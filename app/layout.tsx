@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { playfair, jakarta } from '@/lib/fonts'
+import { playfair, jakarta, thmanyahSans, thmanyahSerif } from '@/lib/fonts'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -14,7 +14,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html className={`${playfair.variable} ${jakarta.variable}`}>
+    <html
+      className={`${playfair.variable} ${jakarta.variable} ${thmanyahSans.variable} ${thmanyahSerif.variable}`}
+    >
       <body>{children}</body>
     </html>
   )

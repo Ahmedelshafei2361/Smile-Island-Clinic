@@ -41,7 +41,11 @@ export default async function LocaleLayout({
   const dir = loc === 'ar' ? 'rtl' : 'ltr'
 
   return (
-    <div lang={loc} dir={dir} className="min-h-screen flex flex-col">
+    <div
+      lang={loc}
+      dir={dir}
+      className="min-h-screen flex flex-col font-[family-name:var(--font-body)]"
+    >
       {children}
     </div>
   )

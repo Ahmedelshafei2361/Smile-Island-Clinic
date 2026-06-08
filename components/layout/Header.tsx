@@ -12,15 +12,15 @@ const navLinks: Record<Locale, { label: string; href: string }[]> = {
   ],
   ar: [
     { label: 'الرئيسية', href: '/ar' },
-    { label: 'الخدمات', href: '/ar#services' },
-    { label: 'آراء العملاء', href: '/ar#testimonials' },
+    { label: 'خدمات', href: '/ar#services' },
+    { label: 'اراء العملاء', href: '/ar#testimonials' },
     { label: 'تواصل معنا', href: '/ar#contact' },
   ],
 }
 
 const ctaLabel: Record<Locale, string> = {
   en: 'Contact Us',
-  ar: 'تواصل معنا',
+  ar: 'اتصل بنا',
 }
 
 function WhatsAppIcon() {

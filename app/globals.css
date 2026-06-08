@@ -12,9 +12,19 @@
   --color-text: #352514;
   --color-text-muted: #9c673f;
 
-  /* Typography — CSS variables set by next/font/local on the locale wrapper */
+  /* Typography — defaults are the English system. next/font sets the
+     underlying --font-* vars on <html>; Arabic overrides below in [lang="ar"]. */
   --font-heading: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-heading-accent: var(--font-playfair), Georgia, "Times New Roman", serif;
   --font-body: var(--font-jakarta), system-ui, sans-serif;
+}
+
+/* Arabic font system — Thmanyah Sans for general UI, Thmanyah Serif Text for
+   the expressive heading accent. Scoped to the locale wrapper (lang="ar"). */
+[lang="ar"] {
+  --font-heading: var(--font-thmanyah-sans), system-ui, sans-serif;
+  --font-heading-accent: var(--font-thmanyah-serif), Georgia, serif;
+  --font-body: var(--font-thmanyah-sans), system-ui, sans-serif;
 }
 
 /* Base resets */

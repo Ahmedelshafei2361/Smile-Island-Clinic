@@ -36,3 +36,55 @@ export const jakarta = localFont({
   variable: '--font-jakarta',
   display: 'swap',
 })
+
+// Arabic fonts (static weights, woff2) — used only on /ar via locale-scoped
+// CSS variables. Thmanyah Sans = body/nav/buttons/stats; Thmanyah Serif Text =
+// expressive Arabic heading accent.
+export const thmanyahSans = localFont({
+  src: [
+    {
+      path: '../public/fonts/thmanyah-sans/woff2/thmanyahsans-Light.woff2',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/thmanyah-sans/woff2/thmanyahsans-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/thmanyah-sans/woff2/thmanyahsans-Medium.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/thmanyah-sans/woff2/thmanyahsans-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-thmanyah-sans',
+  display: 'swap',
+})
+
+export const thmanyahSerif = localFont({
+  src: [
+    {
+      path: '../public/fonts/thmanyah-serif/woff2/thmanyahseriftext-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/thmanyah-serif/woff2/thmanyahseriftext-Medium.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/thmanyah-serif/woff2/thmanyahseriftext-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-thmanyah-serif',
+  display: 'swap',
+})

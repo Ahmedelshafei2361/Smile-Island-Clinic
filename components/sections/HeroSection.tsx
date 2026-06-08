@@ -27,18 +27,36 @@ export default function HeroSection({ locale }: HeroSectionProps) {
   const whatsappUrl = getBookingUrl({ locale: loc })
   const servicesHref = `/${loc}#services`
 
-  const heading =
-    loc === 'ar'
-      ? { italic: 'ابتسامة استثنائية', regular: ' بأسعار معقولة' }
-      : { italic: 'Exceptional Smile', regular: ' Fairly Priced' }
+  const isAr = loc === 'ar'
 
-  const subtitle =
-    loc === 'ar'
-      ? 'استعد ابتسامتك مع أطباء أسنان متمرسين يقدمون رعاية عالية الجودة بأسعار منصفة.'
-      : 'Restore your smile with experienced dentists providing quality care at fair pricing.'
+  // Heading: `accent` uses the serif/expressive font, `regular` the sans font.
+  const heading = isAr
+    ? { accent: 'ابتسامة استثنائية', regular: ' بأسعار معقولة' }
+    : { accent: 'Exceptional Smile', regular: ' Fairly Priced' }
 
-  const ctaContact = loc === 'ar' ? 'تواصل معنا' : 'Contact Us'
-  const ctaExplore = loc === 'ar' ? 'استعرض الخدمات' : 'Explore services'
+  // English accent is italic Playfair; Arabic serif is upright.
+  const accentItalic = isAr ? '' : 'italic'
+
+  const subtitle = isAr
+    ? 'استعد ابتسامتك مع أطباء أسنان ذوي خبرة يقدمون رعاية عالية الجودة بأسعار عادلة.'
+    : 'Restore your smile with experienced dentists providing quality care at fair pricing.'
+
+  const ctaContact = isAr ? 'اتصل بنا' : 'Contact Us'
+  const ctaExplore = isAr ? 'اكتشف الخدمات' : 'Explore services'
+
+  const stats = isAr
+    ? {
+        healthy: 'ابتسامة صحية',
+        trusted: 'موثوق بها من قبل الآلاف',
+        satisfaction: 'إشباع',
+        reviews: 'التعليقات',
+      }
+    : {
+        healthy: 'Healthy Smile',
+        trusted: 'Trusted by thousands',
+        satisfaction: 'Satisfaction',
+        reviews: 'Reviews',
+      }
 
   return (
     <>
@@ -77,8 +95,8 @@ export default function HeroSection({ locale }: HeroSectionProps) {
         {/* Text block */}
         <div className="flex flex-col gap-[16px] items-center justify-center text-center w-full">
           <h1 className="leading-[1.2] w-full animate-rise delay-1">
-            <span className="font-[family-name:var(--font-heading)] font-medium italic leading-[1.2] text-[#9c673f] text-[72px]">
-              {heading.italic}
+            <span className={`font-[family-name:var(--font-heading-accent)] font-medium ${accentItalic} leading-[1.2] text-[#9c673f] text-[72px]`}>
+              {heading.accent}
             </span>
             <span className="font-[family-name:var(--font-heading)] font-medium leading-[1.2] text-[#352514] text-[72px]">
               {heading.regular}
@@ -120,11 +138,11 @@ export default function HeroSection({ locale }: HeroSectionProps) {
             className="h-[58px] w-[18.353px] object-contain shrink-0"
           />
           <div className="flex flex-col gap-[1px] items-center text-center text-[#352514] w-[144.52px]">
-            <p className="font-[family-name:var(--font-heading)] font-semibold italic text-[20.355px] leading-[1.5] w-full">
-              Healthy Smile
+            <p className={`font-[family-name:var(--font-heading-accent)] font-semibold ${accentItalic} text-[20.355px] leading-[1.5] w-full`}>
+              {stats.healthy}
             </p>
             <p className="font-[family-name:var(--font-body)] font-normal text-[14.249px] leading-[1.5] w-full">
-              Trusted by thousands
+              {stats.trusted}
             </p>
           </div>
           <img
@@ -143,7 +161,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
             100%
           </p>
           <p className="font-[family-name:var(--font-body)] font-light text-[16px] leading-[1.5] whitespace-nowrap">
-            Satisfaction
+            {stats.satisfaction}
           </p>
         </div>
 
@@ -169,7 +187,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
             120+
           </p>
           <p className="font-[family-name:var(--font-body)] font-light text-[16px] leading-[1.5] whitespace-nowrap">
-            Reviews
+            {stats.reviews}
           </p>
         </div>
       </div>
@@ -190,8 +208,8 @@ export default function HeroSection({ locale }: HeroSectionProps) {
       <div className="relative flex flex-col gap-[36px] items-center px-[20px] pt-[36px]">
         <div className="flex flex-col gap-[20px] items-center text-center w-full">
           <h1 className="leading-[1.2] w-full animate-rise delay-1">
-            <span className="font-[family-name:var(--font-heading)] font-medium italic leading-[1.2] text-[#9c673f] text-[40px]">
-              {heading.italic}
+            <span className={`font-[family-name:var(--font-heading-accent)] font-medium ${accentItalic} leading-[1.2] text-[#9c673f] text-[40px]`}>
+              {heading.accent}
             </span>
             <span className="font-[family-name:var(--font-heading)] font-medium leading-[1.2] text-[#352514] text-[40px]">
               {heading.regular}
@@ -244,11 +262,11 @@ export default function HeroSection({ locale }: HeroSectionProps) {
               className="h-[48px] w-[15.187px] object-contain shrink-0"
             />
             <div className="flex flex-col gap-[1px] items-center text-center text-[#352514] w-[144.52px]">
-              <p className="font-[family-name:var(--font-heading)] font-semibold italic text-[16px] leading-[1.5] w-full">
-                Healthy Smile
+              <p className={`font-[family-name:var(--font-heading-accent)] font-semibold ${accentItalic} text-[16px] leading-[1.5] w-full`}>
+                {stats.healthy}
               </p>
               <p className="font-[family-name:var(--font-body)] font-normal text-[12px] leading-[1.5] w-full">
-                Trusted by thousands
+                {stats.trusted}
               </p>
             </div>
             <img
@@ -277,7 +295,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                 100%
               </p>
               <p className="font-[family-name:var(--font-body)] font-light text-[14px] leading-[1.5] whitespace-nowrap">
-                Satisfaction
+                {stats.satisfaction}
               </p>
             </div>
 
@@ -286,7 +304,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                 120+
               </p>
               <p className="font-[family-name:var(--font-body)] font-light text-[14px] leading-[1.5] whitespace-nowrap">
-                Reviews
+                {stats.reviews}
               </p>
             </div>
           </div>
