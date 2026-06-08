@@ -65,6 +65,36 @@ export interface SiteSettings {
   social: { platform: string; url: string }[]
 }
 
+// ─── About Us ────────────────────────────────────────────────────────────────
+
+export interface About {
+  titleEn: string
+  titleAr: string
+  accentEn: string
+  accentAr: string
+  paragraphsEn: string[]
+  paragraphsAr: string[]
+  image: string
+}
+
+export const about: About = {
+  titleEn: 'Us',
+  titleAr: 'من',
+  accentEn: 'About',
+  accentAr: 'نحن',
+  paragraphsEn: [
+    'At Smile Island Clinic, we are a team of specialized dentists covering all fields of dentistry, working together to provide comprehensive and high-quality care.',
+    'We use the latest advanced dental technologies and equipment to ensure accurate diagnosis, effective treatment, and the best results for our patients.',
+    'Our goal is to provide professional, comfortable care tailored to meet the needs of every smile, with high quality and affordable prices.',
+  ],
+  paragraphsAr: [
+    'في عيادة سمايل ايلاند نحن فريق من أطباء الأسنان المتخصصين في جميع مجالات طب الأسنان، نعمل معاً لتقديم رعاية شاملة وعالية الجودة.',
+    'نستخدم أحدث تقنيات وأجهزة طب الأسنان المتطورة لضمان دقة التشخيص، وفعالية العلاج، وتحقيق أفضل النتائج لمرضانا.',
+    'هدفنا هو تقديم رعاية احترافية ومريحة ومصممة خصيصاً لتناسب احتياجات كل ابتسامة بأعلى جودة وسعر مناسب.',
+  ],
+  image: '/images/about/about-us-image.png',
+}
+
 // ─── Services ──────────────────────────────────────────────────────────────
 
 export const services: Service[] = [
