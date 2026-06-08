@@ -359,10 +359,51 @@ export const services: Service[] = [
   },
 ]
 
-// Popular treatments (featured on homepage)
-export const popularTreatments = services.filter((s) =>
-  ['dental-implants', 'gum-contouring', 'laser-teeth-whitening'].includes(s.slug)
-)
+// ─── Popular Treatments (featured carousel on homepage) ──────────────────────
+// Curated list — note "Veneers" is a featured treatment without a dedicated
+// service detail page yet (its page is built in a later phase).
+
+export interface PopularTreatment {
+  slug: string
+  titleEn: string
+  titleAr: string
+  descEn: string
+  descAr: string
+  image: string
+}
+
+export const popularTreatments: PopularTreatment[] = [
+  {
+    slug: 'veneers',
+    titleEn: 'Veneers',
+    titleAr: 'القشور التجميلية',
+    descEn:
+      'Thin custom-made shells that reshape the color, form, and alignment of your smile.',
+    descAr:
+      'قشور رقيقة مصممة خصيصاً لتغيير لون وشكل وانتظام ابتسامتك بمظهر طبيعي.',
+    image: '/images/services/veneers.jpg',
+  },
+  {
+    slug: 'dental-implants',
+    titleEn: 'Dental Implants',
+    titleAr: 'زراعة الأسنان',
+    descEn:
+      'Permanent replacements for missing teeth that restore natural look and function.',
+    descAr:
+      'تعويض دائم للأسنان المفقودة لاستعادة الشكل الطبيعي ووظيفة المضغ.',
+    image: '/images/services/dental-implants.jpg',
+  },
+  {
+    slug: 'gum-contouring',
+    titleEn: 'Gum Contouring',
+    titleAr: 'قص اللثة',
+    descEn:
+      'Reshaping the gum line for a balanced, confident, and healthier-looking smile.',
+    descAr:
+      'إعادة تشكيل خط اللثة لابتسامة متناسقة وصحية وأكثر ثقة.',
+    image: '/images/services/gum-contouring.jpg',
+  },
+]
 
 // ─── Before & After ─────────────────────────────────────────────────────────
 
