@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getBookingUrl } from '@/lib/whatsapp'
 import { toLocale, type Locale } from '@/lib/locale'
+import MobileMenu from './MobileMenu'
 
 const navLinks: Record<Locale, { label: string; href: string }[]> = {
   en: [
@@ -45,10 +46,13 @@ export default function Header({ locale }: HeaderProps) {
   const whatsappUrl = getBookingUrl({ locale: loc })
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50">
-      <div className="flex items-center justify-between px-[64px] py-[20px]">
-        {/* Logo */}
-        <Link href={`/${loc}`} className="shrink-0 h-[51px] w-[142px] relative overflow-hidden block">
+    <header className="relative bg-white lg:bg-transparent lg:absolute lg:top-0 lg:left-0 lg:right-0 z-50">
+      <div className="flex items-center justify-between p-[20px] lg:px-[64px] lg:py-[20px]">
+        {/* Logo — smaller on mobile */}
+        <Link
+          href={`/${loc}`}
+          className="shrink-0 h-[40px] w-[111px] lg:h-[51px] lg:w-[142px] relative overflow-hidden block"
+        >
           <img
             alt="Smile Island Dental Clinic"
             className="absolute h-[230.56%] max-w-none"
@@ -62,7 +66,7 @@ export default function Header({ locale }: HeaderProps) {
         </Link>
 
         {/* Desktop nav links */}
-        <nav className="flex items-center gap-[24px]">
+        <nav className="hidden lg:flex items-center gap-[24px]">
           {links.map((link, i) => (
             <Link
               key={link.href}
@@ -78,16 +82,19 @@ export default function Header({ locale }: HeaderProps) {
           ))}
         </nav>
 
-        {/* Contact Us CTA — icon LEFT of label */}
+        {/* Desktop Contact Us CTA — icon LEFT of label */}
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-[#352514] flex gap-[8px] items-center justify-center px-[20px] py-[10px] rounded-[800px] text-white text-[16px] font-medium leading-[1.5] whitespace-nowrap transition-all duration-200 hover:bg-[#2a1d10] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#352514]/20 shrink-0"
+          className="hidden lg:flex bg-[#352514] gap-[8px] items-center justify-center px-[20px] py-[10px] rounded-[800px] text-white text-[16px] font-medium leading-[1.5] whitespace-nowrap transition-all duration-200 hover:bg-[#2a1d10] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#352514]/20 shrink-0"
         >
           <WhatsAppIcon />
           {ctaLabel[loc]}
         </a>
+
+        {/* Mobile menu (hamburger + panel) */}
+        <MobileMenu links={links} ctaLabel={ctaLabel[loc]} ctaHref={whatsappUrl} />
       </div>
     </header>
   )

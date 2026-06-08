@@ -41,7 +41,9 @@ export default function HeroSection({ locale }: HeroSectionProps) {
   const ctaExplore = loc === 'ar' ? 'استعرض الخدمات' : 'Explore services'
 
   return (
-    <section className="relative h-[849px] overflow-clip rounded-tl-[24px] rounded-tr-[24px]">
+    <>
+    {/* ── Desktop hero (lg and up) — approved layout, unchanged ── */}
+    <section className="relative hidden lg:block h-[849px] overflow-clip rounded-tl-[24px] rounded-tr-[24px]">
       {/* Decorative beige background — soft curves + blurred leaves */}
       <div className="absolute inset-0 overflow-hidden rounded-tl-[24px] rounded-tr-[24px]" aria-hidden>
         <img
@@ -172,5 +174,125 @@ export default function HeroSection({ locale }: HeroSectionProps) {
         </div>
       </div>
     </section>
+
+    {/* ── Mobile hero (below lg) — flow-based layout ── */}
+    <section className="relative lg:hidden overflow-hidden">
+      {/* Decorative beige background — same premium style */}
+      <div className="absolute inset-0 overflow-hidden" aria-hidden>
+        <img
+          alt=""
+          className="h-full w-full object-cover animate-fade"
+          src="/images/hero/hero-bg.png"
+        />
+      </div>
+
+      {/* Heading + subtitle + buttons */}
+      <div className="relative flex flex-col gap-[36px] items-center px-[20px] pt-[36px]">
+        <div className="flex flex-col gap-[20px] items-center text-center w-full">
+          <h1 className="leading-[1.2] w-full animate-rise delay-1">
+            <span className="font-[family-name:var(--font-heading)] font-medium italic leading-[1.2] text-[#9c673f] text-[40px]">
+              {heading.italic}
+            </span>
+            <span className="font-[family-name:var(--font-heading)] font-medium leading-[1.2] text-[#352514] text-[40px]">
+              {heading.regular}
+            </span>
+          </h1>
+          <p className="font-[family-name:var(--font-body)] font-normal leading-[1.5] text-[14px] text-[#352514] animate-rise delay-2">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* CTA buttons — icon LEFT of label, compact equal halves */}
+        <div className="flex gap-[10px] items-stretch w-full animate-rise delay-3">
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 bg-[#352514] flex gap-[6px] items-center justify-center px-[14px] py-[8px] rounded-[800px] text-[#f7efe8] text-[14px] font-medium leading-[1.5] whitespace-nowrap transition-colors duration-200 hover:bg-[#2a1d10]"
+          >
+            <WhatsAppIcon className="size-[16px]" />
+            {ctaContact}
+          </a>
+          <a
+            href={servicesHref}
+            className="flex-1 bg-[#efdfd2] flex items-center justify-center px-[14px] py-[8px] rounded-[800px] text-[#352514] text-[14px] font-medium leading-[1.5] whitespace-nowrap transition-colors duration-200 hover:bg-[#e7d3c2]"
+          >
+            {ctaExplore}
+          </a>
+        </div>
+      </div>
+
+      {/* Team image + stats card — same width so they scale together and the
+          leg-crop is fully tucked behind the card at every mobile width */}
+      <div className="relative flex flex-col items-center mt-[36px] pb-[40px]">
+        <div className="relative w-[calc(100%-24px)] max-w-[440px] aspect-[1274/575] overflow-hidden animate-fade delay-2">
+          <img
+            alt="Smile Island dental team"
+            className="absolute h-[148.46%] left-[-0.41%] max-w-none top-[-23.97%] w-[100.41%] object-cover"
+            src="/images/hero/hero-team.png"
+          />
+        </div>
+
+        {/* Stats card — same width as image, overlapping its bottom */}
+        <div className="relative -mt-[36px] w-[calc(100%-24px)] max-w-[440px] bg-white border border-[#e9cdb4] rounded-[24px] px-[24px] py-[16px] flex flex-col gap-[20px] items-center animate-rise delay-3">
+          {/* Healthy Smile */}
+          <div className="flex gap-[2px] items-center justify-center w-[185px]">
+            <img
+              alt=""
+              aria-hidden
+              src="/images/hero/laurel-left.svg"
+              className="h-[48px] w-[15.187px] object-contain shrink-0"
+            />
+            <div className="flex flex-col gap-[1px] items-center text-center text-[#352514] w-[144.52px]">
+              <p className="font-[family-name:var(--font-heading)] font-semibold italic text-[16px] leading-[1.5] w-full">
+                Healthy Smile
+              </p>
+              <p className="font-[family-name:var(--font-body)] font-normal text-[12px] leading-[1.5] w-full">
+                Trusted by thousands
+              </p>
+            </div>
+            <img
+              alt=""
+              aria-hidden
+              src="/images/hero/laurel-right.svg"
+              className="h-[48px] w-[15.188px] object-contain shrink-0"
+            />
+          </div>
+
+          {/* Rating row: 5.00 · 100% · 120+ */}
+          <div className="flex items-center justify-between w-full">
+            <div className="flex flex-col gap-[4px] items-center w-[83px]">
+              <p className="font-[family-name:var(--font-body)] font-medium text-[18px] leading-[1.5] text-[#352514] text-center min-w-full">
+                5.00
+              </p>
+              <img
+                alt="5 stars"
+                src="/images/hero/stars.svg"
+                className="h-[20px] w-[69.167px] object-contain"
+              />
+            </div>
+
+            <div className="flex flex-col gap-[4px] items-center text-[#352514]">
+              <p className="font-[family-name:var(--font-body)] font-medium text-[18px] leading-[1.5] text-center min-w-full">
+                100%
+              </p>
+              <p className="font-[family-name:var(--font-body)] font-light text-[14px] leading-[1.5] whitespace-nowrap">
+                Satisfaction
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-[4px] items-center text-[#352514]">
+              <p className="font-[family-name:var(--font-body)] font-medium text-[18px] leading-[1.5] text-center min-w-full">
+                120+
+              </p>
+              <p className="font-[family-name:var(--font-body)] font-light text-[14px] leading-[1.5] whitespace-nowrap">
+                Reviews
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    </>
   )
 }
