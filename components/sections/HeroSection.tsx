@@ -83,10 +83,10 @@ export default function HeroSection({ locale }: HeroSectionProps) {
         />
       </div>
 
-      {/* Bottom fade — toward the warm page tone (not pure white) so the
-          team grounds softly without an obvious white block */}
+      {/* Short bottom transition — only the lower ~12% softens into the next
+          section colour (#FEFCFB). Does not wash out the doctors. */}
       <div
-        className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent from-[78%] to-[#FEFCFB]/90"
+        className="absolute inset-x-0 bottom-0 h-[12%] pointer-events-none bg-gradient-to-b from-transparent to-[#FEFCFB]"
         aria-hidden
       />
 
@@ -129,15 +129,16 @@ export default function HeroSection({ locale }: HeroSectionProps) {
 
       {/* Stats bar */}
       <div className="-translate-x-1/2 absolute left-[calc(50%+0.5px)] top-[652px] w-[807px] bg-[#f9eee7] border border-[#e9cdb4] rounded-[24px] px-[48px] py-[16px] flex items-center justify-between overflow-clip animate-rise delay-4">
-        {/* Healthy Smile */}
-        <div className="flex gap-[2px] items-center justify-center w-[185px]">
+        {/* Healthy Smile — laurels kept dir=ltr so RTL never swaps/flips the
+            decorative graphics; the Arabic text inside stays dir=rtl */}
+        <div dir="ltr" className="flex gap-[2px] items-center justify-center w-[185px]">
           <img
             alt=""
             aria-hidden
             src="/images/hero/laurel-left.svg"
             className="h-[58px] w-[18.353px] object-contain shrink-0"
           />
-          <div className="flex flex-col gap-[1px] items-center text-center text-[#352514] w-[144.52px]">
+          <div dir={isAr ? 'rtl' : 'ltr'} className="flex flex-col gap-[1px] items-center text-center text-[#352514] w-[144.52px]">
             <p className={`font-[family-name:var(--font-heading-accent)] font-semibold ${accentItalic} text-[20.355px] leading-[1.5] w-full`}>
               {stats.healthy}
             </p>
@@ -253,15 +254,15 @@ export default function HeroSection({ locale }: HeroSectionProps) {
 
         {/* Stats card — same width as image, overlapping its bottom */}
         <div className="relative -mt-[36px] w-[calc(100%-24px)] max-w-[440px] bg-white border border-[#e9cdb4] rounded-[24px] px-[24px] py-[16px] flex flex-col gap-[20px] items-center animate-rise delay-3">
-          {/* Healthy Smile */}
-          <div className="flex gap-[2px] items-center justify-center w-[185px]">
+          {/* Healthy Smile — laurels kept dir=ltr (see desktop note) */}
+          <div dir="ltr" className="flex gap-[2px] items-center justify-center w-[185px]">
             <img
               alt=""
               aria-hidden
               src="/images/hero/laurel-left.svg"
               className="h-[48px] w-[15.187px] object-contain shrink-0"
             />
-            <div className="flex flex-col gap-[1px] items-center text-center text-[#352514] w-[144.52px]">
+            <div dir={isAr ? 'rtl' : 'ltr'} className="flex flex-col gap-[1px] items-center text-center text-[#352514] w-[144.52px]">
               <p className={`font-[family-name:var(--font-heading-accent)] font-semibold ${accentItalic} text-[16px] leading-[1.5] w-full`}>
                 {stats.healthy}
               </p>

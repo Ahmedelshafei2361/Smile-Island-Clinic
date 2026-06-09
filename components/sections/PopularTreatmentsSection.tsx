@@ -32,7 +32,7 @@ export default function PopularTreatmentsSection({
   return (
     <section
       id="treatments"
-      className="relative isolate overflow-hidden bg-[#fbf8f5] pt-[64px] pb-[80px] md:pt-[88px] md:pb-[112px]"
+      className="relative isolate overflow-hidden bg-background-soft pt-[64px] pb-[80px] md:pt-[88px] md:pb-[112px]"
     >
       <Container>
         <Reveal className="flex flex-col items-center text-center">

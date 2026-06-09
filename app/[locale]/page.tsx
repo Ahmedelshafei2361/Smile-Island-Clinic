@@ -3,6 +3,8 @@ import Footer from '@/components/layout/Footer'
 import HeroSection from '@/components/sections/HeroSection'
 import AboutSection from '@/components/sections/AboutSection'
 import PopularTreatmentsSection from '@/components/sections/PopularTreatmentsSection'
+import BeforeAfterSection from '@/components/sections/BeforeAfterSection'
+import AllServicesSection from '@/components/sections/AllServicesSection'
 
 export default async function LocalePage({
   params,
@@ -18,6 +20,8 @@ export default async function LocalePage({
         <HeroSection locale={locale} />
         <AboutSection locale={locale} />
         <PopularTreatmentsSection locale={locale} />
+        <BeforeAfterSection locale={locale} />
+        <AllServicesSection locale={locale} />
       </main>
       <Footer locale={locale} />
     </>

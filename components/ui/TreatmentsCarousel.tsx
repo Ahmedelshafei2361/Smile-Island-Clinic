@@ -18,10 +18,13 @@ import { useEffect, useRef } from 'react'
 export default function TreatmentsCarousel({
   children,
   reverse = false,
+  auto = true,
 }: {
   children: React.ReactNode
   /** Drift rightward instead of leftward (used for Arabic / RTL). */
   reverse?: boolean
+  /** Auto-drift continuously. When false, the carousel is drag/swipe-only. */
+  auto?: boolean
 }) {
   const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
@@ -62,10 +65,11 @@ export default function TreatmentsCarousel({
       const w = setWidth.current || 1
 
       if (!dragging.current) {
-        if (Math.abs(velocity.current) > AUTO && !reduce.current) {
+        const floor = auto ? AUTO : 6
+        if (Math.abs(velocity.current) > floor && !reduce.current) {
           offset.current += velocity.current * dt
-          velocity.current *= 0.92 // decay flick into the slow drift
-        } else if (!hovered.current && !reduce.current) {
+          velocity.current *= 0.92 // decay flick (into slow drift, or to a stop)
+        } else if (auto && !hovered.current && !reduce.current) {
           offset.current += AUTO * autoSign * dt
         }
       }
@@ -82,7 +86,7 @@ export default function TreatmentsCarousel({
       cancelAnimationFrame(raf)
       ro.disconnect()
     }
-  }, [reverse])
+  }, [reverse, auto])
 
   const onPointerDown = (e: React.PointerEvent) => {
     dragging.current = true

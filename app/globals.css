@@ -5,8 +5,16 @@
   --color-primary: #352514;
   --color-accent: #9c673f;
   --color-bg: #F7F2ED;
+  /* Default page background. */
+  --color-background: #FEFCFB;
+  /* Subtle warm band behind the gallery sections (Popular Treatments /
+     Before & After). Solid value sampled from the design export (#fbf8f5);
+     equivalent to ~#F1E4D9 @ 25% over the page, but solid so there is no
+     opacity compositing to render inconsistently. */
+  --color-background-soft: #fbf8f5;
   --color-surface: #f9eee7;
   --color-surface-btn: #efdfd2;
+  --color-card: #f9f4f0;
   --color-border: #e9cdb4;
   --color-on-primary: #f7efe8;
   --color-text: #352514;
@@ -35,7 +43,7 @@
 }
 
 body {
-  background-color: var(--color-bg);
+  background-color: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -93,4 +101,13 @@ body {
     animation: none;
     transform: none;
   }
+}
+
+/* Hide horizontal scrollbar for carousels while keeping native scroll/swipe. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

@@ -17,7 +17,7 @@ export default function AboutSection({ locale }: AboutSectionProps) {
   const paragraphs = isAr ? about.paragraphsAr : about.paragraphsEn
 
   return (
-    <section id="about" className="pt-[72px] pb-[80px] md:pt-[96px] md:pb-[112px]">
+    <section id="about" className="bg-background pt-[72px] pb-[80px] md:pt-[96px] md:pb-[112px]">
       <Container>
         <Reveal className="flex flex-col items-center text-center">
           <SectionHeading

@@ -17,8 +17,11 @@ export interface Service {
 
 export interface BeforeAfterCase {
   id: string
-  beforeImage: string
-  afterImage: string
+  /** Combined before/after image used on the homepage gallery. */
+  image: string
+  /** Separate halves — used later by interactive service-page sliders. */
+  beforeImage?: string
+  afterImage?: string
   titleEn?: string
   titleAr?: string
   serviceSlug?: string
@@ -407,17 +410,14 @@ export const popularTreatments: PopularTreatment[] = [
 
 // ─── Before & After ─────────────────────────────────────────────────────────
 
+// Homepage gallery uses combined before/after images. Only home-01..03 are
+// real (extracted from the design); the rest cycle them as placeholders and
+// are trivial to replace once final approved cases are provided.
 export const beforeAfterCases: BeforeAfterCase[] = [
-  { id: 'home-01', beforeImage: '/images/before-after/home-01.jpg', afterImage: '/images/before-after/home-01.jpg' },
-  { id: 'home-02', beforeImage: '/images/before-after/home-02.jpg', afterImage: '/images/before-after/home-02.jpg' },
-  { id: 'home-03', beforeImage: '/images/before-after/home-03.jpg', afterImage: '/images/before-after/home-03.jpg' },
-  { id: 'home-04', beforeImage: '/images/before-after/home-04.jpg', afterImage: '/images/before-after/home-04.jpg' },
-  { id: 'home-05', beforeImage: '/images/before-after/home-05.jpg', afterImage: '/images/before-after/home-05.jpg' },
-  { id: 'home-06', beforeImage: '/images/before-after/home-06.jpg', afterImage: '/images/before-after/home-06.jpg' },
-  { id: 'home-07', beforeImage: '/images/before-after/home-07.jpg', afterImage: '/images/before-after/home-07.jpg' },
-  { id: 'home-08', beforeImage: '/images/before-after/home-08.jpg', afterImage: '/images/before-after/home-08.jpg' },
-  { id: 'home-09', beforeImage: '/images/before-after/home-09.jpg', afterImage: '/images/before-after/home-09.jpg' },
-  { id: 'home-10', beforeImage: '/images/before-after/home-10.jpg', afterImage: '/images/before-after/home-10.jpg' },
+  { id: 'ba-1', image: '/images/before-after/home-01.jpg' },
+  { id: 'ba-2', image: '/images/before-after/home-02.jpg' },
+  { id: 'ba-3', image: '/images/before-after/home-03.jpg' },
+  { id: 'ba-4', image: '/images/before-after/home-01.jpg' },
 ]
 
 // ─── Video Testimonials ──────────────────────────────────────────────────────
