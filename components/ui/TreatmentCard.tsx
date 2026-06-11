@@ -44,7 +44,7 @@ export default function TreatmentCard({ treatment, index, locale }: TreatmentCar
   return (
     <article
       dir={isAr ? 'rtl' : 'ltr'}
-      className="group shrink-0 mr-[48px] w-[300px] lg:w-[620px] bg-card rounded-[24px] p-[12px] lg:p-[16px] flex flex-col lg:flex-row lg:items-stretch gap-[16px] lg:gap-[28px] select-none transition-colors duration-500 ease-out hover:bg-[#f1e4d6]"
+      className="group shrink-0 mr-[48px] w-[300px] lg:w-[620px] bg-[#F4EAE1] rounded-[24px] border-2 border-white p-[12px] lg:p-[16px] flex flex-col lg:flex-row lg:items-stretch gap-[16px] lg:gap-[28px] select-none transition-colors duration-500 ease-out hover:bg-[#efe2d6]"
     >
       {/* Image — left on desktop (auto-mirrors to right in RTL), bottom on mobile */}
       <div className="order-2 lg:order-none shrink-0 w-full lg:w-[240px] h-[200px] lg:h-auto rounded-[16px] overflow-hidden">

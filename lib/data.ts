@@ -31,6 +31,9 @@ export interface VideoTestimonial {
   id: string
   nameEn: string
   nameAr: string
+  /** Short trust-focused tag badge shown on the card (2–3 words). */
+  tagEn: string
+  tagAr: string
   youtubeUrl: string
   thumbnailImage: string
 }
@@ -40,6 +43,9 @@ export interface GoogleReview {
   nameEn: string
   nameAr: string
   rating: 5
+  /** Short bold headline shown above the quote (Figma "Great Experience!"). */
+  headlineEn: string
+  headlineAr: string
   quoteEn: string
   quoteAr: string
 }
@@ -427,6 +433,8 @@ export const videoTestimonials: VideoTestimonial[] = [
     id: 'v1',
     nameEn: 'Malak Adel',
     nameAr: 'ملك عادل',
+    tagEn: 'Trust & Care',
+    tagAr: 'ثقة وعناية',
     youtubeUrl: 'https://www.youtube.com/shorts/HGeLuwr5pqw',
     thumbnailImage: '/images/testimonials/malak-adel.jpg',
   },
@@ -434,6 +442,8 @@ export const videoTestimonials: VideoTestimonial[] = [
     id: 'v2',
     nameEn: 'Islam Hassan',
     nameAr: 'إسلام حسن',
+    tagEn: 'Great Service',
+    tagAr: 'خدمة رائعة',
     youtubeUrl: 'https://www.youtube.com/shorts/BRhmBL2GJpI',
     thumbnailImage: '/images/testimonials/islam-hassan.jpg',
   },
@@ -441,6 +451,8 @@ export const videoTestimonials: VideoTestimonial[] = [
     id: 'v3',
     nameEn: 'Tamer Ali',
     nameAr: 'تامر علي',
+    tagEn: 'Real Results',
+    tagAr: 'نتائج حقيقية',
     youtubeUrl: 'https://www.youtube.com/shorts/seNOy6tXtE4',
     thumbnailImage: '/images/testimonials/tamer-ali.jpg',
   },
@@ -448,6 +460,8 @@ export const videoTestimonials: VideoTestimonial[] = [
     id: 'v4',
     nameEn: 'Basel Mashal',
     nameAr: 'باسل مشعل',
+    tagEn: 'Gentle Visit',
+    tagAr: 'زيارة لطيفة',
     youtubeUrl: 'https://www.youtube.com/shorts/SsPpyrb-TWs',
     thumbnailImage: '/images/testimonials/basel-mashal.jpg',
   },
@@ -455,6 +469,8 @@ export const videoTestimonials: VideoTestimonial[] = [
     id: 'v5',
     nameEn: 'Ahmed Tarek',
     nameAr: 'أحمد طارق',
+    tagEn: 'Confident Smile',
+    tagAr: 'ابتسامة واثقة',
     youtubeUrl: 'https://www.youtube.com/shorts/XySmRoalrJ4',
     thumbnailImage: '/images/testimonials/ahmed-tarek.jpg',
   },
@@ -468,6 +484,8 @@ export const googleReviews: GoogleReview[] = [
     nameEn: 'Mayar Hassan',
     nameAr: 'ميار حسن',
     rating: 5,
+    headlineEn: 'Exceeded my expectations',
+    headlineAr: 'فاقت توقعاتي',
     quoteEn:
       'Excellent clinic with a very professional team. The results exceeded my expectations and the prices are very fair.',
     quoteAr:
@@ -478,6 +496,8 @@ export const googleReviews: GoogleReview[] = [
     nameEn: 'Ahmed Elsmahy',
     nameAr: 'أحمد السماحي',
     rating: 5,
+    headlineEn: 'Amazing from start to finish',
+    headlineAr: 'تجربة رائعة من البداية للنهاية',
     quoteEn:
       'Amazing experience from start to finish. The doctors are very skilled and the clinic is spotlessly clean.',
     quoteAr:
@@ -488,6 +508,8 @@ export const googleReviews: GoogleReview[] = [
     nameEn: 'Dalia Aboshady',
     nameAr: 'داليا أبو شادي',
     rating: 5,
+    headlineEn: 'In love with my new smile',
+    headlineAr: 'أحببت ابتسامتي الجديدة',
     quoteEn:
       'I had my veneers done here and I am absolutely in love with my new smile. Highly recommend!',
     quoteAr:
@@ -498,6 +520,8 @@ export const googleReviews: GoogleReview[] = [
     nameEn: 'Ahmed Tarek',
     nameAr: 'أحمد طارق',
     rating: 5,
+    headlineEn: 'Smooth and painless',
+    headlineAr: 'سلس وبدون ألم',
     quoteEn:
       'Very professional staff and excellent results. The implant procedure was smooth and painless.',
     quoteAr:
@@ -508,6 +532,8 @@ export const googleReviews: GoogleReview[] = [
     nameEn: 'Rahma Alhosary',
     nameAr: 'رحمة الحصري',
     rating: 5,
+    headlineEn: 'Best clinic in Alexandria',
+    headlineAr: 'أفضل عيادة في الإسكندرية',
     quoteEn:
       'The best dental clinic in Alexandria. Kind doctors, clean environment, and great results.',
     quoteAr:
@@ -518,6 +544,8 @@ export const googleReviews: GoogleReview[] = [
     nameEn: 'Nourhan Ragab',
     nameAr: 'نورهان رجب',
     rating: 5,
+    headlineEn: 'A true five-star experience',
+    headlineAr: 'تجربة خمس نجوم حقيقية',
     quoteEn:
       'I was nervous about my first visit but the team made me feel so comfortable. Truly a five-star experience.',
     quoteAr:
@@ -528,6 +556,8 @@ export const googleReviews: GoogleReview[] = [
     nameEn: 'Mohamed Abu Mazen',
     nameAr: 'محمد أبو مازن',
     rating: 5,
+    headlineEn: 'Outstanding service',
+    headlineAr: 'خدمة استثنائية',
     quoteEn:
       'Outstanding service and beautiful results. My teeth cleaning was quick, gentle, and effective.',
     quoteAr:

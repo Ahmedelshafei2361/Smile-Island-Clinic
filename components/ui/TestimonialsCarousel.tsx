@@ -27,12 +27,19 @@ function ToothMark({ className = '' }: { className?: string }) {
   )
 }
 
-interface BeforeAfterCarouselProps {
+interface TestimonialsCarouselProps {
   children: React.ReactNode
   isAr: boolean
+  label: string
+  gapClassName?: string
 }
 
-export default function BeforeAfterCarousel({ children, isAr }: BeforeAfterCarouselProps) {
+export default function TestimonialsCarousel({
+  children,
+  isAr,
+  label,
+  gapClassName = 'gap-[20px] lg:gap-[32px]',
+}: TestimonialsCarouselProps) {
   const scrollerRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef(0)
   const [active, setActive] = useState(0)
@@ -119,37 +126,53 @@ export default function BeforeAfterCarousel({ children, isAr }: BeforeAfterCarou
   const atEnd = active >= count - 1
 
   const arrowBase =
-    'absolute top-1/2 z-10 hidden size-[40px] -translate-y-1/2 place-items-center rounded-full border border-[#e9cdb4] bg-[#f3e9df] text-[#352514] shadow-sm transition-all duration-300 ease-out hover:border-[#352514] hover:bg-[#352514] hover:text-[#f7efe8] active:scale-95 disabled:opacity-30 disabled:pointer-events-none md:grid lg:size-[48px]'
+    'absolute top-1/2 z-30 hidden size-[44px] -translate-y-1/2 place-items-center rounded-full bg-[#f7efe8] text-[#352514] shadow-[0px_0px_9.3px_-3px_#66451e] transition-all duration-300 ease-out hover:bg-[#352514] hover:text-[#f7efe8] active:scale-95 disabled:opacity-30 disabled:pointer-events-none md:grid lg:size-[56px]'
 
   return (
-    <div className="relative" dir={isAr ? 'rtl' : 'ltr'}>
+    <div className="relative mx-auto w-full max-w-[1248px] px-[24px]">
       <div
-        ref={scrollerRef}
-        dir={isAr ? 'rtl' : 'ltr'}
-        className="no-scrollbar flex touch-pan-x overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth px-[20px] lg:px-[64px]"
+        className="relative"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label={label}
       >
-        {children}
+        <div
+          dir={isAr ? 'rtl' : 'ltr'}
+          className="relative overflow-visible"
+          style={{
+            marginLeft: 'calc(50% - 50vw)',
+            marginRight: 'calc(50% - 50vw)',
+          }}
+        >
+          <div
+            dir={isAr ? 'rtl' : 'ltr'}
+            ref={scrollerRef}
+            className={`no-scrollbar flex touch-pan-x ${gapClassName} overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth px-6 pb-[4px] scroll-px-6 md:px-12 md:scroll-px-12 lg:px-20 lg:scroll-px-20`}
+          >
+            {children}
+          </div>
+
+          <button
+            type="button"
+            aria-label={isAr ? 'التالي' : 'Previous'}
+            onClick={() => goTo(isAr ? active + 1 : active - 1)}
+            disabled={isAr ? atEnd : atStart}
+            className={`${arrowBase} left-4 lg:left-8`}
+          >
+            <Chevron className="size-[22px]" />
+          </button>
+
+          <button
+            type="button"
+            aria-label={isAr ? 'السابق' : 'Next'}
+            onClick={() => goTo(isAr ? active - 1 : active + 1)}
+            disabled={isAr ? atStart : atEnd}
+            className={`${arrowBase} right-4 lg:right-8`}
+          >
+            <Chevron className="size-[22px] -scale-x-100" />
+          </button>
+        </div>
       </div>
-
-      <button
-        type="button"
-        aria-label={isAr ? 'التالي' : 'Previous'}
-        onClick={() => goTo(isAr ? active + 1 : active - 1)}
-        disabled={isAr ? atEnd : atStart}
-        className={`${arrowBase} left-[10px] lg:left-[24px]`}
-      >
-        <Chevron className="size-[20px]" />
-      </button>
-
-      <button
-        type="button"
-        aria-label={isAr ? 'السابق' : 'Next'}
-        onClick={() => goTo(isAr ? active - 1 : active + 1)}
-        disabled={isAr ? atStart : atEnd}
-        className={`${arrowBase} right-[10px] lg:right-[24px]`}
-      >
-        <Chevron className="size-[20px] -scale-x-100" />
-      </button>
 
       <div
         dir={isAr ? 'rtl' : 'ltr'}
@@ -159,7 +182,7 @@ export default function BeforeAfterCarousel({ children, isAr }: BeforeAfterCarou
           <button
             key={i}
             type="button"
-            aria-label={`${isAr ? 'حالة' : 'Case'} ${i + 1}`}
+            aria-label={`${isAr ? 'عنصر' : 'Item'} ${i + 1}`}
             aria-current={i === active}
             onClick={() => goTo(i)}
             className={`transition-all duration-300 ease-out ${

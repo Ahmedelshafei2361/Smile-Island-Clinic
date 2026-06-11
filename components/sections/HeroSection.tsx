@@ -83,13 +83,6 @@ export default function HeroSection({ locale }: HeroSectionProps) {
         />
       </div>
 
-      {/* Short bottom transition — only the lower ~12% softens into the next
-          section colour (#FEFCFB). Does not wash out the doctors. */}
-      <div
-        className="absolute inset-x-0 bottom-0 h-[12%] pointer-events-none bg-gradient-to-b from-transparent to-[#FEFCFB]"
-        aria-hidden
-      />
-
       {/* Hero content: heading + subtitle + CTAs */}
       <div className="-translate-x-1/2 absolute left-1/2 top-[123px] w-[1002px] flex flex-col gap-[48px] items-center justify-center">
         {/* Text block */}

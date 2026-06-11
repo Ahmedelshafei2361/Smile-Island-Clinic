@@ -7,11 +7,9 @@
   --color-bg: #F7F2ED;
   /* Default page background. */
   --color-background: #FEFCFB;
-  /* Subtle warm band behind the gallery sections (Popular Treatments /
-     Before & After). Solid value sampled from the design export (#fbf8f5);
-     equivalent to ~#F1E4D9 @ 25% over the page, but solid so there is no
-     opacity compositing to render inconsistently. */
-  --color-background-soft: #fbf8f5;
+  /* Subtle warm band behind the Popular Treatments section.
+     Figma value: #F1E4D9 at 25% opacity, composited over the page background. */
+  --color-background-soft: rgba(241, 228, 217, 0.25);
   --color-surface: #f9eee7;
   --color-surface-btn: #efdfd2;
   --color-card: #f9f4f0;
