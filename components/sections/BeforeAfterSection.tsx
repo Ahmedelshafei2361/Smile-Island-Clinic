@@ -28,7 +28,7 @@ export default function BeforeAfterSection({ locale }: BeforeAfterSectionProps) 
   return (
     <section
       id="before-after"
-      className="relative overflow-hidden bg-background pt-[24px] pb-[80px] md:pb-[112px]"
+      className="relative overflow-hidden bg-background pt-[48px] pb-[80px] md:pt-[88px] md:pb-[112px]"
     >
       <Container>
         <Reveal className="flex flex-col items-center text-center">

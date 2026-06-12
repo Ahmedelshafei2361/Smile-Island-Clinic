@@ -128,7 +128,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
           </p>
         </Reveal>
 
-        <div className="mt-[40px] grid grid-cols-1 items-start gap-[24px] md:mt-[56px] lg:grid-cols-[minmax(0,500px)_1fr] lg:gap-[48px]">
+        <div className="mt-[40px] grid grid-cols-1 items-stretch gap-[24px] md:mt-[56px] lg:grid-cols-[minmax(0,500px)_1fr] lg:gap-[48px]">
           {/* Contact cards */}
           <Reveal className="flex flex-col gap-[16px]">
             {cards.map((c) => (
@@ -146,7 +146,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
                   <span className="block text-[16px] md:text-[18px] font-medium leading-[1.4] text-[#14110f]">
                     {c.title}
                   </span>
-                  <span dir="ltr" className="block text-[14px] md:text-[16px] leading-[1.5] text-[#57534d] truncate text-start">
+                  <span className="block truncate text-start text-[14px] md:text-[16px] leading-[1.5] text-[#57534d]">
                     {c.detail}
                   </span>
                 </span>
@@ -182,7 +182,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
             </div>
           </Reveal>
 
-          {/* Clickable map — placeholder, easy to swap for a real image later */}
+          {/* Clickable map — placeholder, easy to swap for a real <img> later */}
           <Reveal delay={120} className="h-full">
             <a
               href={mapsUrl}
@@ -190,7 +190,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
               rel="noopener noreferrer"
               aria-label={mapAria}
               title={mapAria}
-              className="group relative block h-[280px] w-full overflow-hidden rounded-[24px] border border-[#e9cdb4] sm:h-[360px] lg:h-full lg:min-h-[560px]"
+              className="group relative block h-[260px] w-full overflow-hidden rounded-[24px] sm:h-[340px] lg:h-full lg:min-h-[420px]"
             >
               {/* Faux-map placeholder (swap this block for <img src=...> later) */}
               <span
@@ -200,10 +200,6 @@ export default function ContactSection({ locale }: ContactSectionProps) {
                   backgroundImage:
                     'repeating-linear-gradient(0deg, transparent 0 38px, rgba(156,103,63,0.10) 38px 40px), repeating-linear-gradient(90deg, transparent 0 38px, rgba(156,103,63,0.10) 38px 40px), linear-gradient(135deg, rgba(120,170,140,0.18), transparent 60%)',
                 }}
-              />
-              <span
-                aria-hidden="true"
-                className="absolute left-1/2 top-1/2 h-[6px] w-[120px] -translate-x-1/2 -translate-y-1/2 rotate-[28deg] rounded-full bg-[rgba(156,103,63,0.25)]"
               />
               <span className="absolute left-1/2 top-1/2 grid -translate-x-1/2 -translate-y-1/2 place-items-center">
                 <span className="grid size-[52px] place-items-center rounded-full bg-[#9c673f] text-white shadow-lg transition-transform duration-300 group-hover:-translate-y-1">

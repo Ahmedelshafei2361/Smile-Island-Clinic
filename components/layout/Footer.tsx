@@ -92,13 +92,8 @@ export default function Footer({ locale }: FooterProps) {
   return (
     <footer className="bg-[#55402a] text-[#f7efe8] rounded-tl-[32px] rounded-tr-[32px] font-[family-name:var(--font-body)]">
       <div className="mx-auto max-w-[1312px] px-[24px] py-[56px] md:px-[40px] md:py-[80px]">
-        {/* Centered CTA: logo · heading · subtitle · Contact button */}
+        {/* Centered CTA: heading · subtitle · Contact button (logo lives below) */}
         <div className="flex flex-col items-center gap-[24px] text-center">
-          <img
-            src="/images/logo/logo-footer.svg"
-            alt="Smile Island Dental Clinic"
-            className="h-[60px] w-auto md:h-[72px]"
-          />
           <h2 className="max-w-[760px] font-[family-name:var(--font-heading)] leading-[1.2] text-[30px] md:text-[44px] lg:text-[52px] text-[#f7efe8]">
             {isAr ? (
               <>
@@ -127,23 +122,30 @@ export default function Footer({ locale }: FooterProps) {
         </div>
 
         {/* Divider */}
-        <div className="my-[32px] md:my-[40px] h-px w-full bg-[#f7efe8]/20" />
+        <div className="my-[40px] md:my-[56px] h-px w-full bg-[#f7efe8]/20" />
 
-        {/* Nav links */}
-        <nav className="flex flex-wrap items-center justify-center gap-x-[28px] gap-y-[12px] md:gap-x-[40px]">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-[14px] text-[#f7efe8]/90 transition-opacity hover:opacity-100 hover:text-[#f7efe8]"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        {/* Lower body: logo + nav links (centered) */}
+        <div className="flex flex-col items-center gap-[28px]">
+          <img
+            src="/images/logo/logo-footer.svg"
+            alt="Smile Island Dental Clinic"
+            className="h-[56px] w-auto md:h-[64px]"
+          />
+          <nav className="flex flex-wrap items-center justify-center gap-x-[28px] gap-y-[12px] md:gap-x-[40px]">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-[14px] text-[#f7efe8]/90 transition-opacity hover:opacity-100 hover:text-[#f7efe8]"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
 
         {/* Credits: copyright + social icons */}
-        <div className="mt-[32px] flex flex-col-reverse items-center justify-between gap-[20px] sm:flex-row">
+        <div className="mt-[36px] flex flex-col-reverse items-center justify-between gap-[20px] sm:flex-row">
           <p className="text-[13px] md:text-[14px] text-[#f7efe8]/70 text-center sm:text-start">
             {copyright[loc]}
           </p>

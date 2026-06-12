@@ -29,9 +29,9 @@ interface ReviewCardProps {
 }
 
 /**
- * Static Google-review card — gold rating, bold headline, quote, and a floating
- * white reviewer pill (initial avatar + name + "Google Review"). Content comes
- * from local data and is trivial to swap for Sanity later. No Google API.
+ * Static Google-review card — gold rating, bold headline, quote, and a reviewer
+ * pill (name + "Google Review"). No photo/initial avatar (Figma shows none in
+ * the project's content). Content is local data, easy to swap for Sanity later.
  */
 export default function ReviewCard({ item, locale }: ReviewCardProps) {
   const isAr = locale === 'ar'
@@ -39,36 +39,27 @@ export default function ReviewCard({ item, locale }: ReviewCardProps) {
   const headline = isAr ? item.headlineAr : item.headlineEn
   const quote = isAr ? item.quoteAr : item.quoteEn
   const sourceLabel = isAr ? 'مراجعة Google' : 'Google Review'
-  const initial = name.trim().charAt(0)
 
   return (
-    <article className="snap-center shrink-0 flex flex-col w-[296px] sm:w-[440px] lg:w-[640px] rounded-[24px] bg-gradient-to-r from-[rgba(241,228,217,0.6)] to-[rgba(241,228,217,0.4)] px-[24px] lg:px-[32px] py-[24px]">
+    <article className="snap-center shrink-0 flex flex-col w-[288px] sm:w-[420px] lg:w-[600px] rounded-[24px] bg-gradient-to-r from-[rgba(241,228,217,0.6)] to-[rgba(241,228,217,0.4)] px-[24px] lg:px-[28px] py-[24px]">
       <Stars />
 
-      <p className="mt-[16px] font-medium text-[24px] lg:text-[32px] leading-[1.3] text-[#1f160c]">
+      <p className="mt-[14px] font-medium text-[19px] lg:text-[24px] leading-[1.3] text-[#1f160c]">
         {isAr ? `«${headline}»` : `“${headline}”`}
       </p>
 
-      <p className="mt-[8px] text-[15px] lg:text-[18px] leading-[1.6] text-[#57534d]">
+      <p className="mt-[6px] text-[14px] lg:text-[15px] leading-[1.6] text-[#57534d]">
         {quote}
       </p>
 
-      {/* Floating reviewer pill, anchored to the bottom of the (stretched) card */}
-      <div className="mt-auto pt-[32px]">
-        <div className="inline-flex items-center gap-[12px] rounded-[16px] bg-white px-[16px] py-[8px] shadow-[0px_0px_2.9px_#e2cab3]">
-          <span
-            className="grid place-items-center size-[48px] rounded-full bg-[#f0e2d4] text-[#9c673f] text-[18px] font-semibold shrink-0"
-            aria-hidden="true"
-          >
-            {initial}
+      {/* Reviewer pill, anchored to the bottom of the (stretched) card */}
+      <div className="mt-auto pt-[24px]">
+        <div className="inline-flex flex-col gap-[1px] rounded-[14px] bg-white px-[16px] py-[10px] leading-[1.4] shadow-[0px_0px_2.9px_#e2cab3]">
+          <span className="text-[14px] font-medium text-[#1f160c]">{name}</span>
+          <span className="inline-flex items-center gap-[5px] text-[12px] text-[#57534d]">
+            <GoogleGlyph className="size-[12px]" />
+            {sourceLabel}
           </span>
-          <div className="flex flex-col leading-[1.4]">
-            <span className="text-[14px] text-black">{name}</span>
-            <span className="inline-flex items-center gap-[4px] text-[12px] text-[#57534d]">
-              <GoogleGlyph className="size-[12px]" />
-              {sourceLabel}
-            </span>
-          </div>
         </div>
       </div>
     </article>
