@@ -92,37 +92,34 @@ export default function Footer({ locale }: FooterProps) {
   return (
     <footer className="bg-[#55402a] text-[#f7efe8] rounded-tl-[32px] rounded-tr-[32px] font-[family-name:var(--font-body)]">
       <div className="mx-auto max-w-[1312px] px-[24px] py-[56px] md:px-[40px] md:py-[80px]">
-        {/* Top: brand block + Contact button */}
-        <div className="flex flex-col gap-[32px] lg:flex-row lg:items-start lg:justify-between">
-          <div className="flex max-w-[640px] flex-col items-start gap-[24px]">
-            <img
-              src="/images/logo/logo-footer.svg"
-              alt="Smile Island Dental Clinic"
-              className="h-[60px] w-auto md:h-[68px]"
-            />
-            <h2 className="font-[family-name:var(--font-heading)] leading-[1.2] text-[28px] md:text-[40px] lg:text-[48px] text-[#f7efe8]">
-              {isAr ? (
-                <>
-                  <span className="font-[family-name:var(--font-heading-accent)]">ابتسامتك،</span>{' '}
-                  <span className="block">واحة عنايتنا.</span>
-                </>
-              ) : (
-                <>
-                  <span className="font-[family-name:var(--font-heading-accent)] italic">Your smile,</span>{' '}
-                  <span className="block">our island of care.</span>
-                </>
-              )}
-            </h2>
-            <p className="text-[15px] md:text-[16px] leading-[1.5] text-[#f7efe8]/85">
-              {intro}
-            </p>
-          </div>
-
+        {/* Centered CTA: logo · heading · subtitle · Contact button */}
+        <div className="flex flex-col items-center gap-[24px] text-center">
+          <img
+            src="/images/logo/logo-footer.svg"
+            alt="Smile Island Dental Clinic"
+            className="h-[60px] w-auto md:h-[72px]"
+          />
+          <h2 className="max-w-[760px] font-[family-name:var(--font-heading)] leading-[1.2] text-[30px] md:text-[44px] lg:text-[52px] text-[#f7efe8]">
+            {isAr ? (
+              <>
+                <span className="font-[family-name:var(--font-heading-accent)]">ابتسامتك،</span>{' '}
+                <span>واحة عنايتنا.</span>
+              </>
+            ) : (
+              <>
+                <span className="font-[family-name:var(--font-heading-accent)] italic">Your smile,</span>{' '}
+                <span>our island of care.</span>
+              </>
+            )}
+          </h2>
+          <p className="max-w-[600px] text-[15px] md:text-[16px] leading-[1.6] text-[#f7efe8]/85">
+            {intro}
+          </p>
           <a
             href={contactUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-[44px] shrink-0 items-center justify-center gap-[10px] self-start rounded-[800px] bg-[#f7efe8] px-[20px] text-[15px] md:text-[16px] font-medium text-[#352514] transition-all duration-200 hover:bg-white hover:-translate-y-0.5"
+            className="mt-[8px] inline-flex h-[48px] items-center justify-center gap-[10px] rounded-[800px] bg-[#f7efe8] px-[24px] text-[15px] md:text-[16px] font-medium text-[#352514] transition-all duration-200 hover:bg-white hover:-translate-y-0.5"
           >
             <WhatsAppIcon className="size-[18px]" />
             {contactLabel}

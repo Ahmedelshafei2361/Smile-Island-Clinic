@@ -21,17 +21,33 @@ function QuestionIcon({ className = '' }: { className?: string }) {
   )
 }
 
-/** Plus that morphs into a minus when open (the vertical bar collapses). */
+/**
+ * Plus that morphs into a minus when open. Drawn as two SVG strokes of equal
+ * width with round caps, so horizontal/vertical thickness always match; the
+ * vertical stroke collapses to 0 on open, leaving a clean centred minus.
+ */
 function Toggle({ open }: { open: boolean }) {
   return (
-    <span className="relative grid size-[24px] shrink-0 place-items-center text-[#352514]" aria-hidden="true">
-      <span className="absolute h-[2px] w-[14px] rounded-full bg-current" />
-      <span
-        className={`absolute h-[14px] w-[2px] rounded-full bg-current transition-transform duration-300 ease-out motion-reduce:transition-none ${
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.25"
+      strokeLinecap="round"
+      aria-hidden="true"
+      className="size-[24px] shrink-0 text-[#352514]"
+    >
+      <line x1="5" y1="12" x2="19" y2="12" />
+      <line
+        x1="12"
+        y1="5"
+        x2="12"
+        y2="19"
+        className={`origin-center transition-transform duration-300 ease-out motion-reduce:transition-none ${
           open ? 'scale-y-0' : 'scale-y-100'
         }`}
       />
-    </span>
+    </svg>
   )
 }
 

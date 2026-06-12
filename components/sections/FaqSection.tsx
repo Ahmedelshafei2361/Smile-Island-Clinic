@@ -20,10 +20,6 @@ export default function FaqSection({ locale }: FaqSectionProps) {
     isAr ? '' : 'italic'
   }`
 
-  const imageAlt = isAr
-    ? 'استقبال عيادة سمايل ايلاند لطب الأسنان'
-    : 'Smile Island Dental Clinic reception'
-
   return (
     <section
       id="faq"
@@ -47,21 +43,9 @@ export default function FaqSection({ locale }: FaqSectionProps) {
           </p>
         </Reveal>
 
-        <div className="mt-[40px] grid items-start gap-[24px] md:mt-[56px] lg:grid-cols-[515px_1fr] lg:gap-[48px]">
-          <Reveal>
-            <div className="overflow-hidden rounded-[24px] h-[220px] sm:h-[320px] lg:h-[516px]">
-              <img
-                src="/images/faq/faq-clinic.jpg"
-                alt={imageAlt}
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </Reveal>
-
-          <Reveal delay={120}>
-            <FaqAccordion items={faqs} locale={loc} />
-          </Reveal>
-        </div>
+        <Reveal delay={120} className="mx-auto mt-[40px] w-full max-w-[820px] md:mt-[56px]">
+          <FaqAccordion items={faqs} locale={loc} />
+        </Reveal>
       </Container>
     </section>
   )

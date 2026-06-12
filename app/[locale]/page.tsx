@@ -7,6 +7,7 @@ import BeforeAfterSection from '@/components/sections/BeforeAfterSection'
 import AllServicesSection from '@/components/sections/AllServicesSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import FaqSection from '@/components/sections/FaqSection'
+import ContactSection from '@/components/sections/ContactSection'
 
 export default async function LocalePage({
   params,
@@ -26,6 +27,7 @@ export default async function LocalePage({
         <AllServicesSection locale={locale} />
         <TestimonialsSection locale={locale} />
         <FaqSection locale={locale} />
+        <ContactSection locale={locale} />
       </main>
       <Footer locale={locale} />
     </>
