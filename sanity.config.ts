@@ -8,7 +8,12 @@ import { apiVersion, dataset, projectId } from './sanity/env'
 import { schema } from './sanity/schemaTypes'
 
 // Singleton document types — only one document of each type should exist.
-const SINGLETON_TYPES = new Set(['homePage', 'beforeAfterSection'])
+// `service` is intentionally NOT a singleton (it is a collection).
+const SINGLETON_TYPES = new Set([
+  'homePage',
+  'beforeAfterSection',
+  'popularTreatments',
+])
 
 export default defineConfig({
   basePath: '/studio',
@@ -38,6 +43,17 @@ export default defineConfig({
                   .schemaType('beforeAfterSection')
                   .documentId('beforeAfterImages')
                   .title('Before & After Images'),
+              ),
+            S.divider(),
+            S.documentTypeListItem('service').title('Services'),
+            S.listItem()
+              .title('Popular Treatments')
+              .id('popularTreatments')
+              .child(
+                S.document()
+                  .schemaType('popularTreatments')
+                  .documentId('popularTreatments')
+                  .title('Popular Treatments'),
               ),
           ]),
     }),

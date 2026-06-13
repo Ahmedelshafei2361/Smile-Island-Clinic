@@ -6,12 +6,17 @@ import ServiceHero from '@/components/sections/ServiceHero'
 import ServiceSteps from '@/components/sections/ServiceSteps'
 import ServiceBeforeAfter from '@/components/sections/ServiceBeforeAfter'
 import ContactSection from '@/components/sections/ContactSection'
-import { services } from '@/lib/data'
+import { getServiceBySlug, getServiceSlugs } from '@/sanity/lib/getServices'
 import { LOCALES, toLocale } from '@/lib/locale'
 
-export function generateStaticParams() {
+// Allow service pages added in Sanity after deployment to render on demand,
+// without requiring a rebuild for every new slug.
+export const dynamicParams = true
+
+export async function generateStaticParams() {
+  const slugs = await getServiceSlugs()
   return LOCALES.flatMap((locale) =>
-    services.map((service) => ({ locale, slug: service.slug }))
+    slugs.map((slug) => ({ locale, slug }))
   )
 }
 
@@ -21,7 +26,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
   const { locale, slug } = await params
-  const service = services.find((s) => s.slug === slug)
+  const service = await getServiceBySlug(slug)
   if (!service) return {}
   const isAr = toLocale(locale) === 'ar'
   const title = isAr ? service.titleAr : service.titleEn
@@ -39,16 +44,18 @@ export default async function ServicePage({
 }) {
   const { locale, slug } = await params
   const loc = toLocale(locale)
-  const service = services.find((s) => s.slug === slug)
+  const service = await getServiceBySlug(slug)
   if (!service) notFound()
 
   return (
     <>
       <Header locale={loc} />
       <main className="flex-1">
-        <ServiceHero service={service} image={service.heroImage} locale={loc} />
+        <ServiceHero service={service} image={service.image} locale={loc} />
         <ServiceSteps service={service} locale={loc} />
-        <ServiceBeforeAfter locale={loc} />
+        {service.sliderCases.length > 0 && (
+          <ServiceBeforeAfter locale={loc} cases={service.sliderCases} />
+        )}
         <ContactSection locale={loc} />
       </main>
       <Footer locale={loc} />

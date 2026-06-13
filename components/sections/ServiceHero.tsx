@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import type { Service } from '@/lib/data'
+import type { ResolvedService } from '@/sanity/lib/getServices'
 import { getBookingUrl } from '@/lib/whatsapp'
 import { toLocale } from '@/lib/locale'
 
@@ -34,7 +34,7 @@ function splitLastWord(title: string) {
 }
 
 interface ServiceHeroProps {
-  service: Service
+  service: ResolvedService
   /** Resolved, guaranteed-to-exist image path. */
   image: string
   locale: string

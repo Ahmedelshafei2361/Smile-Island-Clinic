@@ -1,11 +1,11 @@
 import Container from '@/components/ui/Container'
 import SectionHeading from '@/components/ui/SectionHeading'
 import Reveal from '@/components/ui/Reveal'
-import type { Service } from '@/lib/data'
+import type { ResolvedService } from '@/sanity/lib/getServices'
 import { toLocale } from '@/lib/locale'
 
 interface ServiceStepsProps {
-  service: Service
+  service: ResolvedService
   locale: string
 }
 

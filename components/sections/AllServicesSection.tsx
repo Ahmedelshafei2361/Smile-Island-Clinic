@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Container from '@/components/ui/Container'
 import SectionHeading from '@/components/ui/SectionHeading'
 import Reveal from '@/components/ui/Reveal'
-import { services } from '@/lib/data'
+import type { ResolvedService } from '@/sanity/lib/getServices'
 import { getBookingUrl } from '@/lib/whatsapp'
 import { toLocale } from '@/lib/locale'
 
@@ -40,15 +40,19 @@ function ArrowIcon({ className = '' }: { className?: string }) {
 
 interface AllServicesSectionProps {
   locale: string
+  services: ResolvedService[]
 }
 
-type ServiceItem = (typeof services)[number]
+type ServiceItem = ResolvedService
 
-export default function AllServicesSection({ locale }: AllServicesSectionProps) {
+export default function AllServicesSection({
+  locale,
+  services,
+}: AllServicesSectionProps) {
   const loc = toLocale(locale)
   const isAr = loc === 'ar'
 
-  const [selectedSlug, setSelectedSlug] = useState(services[0].slug)
+  const [selectedSlug, setSelectedSlug] = useState(services[0]?.slug)
   const selected = services.find((s) => s.slug === selectedSlug) ?? services[0]
 
   const heading = isAr
@@ -150,7 +154,7 @@ export default function AllServicesSection({ locale }: AllServicesSectionProps) 
           {/* Selected service preview */}
           <div className="order-1 flex flex-col lg:order-none">
             <img
-              src={selected.thumbnailImage}
+              src={selected.image}
               alt={title(selected)}
               className="h-[220px] w-full rounded-[18px] object-cover opacity-90 md:h-[280px] lg:h-[350px] lg:rounded-[16px]"
             />

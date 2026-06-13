@@ -3,15 +3,18 @@ import SectionHeading from '@/components/ui/SectionHeading'
 import Reveal from '@/components/ui/Reveal'
 import TreatmentCard from '@/components/ui/TreatmentCard'
 import TreatmentsCarousel from '@/components/ui/TreatmentsCarousel'
-import { popularTreatments } from '@/lib/data'
+import type { PopularTreatment } from '@/lib/data'
 import { toLocale } from '@/lib/locale'
 
 interface PopularTreatmentsSectionProps {
   locale: string
+  /** Treatments to show (already resolved from CMS or local fallback). */
+  items: PopularTreatment[]
 }
 
 export default function PopularTreatmentsSection({
   locale,
+  items: treatments,
 }: PopularTreatmentsSectionProps) {
   const loc = toLocale(locale)
   const isAr = loc === 'ar'
@@ -24,7 +27,7 @@ export default function PopularTreatmentsSection({
     ? 'العلاجات الأكثر طلباً وثقةً بين مرضانا.'
     : 'The treatments our patients choose and trust the most.'
 
-  const items = popularTreatments.map((treatment, index) => ({ treatment, index }))
+  const items = treatments.map((treatment, index) => ({ treatment, index }))
   const ordered = isAr ? [...items].reverse() : items
 
   return (

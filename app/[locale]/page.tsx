@@ -10,6 +10,10 @@ import FaqSection from '@/components/sections/FaqSection'
 import ContactSection from '@/components/sections/ContactSection'
 import { getHeroContent } from '@/sanity/lib/getHeroContent'
 import { getBeforeAfterContent } from '@/sanity/lib/getBeforeAfterContent'
+import { getServices } from '@/sanity/lib/getServices'
+import { getPopularTreatments } from '@/sanity/lib/getPopularTreatments'
+import { popularTreatments as localPopular } from '@/lib/data'
+import type { PopularTreatment } from '@/lib/data'
 
 export default async function LocalePage({
   params,
@@ -17,10 +21,25 @@ export default async function LocalePage({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  const [heroContent, beforeAfterContent] = await Promise.all([
+  const [heroContent, beforeAfterContent, services, popular] = await Promise.all([
     getHeroContent(locale),
     getBeforeAfterContent(),
+    getServices(),
+    getPopularTreatments(),
   ])
+
+  // popular === null → use local fallback; [] → hide section; [...] → show CMS.
+  const popularItems: PopularTreatment[] =
+    popular === null
+      ? localPopular
+      : popular.map((s) => ({
+          slug: s.slug,
+          titleEn: s.titleEn,
+          titleAr: s.titleAr,
+          descEn: s.shortDescriptionEn,
+          descAr: s.shortDescriptionAr,
+          image: s.image,
+        }))
 
   return (
     <>
@@ -28,9 +47,11 @@ export default async function LocalePage({
       <main className="flex-1">
         <HeroSection locale={locale} content={heroContent} />
         <AboutSection locale={locale} />
-        <PopularTreatmentsSection locale={locale} />
+        {popularItems.length >= 3 && (
+          <PopularTreatmentsSection locale={locale} items={popularItems} />
+        )}
         <BeforeAfterSection locale={locale} content={beforeAfterContent} />
-        <AllServicesSection locale={locale} />
+        <AllServicesSection locale={locale} services={services} />
         <TestimonialsSection locale={locale} />
         <FaqSection locale={locale} />
         <ContactSection locale={locale} />

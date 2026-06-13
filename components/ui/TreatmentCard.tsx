@@ -46,7 +46,7 @@ export default function TreatmentCard({ treatment, index, locale }: TreatmentCar
       dir={isAr ? 'rtl' : 'ltr'}
       className="group shrink-0 mr-[24px] w-[300px] lg:w-[620px] bg-[#F4EAE1] rounded-[24px] border-2 border-white p-[12px] lg:p-[16px] flex flex-col lg:flex-row lg:items-stretch gap-[16px] lg:gap-[28px] select-none transition-colors duration-500 ease-out hover:bg-[#F1E5DA]"
     >
-      <div className="order-2 lg:order-none shrink-0 w-full lg:w-[240px] h-[200px] lg:h-auto rounded-[16px] overflow-hidden">
+      <div className="order-2 lg:order-none shrink-0 w-full lg:w-[280px] aspect-[4/3] lg:self-center rounded-[16px] overflow-hidden">
         <img
           src={treatment.image}
           alt={title}
