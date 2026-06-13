@@ -51,18 +51,41 @@ export default function VideoTestimonialCard({ item, locale }: VideoTestimonialC
   return (
     <div className="relative snap-center shrink-0 w-[252px] sm:w-[300px] lg:w-[416px] aspect-[416/560] rounded-[24px] overflow-hidden bg-card select-none">
       {playing ? (
-        <iframe
-          className="absolute inset-0 h-full w-full"
-          src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1&modestbranding=1`}
-          title={name}
-          loading="lazy"
-          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-          allowFullScreen
-        />
+        <div className="absolute inset-0">
+          <iframe
+            className="absolute inset-0 h-full w-full border-0"
+            src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1&modestbranding=1`}
+            title={name}
+            loading="lazy"
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            allowFullScreen
+          />
+          {/* Site-controlled stop — unmounts the iframe, never navigates to
+              YouTube. Placed top-start, away from YouTube's own controls. */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              setPlaying(false)
+            }}
+            aria-label={isAr ? 'إيقاف الفيديو' : 'Stop video'}
+            className="absolute left-[10px] top-[10px] z-20 grid size-[40px] place-items-center rounded-full bg-black/65 text-white shadow-md backdrop-blur-sm transition-colors hover:bg-black/80"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true" className="size-[18px]">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" />
+            </svg>
+          </button>
+        </div>
       ) : (
         <button
           type="button"
-          onClick={() => setPlaying(true)}
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            setPlaying(true)
+          }}
           aria-label={aria}
           className="group absolute inset-0 h-full w-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#9c673f] focus-visible:ring-inset"
         >
@@ -83,7 +106,7 @@ export default function VideoTestimonialCard({ item, locale }: VideoTestimonialC
           {/* Center play button — dark frosted circle, white icon (Figma) */}
           <span className="absolute inset-0 grid place-items-center">
             <span className="grid place-items-center size-[72px] lg:size-[96px] rounded-full bg-black/35 text-white ring-1 ring-white/25 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.25)] transition-transform duration-300 ease-out motion-safe:group-hover:scale-110">
-              <PlayIcon className="size-[28px] lg:size-[38px]" />
+              <PlayIcon className="size-[28px] lg:size-[36px]" />
             </span>
           </span>
 

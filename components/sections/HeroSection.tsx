@@ -41,15 +41,15 @@ export default function HeroSection({ locale }: HeroSectionProps) {
     ? 'استعد ابتسامتك مع أطباء أسنان ذوي خبرة يقدمون رعاية عالية الجودة بأسعار عادلة.'
     : 'Restore your smile with experienced dentists providing quality care at fair pricing.'
 
-  const ctaContact = isAr ? 'اتصل بنا' : 'Contact Us'
+  const ctaContact = isAr ? 'تواصل معنا' : 'Contact Us'
   const ctaExplore = isAr ? 'اكتشف الخدمات' : 'Explore services'
 
   const stats = isAr
     ? {
         healthy: 'ابتسامة صحية',
         trusted: 'موثوق بها من قبل الآلاف',
-        satisfaction: 'إشباع',
-        reviews: 'التعليقات',
+        satisfaction: 'رضاء',
+        reviews: 'تعليق',
       }
     : {
         healthy: 'Healthy Smile',
@@ -106,14 +106,14 @@ export default function HeroSection({ locale }: HeroSectionProps) {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-[#352514] flex gap-[8px] items-center justify-center px-[20px] py-[12px] rounded-[800px] text-[#f7efe8] text-[16px] font-medium leading-[1.5] whitespace-nowrap transition-all duration-200 hover:bg-[#2a1d10] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#352514]/20"
+            className="group bg-[#352514] flex gap-[8px] items-center justify-center px-[20px] py-[12px] rounded-[800px] text-[#f7efe8] text-[16px] font-medium leading-[1.5] whitespace-nowrap transition-all duration-200 hover:bg-[#2a1d10] hover:-translate-y-0.5"
           >
             <WhatsAppIcon className="size-[18px]" />
             {ctaContact}
           </a>
           <a
             href={servicesHref}
-            className="bg-[#efdfd2] flex items-center justify-center px-[24px] py-[12px] rounded-[800px] text-[#352514] text-[16px] font-medium leading-[1.5] whitespace-nowrap transition-all duration-200 hover:bg-[#e7d3c2] hover:-translate-y-0.5 hover:shadow-md hover:shadow-[#9c673f]/15"
+            className="bg-[#efdfd2] flex items-center justify-center px-[24px] py-[12px] rounded-[800px] text-[#352514] text-[16px] font-medium leading-[1.5] whitespace-nowrap transition-all duration-200 hover:bg-[white] hover:-translate-y-0.5"
           >
             {ctaExplore}
           </a>

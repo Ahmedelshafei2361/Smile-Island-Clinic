@@ -125,7 +125,7 @@ export default function Footer({ locale }: FooterProps) {
   const isAr = loc === 'ar'
   const links = footerLinks[loc]
 
-  const contactLabel = isAr ? 'اتصل بنا' : 'Contact Us'
+  const contactLabel = isAr ? 'تواصل معنا' : 'Contact Us'
   const contactUrl = getWhatsAppUrl(
     isAr
       ? 'مرحباً، أريد التواصل مع عيادة سمايل ايلاند.'
@@ -165,7 +165,7 @@ export default function Footer({ locale }: FooterProps) {
 
           <p className="mt-[32px] max-w-[760px] text-[15px] leading-[1.6] text-[#f7efe8]/90 md:mt-[40px] md:text-[20px]">
             {isAr
-              ? 'اتصل بفريقنا اليوم واكتشف رعاية الأسنان المصممة خصيصًا لراحتك.'
+              ? 'تواصل مع فريقنا اليوم واكتشف رعاية الأسنان المصممة خصيصًا لراحتك.'
               : 'Contact our team today and discover dental care designed around your comfort.'}
           </p>
 

@@ -16,18 +16,20 @@ interface ServiceBeforeAfterProps {
   cases?: BeforeAfterCase[]
 }
 
+// Temporary dental placeholders (no real before/after pairs yet). Each case
+// reuses a local dental image for both sides — swap for real per-service pairs.
 const DUMMY_CASES: BeforeAfterCase[] = [
   {
-    beforeImage: 'https://picsum.photos/seed/smile-before-01/900/1200',
-    afterImage: 'https://picsum.photos/seed/smile-after-01/900/1200',
+    beforeImage: '/images/before-after/home-01.jpg',
+    afterImage: '/images/before-after/home-01.jpg',
   },
   {
-    beforeImage: 'https://picsum.photos/seed/smile-before-02/900/1200',
-    afterImage: 'https://picsum.photos/seed/smile-after-02/900/1200',
+    beforeImage: '/images/before-after/home-02.jpg',
+    afterImage: '/images/before-after/home-02.jpg',
   },
   {
-    beforeImage: 'https://picsum.photos/seed/smile-before-03/900/1200',
-    afterImage: 'https://picsum.photos/seed/smile-after-03/900/1200',
+    beforeImage: '/images/before-after/home-03.jpg',
+    afterImage: '/images/before-after/home-03.jpg',
   },
 ]
 

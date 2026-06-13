@@ -9,17 +9,6 @@ import ContactSection from '@/components/sections/ContactSection'
 import { services } from '@/lib/data'
 import { LOCALES, toLocale } from '@/lib/locale'
 
-// Real images that exist today; everything else falls back to the preview.
-const HERO_IMAGES: Record<string, string> = {
-  'dental-implants': '/images/services/dental-implants.jpg',
-  'gum-contouring': '/images/services/gum-contouring.jpg',
-}
-const FALLBACK_IMAGE = '/images/services/service-preview.jpg'
-
-function resolveImage(slug: string): string {
-  return HERO_IMAGES[slug] ?? FALLBACK_IMAGE
-}
-
 export function generateStaticParams() {
   return LOCALES.flatMap((locale) =>
     services.map((service) => ({ locale, slug: service.slug }))
@@ -57,7 +46,7 @@ export default async function ServicePage({
     <>
       <Header locale={loc} />
       <main className="flex-1">
-        <ServiceHero service={service} image={resolveImage(service.slug)} locale={loc} />
+        <ServiceHero service={service} image={service.heroImage} locale={loc} />
         <ServiceSteps service={service} locale={loc} />
         <ServiceBeforeAfter locale={loc} />
         <ContactSection locale={loc} />

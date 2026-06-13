@@ -1,4 +1,8 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { getBookingUrl } from '@/lib/whatsapp'
 import { toLocale, type Locale } from '@/lib/locale'
 import MobileMenu from './MobileMenu'
@@ -20,7 +24,13 @@ const navLinks: Record<Locale, { label: string; href: string }[]> = {
 
 const ctaLabel: Record<Locale, string> = {
   en: 'Contact Us',
-  ar: 'اتصل بنا',
+  ar: 'تواصل معنا',
+}
+
+const SECTION_IDS = ['services', 'testimonials', 'contact']
+
+function hashOf(href: string): string {
+  return href.includes('#') ? href.split('#')[1] : ''
 }
 
 function WhatsAppIcon() {
@@ -45,57 +55,102 @@ export default function Header({ locale }: HeaderProps) {
   const links = navLinks[loc]
   const whatsappUrl = getBookingUrl({ locale: loc })
 
+  const pathname = usePathname()
+  const isHome = pathname === `/${loc}` || pathname === `/${loc}/`
+
+  const [scrolled, setScrolled] = useState(false)
+  // '' = top/home, or a section id. Only meaningful on the homepage.
+  const [activeId, setActiveId] = useState('')
+
+  useEffect(() => {
+    let raf = 0
+    const update = () => {
+      raf = 0
+      setScrolled(window.scrollY > 64)
+      if (!isHome) return
+      const offset = 120
+      let current = ''
+      for (const id of SECTION_IDS) {
+        const el = document.getElementById(id)
+        if (el && el.getBoundingClientRect().top <= offset) current = id
+      }
+      setActiveId(current)
+    }
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [isHome])
+
+  const isActive = (href: string) => isHome && hashOf(href) === activeId
+
   return (
-    <header className="relative bg-white lg:bg-transparent lg:absolute lg:top-0 lg:left-0 lg:right-0 z-50">
-      <div className="flex items-center justify-between p-[20px] lg:px-[64px] lg:py-[20px]">
-        {/* Logo — smaller on mobile */}
-        <Link
-          href={`/${loc}`}
-          className="shrink-0 h-[40px] w-[111px] lg:h-[51px] lg:w-[142px] relative overflow-hidden block"
-        >
-          <img
-            alt="Smile Island Dental Clinic"
-            className="absolute h-[230.56%] max-w-none"
-            style={{
-              left: '-11.27%',
-              top: '-58.2%',
-              width: '119.01%',
-            }}
-            src="/images/logo/logo.png"
-          />
-        </Link>
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-[600ms] ease-out ${
+          scrolled
+            ? 'bg-[rgba(254,252,251,0.9)] backdrop-blur-md border-b border-[#e9cdb4]/40 shadow-[0_4px_24px_rgba(53,37,20,0.06)]'
+            : 'bg-transparent border-b border-transparent'
+        }`}
+      >
+        <div className="flex items-center justify-between p-[20px] lg:px-[64px] lg:py-[20px]">
+          {/* Logo */}
+          <Link
+            href={`/${loc}`}
+            className="shrink-0 h-[40px] w-[111px] lg:h-[51px] lg:w-[142px] relative overflow-hidden block"
+          >
+            <img
+              alt="Smile Island Dental Clinic"
+              className="absolute h-[230.56%] max-w-none"
+              style={{ left: '-11.27%', top: '-58.2%', width: '119.01%' }}
+              src="/images/logo/logo.png"
+            />
+          </Link>
 
-        {/* Desktop nav links */}
-        <nav className="hidden lg:flex items-center gap-[24px]">
-          {links.map((link, i) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={
-                i === 0
-                  ? 'text-[16px] text-[#9c673f] font-medium leading-[1.5] whitespace-nowrap'
-                  : 'text-[16px] text-[#352514] font-normal leading-[1.5] whitespace-nowrap hover:text-[#9c673f] transition-colors'
-              }
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+          {/* Desktop nav links */}
+          <nav className="hidden lg:flex items-center gap-[24px]">
+            {links.map((link) => {
+              const active = isActive(link.href)
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={active ? 'page' : undefined}
+                  className={`text-[16px] leading-[1.5] whitespace-nowrap transition-colors ${
+                    active
+                      ? 'text-[#9c673f] font-medium'
+                      : 'text-[#352514] font-normal hover:text-[#9c673f]'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
+          </nav>
 
-        {/* Desktop Contact Us CTA — icon LEFT of label */}
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden lg:flex bg-[#352514] gap-[8px] items-center justify-center px-[20px] py-[10px] rounded-[800px] text-white text-[16px] font-medium leading-[1.5] whitespace-nowrap transition-all duration-200 hover:bg-[#2a1d10] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#352514]/20 shrink-0"
-        >
-          <WhatsAppIcon />
-          {ctaLabel[loc]}
-        </a>
+          {/* Desktop Contact Us CTA */}
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden lg:flex bg-[#352514] gap-[8px] items-center justify-center px-[20px] py-[10px] rounded-[800px] text-white text-[16px] font-medium leading-[1.5] whitespace-nowrap transition-all duration-200 hover:bg-[#2a1d10] hover:-translate-y-0.5"
+          >
+            <WhatsAppIcon />
+            {ctaLabel[loc]}
+          </a>
 
-        {/* Mobile menu (hamburger + panel) */}
-        <MobileMenu links={links} ctaLabel={ctaLabel[loc]} ctaHref={whatsappUrl} />
-      </div>
-    </header>
+          {/* Mobile menu */}
+          <MobileMenu links={links} ctaLabel={ctaLabel[loc]} ctaHref={whatsappUrl} />
+        </div>
+      </header>
+
+      {/* Mobile-only spacer — the fixed header used to sit in flow on mobile. */}
+      <div aria-hidden className="h-[80px] lg:hidden" />
+    </>
   )
 }

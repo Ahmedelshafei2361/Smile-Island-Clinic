@@ -40,6 +40,11 @@
   box-sizing: border-box;
 }
 
+/* Fixed header offset so #section anchors are not hidden under the navbar. */
+html {
+  scroll-padding-top: 96px;
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-text);

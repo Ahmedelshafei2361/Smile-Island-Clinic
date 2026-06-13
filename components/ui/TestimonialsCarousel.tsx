@@ -175,7 +175,6 @@ export default function TestimonialsCarousel({
             disabled={isAr ? atEnd : atStart}
             className={`${arrowBase} left-4 lg:left-8`}
           >
-            {/* Left visual arrow */}
             <ArrowIcon className="size-[22px] rotate-180" />
           </button>
 
@@ -186,14 +185,13 @@ export default function TestimonialsCarousel({
             disabled={isAr ? atStart : atEnd}
             className={`${arrowBase} right-4 lg:right-8`}
           >
-            {/* Right visual arrow */}
             <ArrowIcon className="size-[22px]" />
           </button>
         </div>
       </div>
 
       <div
-        dir={isAr ? 'rtl' : 'ltr'}
+        dir="ltr"
         className="mt-[24px] flex items-center justify-center gap-[10px]"
       >
         {Array.from({ length: count }).map((_, i) => (
