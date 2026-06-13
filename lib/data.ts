@@ -420,9 +420,34 @@ export const popularTreatments: PopularTreatment[] = [
 // real (extracted from the design); the rest cycle them as placeholders and
 // are trivial to replace once final approved cases are provided.
 export const beforeAfterCases: BeforeAfterCase[] = [
-  { id: 'ba-1', image: '/images/before-after/home-01.jpg' },
-  { id: 'ba-2', image: '/images/before-after/home-02.jpg' },
-  { id: 'ba-3', image: '/images/before-after/home-03.jpg' },
+  {
+  id: 'whitening-case-01',
+  image: '/images/before-after/whitening-case-01.png',
+  titleEn: 'Laser Teeth Whitening',
+  titleAr: 'تبييض الأسنان بالليزر',
+  serviceSlug: 'laser-teeth-whitening',
+},
+  {
+  id: 'whitening-case-01',
+  image: '/images/before-after/whitening-case-01.png',
+  titleEn: 'Laser Teeth Whitening',
+  titleAr: 'تبييض الأسنان بالليزر',
+  serviceSlug: 'laser-teeth-whitening',
+},
+  {
+  id: 'whitening-case-01',
+  image: '/images/before-after/whitening-case-01.png',
+  titleEn: 'Laser Teeth Whitening',
+  titleAr: 'تبييض الأسنان بالليزر',
+  serviceSlug: 'laser-teeth-whitening',
+},
+  {
+  id: 'whitening-case-01',
+  image: '/images/before-after/whitening-case-01.png',
+  titleEn: 'Laser Teeth Whitening',
+  titleAr: 'تبييض الأسنان بالليزر',
+  serviceSlug: 'laser-teeth-whitening',
+},
   {
   id: 'whitening-case-01',
   image: '/images/before-after/whitening-case-01.png',
@@ -654,7 +679,7 @@ export const siteSettings: SiteSettings = {
     },
     {
       daysEn: 'Sunday / Monday / Tuesday',
-      daysAr: 'الأحد / الإثنين / الثلاثاء',
+      daysAr: 'الأحد / الإثنين / الثeاء',
       hoursEn: '1 PM – 4 PM · 5 PM – 10 PM',
       hoursAr: '١ ظ - ٤ ع · ٥ م - ١٠ م',
     },

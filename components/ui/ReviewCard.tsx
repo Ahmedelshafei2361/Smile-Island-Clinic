@@ -32,7 +32,7 @@ export default function ReviewCard({ item, locale }: ReviewCardProps) {
       <Stars />
 
       <p className="mt-[14px] font-medium text-[19px] lg:text-[24px] leading-[1.3] text-[#1f160c]">
-        {isAr ? `«${headline}»` : `“${headline}”`}
+        {isAr ? `"${headline}"` : `“${headline}”`}
       </p>
 
       <p className="mt-[6px] text-[14px] lg:text-[15px] leading-[1.6] text-[#57534d]">

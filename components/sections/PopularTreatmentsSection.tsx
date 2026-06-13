@@ -24,8 +24,6 @@ export default function PopularTreatmentsSection({
     ? 'العلاجات الأكثر طلباً وثقةً بين مرضانا.'
     : 'The treatments our patients choose and trust the most.'
 
-  // Keep number ↔ treatment fixed; reverse only the visual order for RTL so
-  // card 01 sits on the right and the row reads naturally right-to-left.
   const items = popularTreatments.map((treatment, index) => ({ treatment, index }))
   const ordered = isAr ? [...items].reverse() : items
 
@@ -34,32 +32,42 @@ export default function PopularTreatmentsSection({
       id="treatments"
       className="relative isolate overflow-hidden bg-background-soft pt-[64px] pb-[80px] md:pt-[88px] md:pb-[112px]"
     >
-      <Container>
-        <Reveal className="flex flex-col items-center text-center">
-          <SectionHeading
-            title={heading.title}
-            accent={heading.accent}
-            accentFirst={!isAr}
-            locale={loc}
-          />
-          <p className="mt-[12px] max-w-[560px] font-[family-name:var(--font-body)] text-[14px] md:text-[16px] leading-[1.6] text-[#5b4a3a]">
-            {subtitle}
-          </p>
-        </Reveal>
-      </Container>
+      {/* Decorative tooth */}
+      <img
+        src="/images/decor/tooth.svg"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute left-[-96px] top-[-64px] z-0 w-[230px] opacity-[0.65] sm:left-[-88px] sm:top-[-72px] sm:w-[280px] md:left-[-72px] md:top-[-96px] md:w-[360px] lg:left-[-64px] lg:top-[-112px] lg:w-[430px]"
+      />
 
-      {/* Full-bleed draggable infinite carousel — drifts left in EN, right in AR */}
-      <div className="mt-[40px] md:mt-[48px]">
-        <TreatmentsCarousel reverse={isAr}>
-          {ordered.map(({ treatment, index }) => (
-            <TreatmentCard
-              key={treatment.slug}
-              treatment={treatment}
-              index={index}
+      <div className="relative z-10">
+        <Container>
+          <Reveal className="flex flex-col items-center text-center">
+            <SectionHeading
+              title={heading.title}
+              accent={heading.accent}
+              accentFirst={!isAr}
               locale={loc}
             />
-          ))}
-        </TreatmentsCarousel>
+
+            <p className="mt-[12px] max-w-[560px] font-[family-name:var(--font-body)] text-[14px] md:text-[16px] leading-[1.6] text-[#5b4a3a]">
+              {subtitle}
+            </p>
+          </Reveal>
+        </Container>
+
+        <div className="mt-[40px] md:mt-[48px]">
+          <TreatmentsCarousel reverse={isAr}>
+            {ordered.map(({ treatment, index }) => (
+              <TreatmentCard
+                key={treatment.slug}
+                treatment={treatment}
+                index={index}
+                locale={loc}
+              />
+            ))}
+          </TreatmentsCarousel>
+        </div>
       </div>
     </section>
   )

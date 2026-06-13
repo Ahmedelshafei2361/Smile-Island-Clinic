@@ -80,7 +80,7 @@ export default function FaqAccordion({ items, locale }: FaqAccordionProps) {
               <span
                 className={`grid size-[36px] shrink-0 place-items-center rounded-[8px] ${FAQ_COLORS.questionIconBg} ${FAQ_COLORS.questionIconText}`}
               >
-                <QuestionIcon className="size-[20px]" />
+                <QuestionIcon className="size-[24px]" />
               </span>
 
               <div className="min-w-0 flex-1">

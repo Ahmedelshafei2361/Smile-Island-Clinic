@@ -46,7 +46,6 @@ export default function TreatmentCard({ treatment, index, locale }: TreatmentCar
       dir={isAr ? 'rtl' : 'ltr'}
       className="group shrink-0 mr-[24px] w-[300px] lg:w-[620px] bg-[#F4EAE1] rounded-[24px] border-2 border-white p-[12px] lg:p-[16px] flex flex-col lg:flex-row lg:items-stretch gap-[16px] lg:gap-[28px] select-none transition-colors duration-500 ease-out hover:bg-[#F1E5DA]"
     >
-      {/* Image — left on desktop, auto-mirrors in RTL */}
       <div className="order-2 lg:order-none shrink-0 w-full lg:w-[240px] h-[200px] lg:h-auto rounded-[16px] overflow-hidden">
         <img
           src={treatment.image}
@@ -56,7 +55,6 @@ export default function TreatmentCard({ treatment, index, locale }: TreatmentCar
         />
       </div>
 
-      {/* Content */}
       <div className="order-1 lg:order-none flex-1 flex flex-col lg:py-[12px] min-w-0">
         <span className={numClass}>{num}</span>
 
@@ -73,7 +71,7 @@ export default function TreatmentCard({ treatment, index, locale }: TreatmentCar
             href={bookUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full lg:w-auto whitespace-nowrap bg-[#352514] text-[#f7efe8] rounded-[800px] px-[20px] lg:px-[16px] py-[10px] text-[14px] font-medium flex items-center justify-center gap-[8px] transition-all duration-200 hover:bg-[#2a1d10] hover:-translate-y-0.5"
+            className="w-full lg:w-auto whitespace-nowrap bg-[#352514] text-[#f7efe8] rounded-[800px] px-[20px] lg:px-[16px] py-[10px] text-[14px] font-medium flex items-center justify-center gap-[8px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[#2a1d10]"
           >
             <WhatsAppIcon />
             {bookLabel}
@@ -81,7 +79,7 @@ export default function TreatmentCard({ treatment, index, locale }: TreatmentCar
 
           <a
             href={detailsHref}
-            className="w-full lg:w-auto whitespace-nowrap bg-white text-[#352514] rounded-[800px] px-[20px] lg:px-[16px] py-[10px] text-[14px] font-medium text-center transition-all duration-200 hover:bg-[#f3e9df] hover:-translate-y-0.5"
+            className="w-full lg:w-auto whitespace-nowrap bg-white text-[#352514] rounded-[800px] px-[20px] lg:px-[16px] py-[10px] text-[14px] font-medium text-center transition-transform duration-200 hover:-translate-y-0.5"
           >
             {seeLabel}
           </a>
