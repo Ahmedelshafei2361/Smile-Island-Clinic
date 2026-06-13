@@ -4,26 +4,50 @@ import Reveal from '@/components/ui/Reveal'
 import BeforeAfterCarousel from '@/components/ui/BeforeAfterCarousel'
 import BeforeAfterCard from '@/components/ui/BeforeAfterCard'
 import { beforeAfterCases } from '@/lib/data'
+import type { BeforeAfterCase } from '@/lib/data'
 import { toLocale } from '@/lib/locale'
+import type { BeforeAfterContent } from '@/sanity/lib/getBeforeAfterContent'
 
 interface BeforeAfterSectionProps {
   locale: string
+  /** Optional CMS content; each field falls back to local static defaults. */
+  content?: BeforeAfterContent | null
 }
 
-export default function BeforeAfterSection({ locale }: BeforeAfterSectionProps) {
+export default function BeforeAfterSection({ locale, content }: BeforeAfterSectionProps) {
   const loc = toLocale(locale)
   const isAr = loc === 'ar'
 
-  const heading = isAr
+  const defaultHeading = isAr
     ? { title: 'قبل', accent: 'وبعد' }
     : { title: 'Before', accent: '& After' }
 
-  const subtitle = isAr
+  const defaultSubtitle = isAr
     ? 'نتائج حقيقية لمرضى حقيقيين في عيادة سمايل ايلاند.'
     : 'Real results from real patients at Smile Island Clinic.'
 
-  // Natural order — RTL visual ordering is handled by the carousel's dir.
-  const cases = beforeAfterCases
+  const heading = {
+    title: content?.sectionTitle ?? defaultHeading.title,
+    accent: content?.sectionAccent ?? defaultHeading.accent,
+  }
+  const subtitle = content?.sectionSubtitle ?? defaultSubtitle
+
+  // Use CMS cases when available, otherwise fall back to local static data.
+  let cases: BeforeAfterCase[]
+
+  if (content?.cases && content.cases.length > 0) {
+    cases = content.cases.map((c) => ({
+      id: c.id,
+      image: c.image ?? '/images/before-after/whitening-case-01.png',
+      beforeImage: c.beforeImage,
+      afterImage: c.afterImage,
+      titleEn: c.title,
+      titleAr: c.title,
+      serviceSlug: c.serviceSlug,
+    }))
+  } else {
+    cases = beforeAfterCases
+  }
 
   return (
     <section
@@ -56,3 +80,4 @@ export default function BeforeAfterSection({ locale }: BeforeAfterSectionProps) 
     </section>
   )
 }
+

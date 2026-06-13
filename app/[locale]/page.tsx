@@ -9,6 +9,7 @@ import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import FaqSection from '@/components/sections/FaqSection'
 import ContactSection from '@/components/sections/ContactSection'
 import { getHeroContent } from '@/sanity/lib/getHeroContent'
+import { getBeforeAfterContent } from '@/sanity/lib/getBeforeAfterContent'
 
 export default async function LocalePage({
   params,
@@ -16,7 +17,10 @@ export default async function LocalePage({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  const heroContent = await getHeroContent(locale)
+  const [heroContent, beforeAfterContent] = await Promise.all([
+    getHeroContent(locale),
+    getBeforeAfterContent(locale),
+  ])
 
   return (
     <>
@@ -25,7 +29,7 @@ export default async function LocalePage({
         <HeroSection locale={locale} content={heroContent} />
         <AboutSection locale={locale} />
         <PopularTreatmentsSection locale={locale} />
-        <BeforeAfterSection locale={locale} />
+        <BeforeAfterSection locale={locale} content={beforeAfterContent} />
         <AllServicesSection locale={locale} />
         <TestimonialsSection locale={locale} />
         <FaqSection locale={locale} />
