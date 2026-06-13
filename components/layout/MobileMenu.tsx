@@ -7,6 +7,9 @@ interface MobileMenuProps {
   links: { label: string; href: string }[]
   ctaLabel: string
   ctaHref: string
+  altHref: string
+  altLabel: string
+  altLocale: 'en' | 'ar'
 }
 
 function WhatsAppIcon() {
@@ -22,7 +25,14 @@ function WhatsAppIcon() {
   )
 }
 
-export default function MobileMenu({ links, ctaLabel, ctaHref }: MobileMenuProps) {
+export default function MobileMenu({
+  links,
+  ctaLabel,
+  ctaHref,
+  altHref,
+  altLabel,
+  altLocale,
+}: MobileMenuProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -88,6 +98,17 @@ export default function MobileMenu({ links, ctaLabel, ctaHref }: MobileMenuProps
             <WhatsAppIcon />
             {ctaLabel}
           </a>
+
+          {/* Language switcher */}
+          <Link
+            href={altHref}
+            lang={altLocale}
+            dir={altLocale === 'ar' ? 'rtl' : 'ltr'}
+            onClick={() => setOpen(false)}
+            className="mt-[8px] flex items-center justify-center rounded-[800px] border border-[#352514]/30 px-[20px] py-[12px] text-[15px] text-[#352514] transition-colors hover:bg-[#f1e4d9]"
+          >
+            {altLabel}
+          </Link>
         </nav>
       </div>
     </div>

@@ -16,21 +16,16 @@ interface ServiceBeforeAfterProps {
   cases?: BeforeAfterCase[]
 }
 
-// Temporary dental placeholders (no real before/after pairs yet). Each case
-// reuses a local dental image for both sides — swap for real per-service pairs.
+// Temporary dental placeholders: local teeth photos (before) paired with a
+// bright Unsplash smile (after) so the slider shows real contrast. Swap for
+// real per-service before/after pairs later.
+const AFTER_SMILE =
+  'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=900&q=70'
+
 const DUMMY_CASES: BeforeAfterCase[] = [
-  {
-    beforeImage: '/images/before-after/home-01.jpg',
-    afterImage: '/images/before-after/home-01.jpg',
-  },
-  {
-    beforeImage: '/images/before-after/home-02.jpg',
-    afterImage: '/images/before-after/home-02.jpg',
-  },
-  {
-    beforeImage: '/images/before-after/home-03.jpg',
-    afterImage: '/images/before-after/home-03.jpg',
-  },
+  { beforeImage: '/images/before-after/home-01.jpg', afterImage: AFTER_SMILE },
+  { beforeImage: '/images/before-after/home-02.jpg', afterImage: AFTER_SMILE },
+  { beforeImage: '/images/before-after/home-03.jpg', afterImage: AFTER_SMILE },
 ]
 
 function ChevronLeftIcon({ className = '' }: { className?: string }) {

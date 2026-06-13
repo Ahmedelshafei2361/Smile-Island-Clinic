@@ -72,7 +72,8 @@ export default function ContactSection({ locale }: ContactSectionProps) {
   const loc = toLocale(locale)
   const isAr = loc === 'ar'
 
-  const mapsUrl = 'https://www.google.com/maps/place/%D8%B3%D9%85%D8%A7%D9%8A%D9%84+%D8%A7%D9%8A%D9%84%D8%A7%D9%86%D8%AF+%D9%84%D8%AA%D8%AC%D9%85%D9%8A%D9%84+%D8%A7%D9%84%D9%84%D8%AB%D9%87+%D9%88%D8%B2%D8%B1%D8%A7%D8%B9%D8%A9+%D8%A7%D9%84%D8%A3%D8%B3%D9%86%D8%A7%D9%86+Smile+Island%E2%80%AD/@31.2302137,29.9585276,17.88z/data=!4m6!3m5!1s0x14f5c50a67e3679b:0xdeb1e9b886d35102!8m2!3d31.2304003!4d29.9585073!16s%2Fg%2F11vqwzc74l?hl=en-EG&entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D'
+  const mapsUrl =
+    'https://www.google.com/maps/place/%D8%B3%D9%85%D8%A7%D9%8A%D9%84+%D8%A7%D9%8A%D9%84%D8%A7%D9%86%D8%AF+%D9%84%D8%AA%D8%AC%D9%85%D9%8A%D9%84+%D8%A7%D9%84%D9%84%D8%AB%D9%87+%D9%88%D8%B2%D8%B1%D8%A7%D8%B9%D8%A9+%D8%A7%D9%84%D8%A3%D8%B3%D9%86%D8%A7%D9%86+Smile+Island%E2%80%AD/@31.2302137,29.9585276,17.88z/data=!4m6!3m5!1s0x14f5c50a67e3679b:0xdeb1e9b886d35102!8m2!3d31.2304003!4d29.9585073!16s%2Fg%2F11vqwzc74l?hl=en-EG&entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D'
 
   const subtitle = isAr
     ? 'تواصل معنا، زرنا، أو احجز موعدك — نحن هنا لمساعدتك.'
@@ -128,7 +129,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
           <h2 className="font-[family-name:var(--font-heading)] font-medium leading-[1.3] text-[32px] md:text-[48px] text-[#352514]">
             {isAr ? (
               <>
-                <span className={accentClass}>تواصل</span> معنا
+                بيانات <span className={accentClass}>التواصل</span>
               </>
             ) : (
               <>
@@ -242,4 +243,4 @@ export default function ContactSection({ locale }: ContactSectionProps) {
       </Container>
     </section>
   )
-} 
+}

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { getBookingUrl } from '@/lib/whatsapp'
-import { toLocale, type Locale } from '@/lib/locale'
+import { toLocale, getAlternateLocalePath, type Locale } from '@/lib/locale'
 import MobileMenu from './MobileMenu'
 
 const navLinks: Record<Locale, { label: string; href: string }[]> = {
@@ -18,7 +18,7 @@ const navLinks: Record<Locale, { label: string; href: string }[]> = {
     { label: 'الرئيسية', href: '/ar' },
     { label: 'خدمات', href: '/ar#services' },
     { label: 'اراء العملاء', href: '/ar#testimonials' },
-    { label: 'تواصل معنا', href: '/ar#contact' },
+    { label: 'بيانات التواصل', href: '/ar#contact' },
   ],
 }
 
@@ -58,29 +58,47 @@ export default function Header({ locale }: HeaderProps) {
   const pathname = usePathname()
   const isHome = pathname === `/${loc}` || pathname === `/${loc}/`
 
+  const altLocale: Locale = loc === 'ar' ? 'en' : 'ar'
+  const altHref = getAlternateLocalePath(pathname, altLocale)
+  const altLabel = altLocale === 'ar' ? 'العربية' : 'English'
+
+  const languageSwitcherFontFamily =
+    altLocale === 'ar'
+      ? 'var(--font-thmanyah-sans, "Thmanyah Sans", sans-serif)'
+      : 'var(--font-plus-jakarta-sans, "Plus Jakarta Sans", sans-serif)'
+
   const [scrolled, setScrolled] = useState(false)
-  // '' = top/home, or a section id. Only meaningful on the homepage.
   const [activeId, setActiveId] = useState('')
 
   useEffect(() => {
     let raf = 0
+
     const update = () => {
       raf = 0
       setScrolled(window.scrollY > 64)
+
       if (!isHome) return
+
       const offset = 120
       let current = ''
+
       for (const id of SECTION_IDS) {
         const el = document.getElementById(id)
-        if (el && el.getBoundingClientRect().top <= offset) current = id
+        if (el && el.getBoundingClientRect().top <= offset) {
+          current = id
+        }
       }
+
       setActiveId(current)
     }
+
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update)
     }
+
     update()
     window.addEventListener('scroll', onScroll, { passive: true })
+
     return () => {
       window.removeEventListener('scroll', onScroll)
       if (raf) cancelAnimationFrame(raf)
@@ -116,6 +134,7 @@ export default function Header({ locale }: HeaderProps) {
           <nav className="hidden lg:flex items-center gap-[24px]">
             {links.map((link) => {
               const active = isActive(link.href)
+
               return (
                 <Link
                   key={link.href}
@@ -133,19 +152,38 @@ export default function Header({ locale }: HeaderProps) {
             })}
           </nav>
 
-          {/* Desktop Contact Us CTA */}
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden lg:flex bg-[#352514] gap-[8px] items-center justify-center px-[20px] py-[10px] rounded-[800px] text-white text-[16px] font-medium leading-[1.5] whitespace-nowrap transition-all duration-200 hover:bg-[#2a1d10] hover:-translate-y-0.5"
-          >
-            <WhatsAppIcon />
-            {ctaLabel[loc]}
-          </a>
+          {/* Desktop language switcher + Contact Us CTA */}
+          <div className="hidden lg:flex items-center gap-[12px]">
+            <Link
+              href={altHref}
+              lang={altLocale}
+              dir={altLocale === 'ar' ? 'rtl' : 'ltr'}
+              style={{ fontFamily: languageSwitcherFontFamily }}
+              className="flex items-center justify-center rounded-[800px] bg-[#f1e4d9] px-[28px] py-[10px] text-[16px] font-medium leading-[1.5] text-[#352514] whitespace-nowrap transition-all duration-200 hover:bg-[#ead7c8] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#352514]/30"
+            >
+              {altLabel}
+            </Link>
+
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex bg-[#352514] gap-[8px] items-center justify-center px-[20px] py-[10px] rounded-[800px] text-white text-[16px] font-medium leading-[1.5] whitespace-nowrap transition-all duration-200 hover:bg-[#2a1d10] hover:-translate-y-0.5"
+            >
+              <WhatsAppIcon />
+              {ctaLabel[loc]}
+            </a>
+          </div>
 
           {/* Mobile menu */}
-          <MobileMenu links={links} ctaLabel={ctaLabel[loc]} ctaHref={whatsappUrl} />
+          <MobileMenu
+            links={links}
+            ctaLabel={ctaLabel[loc]}
+            ctaHref={whatsappUrl}
+            altHref={altHref}
+            altLabel={altLabel}
+            altLocale={altLocale}
+          />
         </div>
       </header>
 
