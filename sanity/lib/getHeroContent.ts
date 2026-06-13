@@ -1,94 +1,61 @@
 import { client } from './client'
-import { urlForImage } from './image'
 import { isSanityConfigured } from '../env'
 
 /**
  * Resolved Hero content the HeroSection consumes. Every field is optional —
- * the component merges this over its local static defaults, so a missing
- * Sanity field (or no Sanity at all) never blanks the Hero.
+ * the component fills gaps from local static defaults when a field is missing.
+ *
+ * titleAccent  → the colored/accent span (EN: first, AR: first-read/right-side)
+ * titleNormal  → the dark/normal span   (EN: second, AR: second-read/left-side)
  */
 export interface HeroContent {
   titleAccent?: string
-  titleRegular?: string
+  titleNormal?: string
   subtitle?: string
-  primaryCtaLabel?: string
-  secondaryCtaLabel?: string
-  primaryCtaMessage?: string
-  heroImageUrl?: string
-  stats?: {
-    healthyLabel?: string
-    healthySubtext?: string
-    satisfactionValue?: string
-    satisfactionLabel?: string
-    ratingValue?: string
-    reviewsValue?: string
-    reviewsLabel?: string
-  }
+  reviewsValue?: string
 }
 
-const HERO_QUERY = `*[_type == "homePage" && locale == $locale][0]{
-  heroTitleLine1,
-  heroTitleAccent1,
-  heroTitleLine2,
-  heroTitleAccent2,
-  heroSubtitle,
-  primaryCtaLabel,
-  secondaryCtaLabel,
-  primaryCtaMessage,
-  heroImage,
-  stats
+const HERO_QUERY = `*[_type == "homePage" && _id == "homePageHero"][0]{
+  heroTitleAccentEn,
+  heroTitleNormalEn,
+  heroTitleNormalAr,
+  heroTitleAccentAr,
+  heroSubtitleEn,
+  heroSubtitleAr,
+  reviewCounterEn,
+  reviewCounterAr
 }`
-
-function clean<T extends Record<string, unknown>>(obj: T): Partial<T> {
-  const out: Record<string, unknown> = {}
-  for (const [k, v] of Object.entries(obj)) {
-    if (v !== undefined && v !== null && v !== '') out[k] = v
-  }
-  return out as Partial<T>
-}
 
 /**
  * Fetch homepage Hero content for a locale. Returns null when Sanity is not
  * configured, the fetch fails, or no document exists — callers fall back to
  * local content.
  */
-export async function getHeroContent(locale: string): Promise<HeroContent | null> {
+export async function getHeroContent(
+  locale: string,
+): Promise<HeroContent | null> {
   if (!isSanityConfigured) return null
 
   try {
-    const doc = await client.fetch(
-      HERO_QUERY,
-      { locale: locale === 'ar' ? 'ar' : 'en' },
-      { next: { revalidate: 60 } }
-    )
+    const doc = await client.fetch(HERO_QUERY, {}, { next: { revalidate: 30 } })
     if (!doc) return null
 
-    const stats = doc.stats
-      ? clean({
-          healthyLabel: doc.stats.healthySmileLabel,
-          healthySubtext: doc.stats.healthySmileSubtext,
-          satisfactionValue: doc.stats.satisfactionValue,
-          satisfactionLabel: doc.stats.satisfactionLabel,
-          ratingValue: doc.stats.ratingValue,
-          reviewsValue: doc.stats.reviewsValue,
-          reviewsLabel: doc.stats.reviewsLabel,
-        })
-      : undefined
+    const isAr = locale === 'ar'
 
-    const content: HeroContent = clean({
-      titleAccent: doc.heroTitleAccent1,
-      titleRegular: doc.heroTitleLine1,
-      subtitle: doc.heroSubtitle,
-      primaryCtaLabel: doc.primaryCtaLabel,
-      secondaryCtaLabel: doc.secondaryCtaLabel,
-      primaryCtaMessage: doc.primaryCtaMessage,
-      heroImageUrl: doc.heroImage
-        ? urlForImage(doc.heroImage).width(1400).fit('max').url()
-        : undefined,
-    })
+    // Arabic: "normal first part" (heroTitleNormalAr) goes into the accent span
+    // so it appears on the right (reads first in RTL), preserving correct reading order.
+    const titleAccent = isAr ? doc.heroTitleNormalAr : doc.heroTitleAccentEn
+    const titleNormal = isAr ? doc.heroTitleAccentAr : doc.heroTitleNormalEn
+    const subtitle = isAr ? doc.heroSubtitleAr : doc.heroSubtitleEn
+    const reviewsValue = isAr ? doc.reviewCounterAr : doc.reviewCounterEn
 
-    if (stats && Object.keys(stats).length > 0) content.stats = stats
-    return content
+    const content: HeroContent = {}
+    if (titleAccent) content.titleAccent = titleAccent
+    if (titleNormal) content.titleNormal = titleNormal
+    if (subtitle) content.subtitle = subtitle
+    if (reviewsValue) content.reviewsValue = reviewsValue
+
+    return Object.keys(content).length > 0 ? content : null
   } catch {
     // Network/config error → silent fallback to local content.
     return null

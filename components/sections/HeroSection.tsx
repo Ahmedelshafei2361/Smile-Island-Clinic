@@ -1,4 +1,4 @@
-import { getBookingUrl, getWhatsAppUrl } from '@/lib/whatsapp'
+import { getBookingUrl } from '@/lib/whatsapp'
 import { toLocale } from '@/lib/locale'
 import type { HeroContent } from '@/sanity/lib/getHeroContent'
 
@@ -29,13 +29,10 @@ export default function HeroSection({ locale, content }: HeroSectionProps) {
   const loc = toLocale(locale)
   const isAr = loc === 'ar'
 
-  // Primary CTA → WhatsApp. A CMS-provided message overrides the default copy.
-  const whatsappUrl = content?.primaryCtaMessage
-    ? getWhatsAppUrl(content.primaryCtaMessage)
-    : getBookingUrl({ locale: loc })
+  const whatsappUrl = getBookingUrl({ locale: loc })
   const servicesHref = `/${loc}#services`
 
-  const teamImage = content?.heroImageUrl ?? '/images/hero/hero-team.png'
+  const teamImage = '/images/hero/hero-team.png'
 
   // Local static defaults — used whenever a CMS field is missing.
   const defaults = isAr
@@ -68,21 +65,21 @@ export default function HeroSection({ locale, content }: HeroSectionProps) {
 
   const heading = {
     accent: content?.titleAccent ?? defaults.accent,
-    regular: (content?.titleRegular ?? defaults.regular).trim(),
+    regular: (content?.titleNormal ?? defaults.regular).trim(),
   }
 
   const subtitle = content?.subtitle ?? defaults.subtitle
-  const ctaContact = content?.primaryCtaLabel ?? defaults.contact
-  const ctaExplore = content?.secondaryCtaLabel ?? defaults.explore
+  const ctaContact = defaults.contact
+  const ctaExplore = defaults.explore
 
   const stats = {
-    healthy: content?.stats?.healthyLabel ?? defaults.healthy,
-    trusted: content?.stats?.healthySubtext ?? defaults.trusted,
-    satisfaction: content?.stats?.satisfactionLabel ?? defaults.satisfaction,
-    reviews: content?.stats?.reviewsLabel ?? defaults.reviews,
-    satisfactionValue: content?.stats?.satisfactionValue ?? '100%',
-    ratingValue: content?.stats?.ratingValue ?? '5.00',
-    reviewsValue: content?.stats?.reviewsValue ?? '120+',
+    healthy: defaults.healthy,
+    trusted: defaults.trusted,
+    satisfaction: defaults.satisfaction,
+    reviews: defaults.reviews,
+    satisfactionValue: '100%',
+    ratingValue: '5.00',
+    reviewsValue: content?.reviewsValue ?? '120+',
   }
 
   return (
@@ -204,7 +201,7 @@ export default function HeroSection({ locale, content }: HeroSectionProps) {
           <StatDivider />
 
           <div className="flex flex-col gap-[4px] items-center text-[#352514]">
-            <p className="font-[family-name:var(--font-body)] font-medium text-[20px] leading-[1.5] text-center min-w-full">
+            <p dir="ltr" className="font-[family-name:var(--font-body)] font-medium text-[20px] leading-[1.5] text-center min-w-full">
               {stats.reviewsValue}
             </p>
             <p className="font-[family-name:var(--font-body)] font-light text-[16px] leading-[1.5] whitespace-nowrap">
@@ -325,7 +322,7 @@ export default function HeroSection({ locale, content }: HeroSectionProps) {
               </div>
 
               <div className="flex flex-col gap-[4px] items-center text-[#352514]">
-                <p className="font-[family-name:var(--font-body)] font-medium text-[18px] leading-[1.5] text-center min-w-full">
+                <p dir="ltr" className="font-[family-name:var(--font-body)] font-medium text-[18px] leading-[1.5] text-center min-w-full">
                   {stats.reviewsValue}
                 </p>
                 <p className="font-[family-name:var(--font-body)] font-light text-[14px] leading-[1.5] whitespace-nowrap">

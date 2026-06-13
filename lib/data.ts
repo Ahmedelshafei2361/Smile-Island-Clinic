@@ -95,9 +95,7 @@ export const about: About = {
     'At Smile Island Clinic, our specialized dental team provides comprehensive, high-quality care using advanced technology for accurate diagnosis, effective treatment, and comfortable results tailored to every smile — all with affordable prices.',
   ],
   paragraphsAr: [
-    'في عيادة سمايل ايلاند نحن فريق من أطباء الأسنان المتخصصين في جميع مجالات طب الأسنان، نعمل معاً لتقديم رعاية شاملة وعالية الجودة.',
-    'نستخدم أحدث تقنيات وأجهزة طب الأسنان المتطورة لضمان دقة التشخيص، وفعالية العلاج، وتحقيق أفضل النتائج لمرضانا.',
-    'هدفنا هو تقديم رعاية احترافية ومريحة ومصممة خصيصاً لتناسب احتياجات كل ابتسامة بأعلى جودة وسعر مناسب.',
+  "في سمايل إيلاند، نقدم رعاية أسنان شاملة ومريحة على يد فريق من الأطباء المتخصصين، باستخدام أحدث التقنيات لضمان تشخيص دقيق وعلاج فعّال يناسب احتياجات كل مريض، بهدف الوصول لابتسامة صحية وجميلة بأعلى جودة وسعر مناسب.",
   ],
   image: '/images/about/about-us-image.png',
 }

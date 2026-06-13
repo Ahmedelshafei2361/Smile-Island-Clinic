@@ -19,7 +19,7 @@ export default async function LocalePage({
   const { locale } = await params
   const [heroContent, beforeAfterContent] = await Promise.all([
     getHeroContent(locale),
-    getBeforeAfterContent(locale),
+    getBeforeAfterContent(),
   ])
 
   return (

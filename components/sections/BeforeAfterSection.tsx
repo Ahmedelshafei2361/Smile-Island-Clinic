@@ -26,24 +26,16 @@ export default function BeforeAfterSection({ locale, content }: BeforeAfterSecti
     ? 'نتائج حقيقية لمرضى حقيقيين في عيادة سمايل ايلاند.'
     : 'Real results from real patients at Smile Island Clinic.'
 
-  const heading = {
-    title: content?.sectionTitle ?? defaultHeading.title,
-    accent: content?.sectionAccent ?? defaultHeading.accent,
-  }
-  const subtitle = content?.sectionSubtitle ?? defaultSubtitle
+  const heading = defaultHeading
+  const subtitle = defaultSubtitle
 
-  // Use CMS cases when available, otherwise fall back to local static data.
+  // Use CMS images when available, otherwise fall back to local static data.
   let cases: BeforeAfterCase[]
 
-  if (content?.cases && content.cases.length > 0) {
-    cases = content.cases.map((c) => ({
-      id: c.id,
-      image: c.image ?? '/images/before-after/whitening-case-01.png',
-      beforeImage: c.beforeImage,
-      afterImage: c.afterImage,
-      titleEn: c.title,
-      titleAr: c.title,
-      serviceSlug: c.serviceSlug,
+  if (content?.images && content.images.length > 0) {
+    cases = content.images.map((url, index) => ({
+      id: `cms-ba-${index}`,
+      image: url,
     }))
   } else {
     cases = beforeAfterCases
