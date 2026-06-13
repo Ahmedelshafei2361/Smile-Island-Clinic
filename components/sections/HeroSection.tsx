@@ -1,8 +1,11 @@
-import { getBookingUrl } from '@/lib/whatsapp'
+import { getBookingUrl, getWhatsAppUrl } from '@/lib/whatsapp'
 import { toLocale } from '@/lib/locale'
+import type { HeroContent } from '@/sanity/lib/getHeroContent'
 
 interface HeroSectionProps {
   locale: string
+  /** Optional CMS content; each field falls back to local static defaults. */
+  content?: HeroContent | null
 }
 
 function WhatsAppIcon({ className = '' }: { className?: string }) {
@@ -22,39 +25,65 @@ function StatDivider() {
   return <div className="w-px h-[52px] bg-[#e9cdb4] shrink-0" />
 }
 
-export default function HeroSection({ locale }: HeroSectionProps) {
+export default function HeroSection({ locale, content }: HeroSectionProps) {
   const loc = toLocale(locale)
-  const whatsappUrl = getBookingUrl({ locale: loc })
-  const servicesHref = `/${loc}#services`
-
   const isAr = loc === 'ar'
 
-  const heading = isAr
-    ? { accent: 'ابتسامة استثنائية', regular: ' بأسعار معقولة' }
-    : { accent: 'Exceptional Smile', regular: ' Fairly Priced' }
+  // Primary CTA → WhatsApp. A CMS-provided message overrides the default copy.
+  const whatsappUrl = content?.primaryCtaMessage
+    ? getWhatsAppUrl(content.primaryCtaMessage)
+    : getBookingUrl({ locale: loc })
+  const servicesHref = `/${loc}#services`
 
-  const accentItalic = isAr ? '' : 'italic'
+  const teamImage = content?.heroImageUrl ?? '/images/hero/hero-team.png'
 
-  const subtitle = isAr
-    ? 'استعد ابتسامتك مع أطباء أسنان ذوي خبرة يقدمون رعاية عالية الجودة بأسعار عادلة.'
-    : 'Restore your smile with experienced dentists providing quality care at fair pricing.'
-
-  const ctaContact = isAr ? 'تواصل معنا' : 'Contact Us'
-  const ctaExplore = isAr ? 'اكتشف الخدمات' : 'Explore services'
-
-  const stats = isAr
+  // Local static defaults — used whenever a CMS field is missing.
+  const defaults = isAr
     ? {
+        accent: 'ابتسامة استثنائية',
+        regular: 'بأسعار معقولة',
+        subtitle:
+          'استعد ابتسامتك مع أطباء أسنان ذوي خبرة يقدمون رعاية عالية الجودة بأسعار عادلة.',
+        contact: 'تواصل معنا',
+        explore: 'اكتشف الخدمات',
         healthy: 'ابتسامة صحية',
         trusted: 'موثوق بها من قبل الآلاف',
         satisfaction: 'رضاء',
         reviews: 'تعليق',
       }
     : {
+        accent: 'Exceptional Smile',
+        regular: 'Fairly Priced',
+        subtitle:
+          'Restore your smile with experienced dentists providing quality care at fair pricing.',
+        contact: 'Contact Us',
+        explore: 'Explore services',
         healthy: 'Healthy Smile',
         trusted: 'Trusted by thousands',
         satisfaction: 'Satisfaction',
         reviews: 'Reviews',
       }
+
+  const accentItalic = isAr ? '' : 'italic'
+
+  const heading = {
+    accent: content?.titleAccent ?? defaults.accent,
+    regular: (content?.titleRegular ?? defaults.regular).trim(),
+  }
+
+  const subtitle = content?.subtitle ?? defaults.subtitle
+  const ctaContact = content?.primaryCtaLabel ?? defaults.contact
+  const ctaExplore = content?.secondaryCtaLabel ?? defaults.explore
+
+  const stats = {
+    healthy: content?.stats?.healthyLabel ?? defaults.healthy,
+    trusted: content?.stats?.healthySubtext ?? defaults.trusted,
+    satisfaction: content?.stats?.satisfactionLabel ?? defaults.satisfaction,
+    reviews: content?.stats?.reviewsLabel ?? defaults.reviews,
+    satisfactionValue: content?.stats?.satisfactionValue ?? '100%',
+    ratingValue: content?.stats?.ratingValue ?? '5.00',
+    reviewsValue: content?.stats?.reviewsValue ?? '120+',
+  }
 
   return (
     <>
@@ -75,7 +104,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
           <img
             alt="Smile Island dental team"
             className="absolute h-[148.46%] left-[-0.41%] max-w-none top-[-23.97%] w-[100.41%] object-cover"
-            src="/images/hero/hero-team.png"
+            src={teamImage}
           />
         </div>
 
@@ -88,7 +117,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                 {heading.accent}
               </span>
               <span className="font-[family-name:var(--font-heading)] font-medium leading-[1.2] text-[#352514] text-[72px]">
-                {heading.regular}
+                {' '}{heading.regular}
               </span>
             </h1>
 
@@ -152,7 +181,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
 
           <div className="flex flex-col gap-[4px] items-center text-[#352514]">
             <p className="font-[family-name:var(--font-body)] font-medium text-[20px] leading-[1.5] text-center min-w-full">
-              100%
+              {stats.satisfactionValue}
             </p>
             <p className="font-[family-name:var(--font-body)] font-light text-[16px] leading-[1.5] whitespace-nowrap">
               {stats.satisfaction}
@@ -163,7 +192,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
 
           <div className="flex flex-col gap-[4px] items-center w-[83px]">
             <p className="font-[family-name:var(--font-body)] font-medium text-[20px] leading-[1.5] text-[#352514] text-center min-w-full">
-              5.00
+              {stats.ratingValue}
             </p>
             <img
               alt="5 stars"
@@ -176,7 +205,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
 
           <div className="flex flex-col gap-[4px] items-center text-[#352514]">
             <p className="font-[family-name:var(--font-body)] font-medium text-[20px] leading-[1.5] text-center min-w-full">
-              120+
+              {stats.reviewsValue}
             </p>
             <p className="font-[family-name:var(--font-body)] font-light text-[16px] leading-[1.5] whitespace-nowrap">
               {stats.reviews}
@@ -204,7 +233,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                 {heading.accent}
               </span>
               <span className="font-[family-name:var(--font-heading)] font-medium leading-[1.2] text-[#352514] text-[40px]">
-                {heading.regular}
+                {' '}{heading.regular}
               </span>
             </h1>
 
@@ -239,7 +268,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
             <img
               alt="Smile Island dental team"
               className="absolute h-[148.46%] left-[-0.41%] max-w-none top-[-23.97%] w-[100.41%] object-cover"
-              src="/images/hero/hero-team.png"
+              src={teamImage}
             />
           </div>
 
@@ -277,7 +306,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
             <div className="flex items-center justify-between w-full">
               <div className="flex flex-col gap-[4px] items-center w-[83px]">
                 <p className="font-[family-name:var(--font-body)] font-medium text-[18px] leading-[1.5] text-[#352514] text-center min-w-full">
-                  5.00
+                  {stats.ratingValue}
                 </p>
                 <img
                   alt="5 stars"
@@ -288,7 +317,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
 
               <div className="flex flex-col gap-[4px] items-center text-[#352514]">
                 <p className="font-[family-name:var(--font-body)] font-medium text-[18px] leading-[1.5] text-center min-w-full">
-                  100%
+                  {stats.satisfactionValue}
                 </p>
                 <p className="font-[family-name:var(--font-body)] font-light text-[14px] leading-[1.5] whitespace-nowrap">
                   {stats.satisfaction}
@@ -297,7 +326,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
 
               <div className="flex flex-col gap-[4px] items-center text-[#352514]">
                 <p className="font-[family-name:var(--font-body)] font-medium text-[18px] leading-[1.5] text-center min-w-full">
-                  120+
+                  {stats.reviewsValue}
                 </p>
                 <p className="font-[family-name:var(--font-body)] font-light text-[14px] leading-[1.5] whitespace-nowrap">
                   {stats.reviews}

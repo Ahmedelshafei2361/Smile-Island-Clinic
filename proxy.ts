@@ -12,5 +12,5 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   // Match root and any path not already under a locale or system route
-  matcher: ['/((?!en|ar|_next|api|fonts|images|favicon\\.ico).*)'],
+  matcher: ['/((?!en|ar|studio|_next|api|fonts|images|favicon\\.ico).*)'],
 }

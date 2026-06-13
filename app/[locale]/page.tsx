@@ -8,6 +8,7 @@ import AllServicesSection from '@/components/sections/AllServicesSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import FaqSection from '@/components/sections/FaqSection'
 import ContactSection from '@/components/sections/ContactSection'
+import { getHeroContent } from '@/sanity/lib/getHeroContent'
 
 export default async function LocalePage({
   params,
@@ -15,12 +16,13 @@ export default async function LocalePage({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
+  const heroContent = await getHeroContent(locale)
 
   return (
     <>
       <Header locale={locale} />
       <main className="flex-1">
-        <HeroSection locale={locale} />
+        <HeroSection locale={locale} content={heroContent} />
         <AboutSection locale={locale} />
         <PopularTreatmentsSection locale={locale} />
         <BeforeAfterSection locale={locale} />
