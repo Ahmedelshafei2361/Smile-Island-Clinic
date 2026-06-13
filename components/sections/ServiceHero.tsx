@@ -66,7 +66,7 @@ export default function ServiceHero({ service, image, locale }: ServiceHeroProps
   return (
     <section
       dir={isAr ? 'rtl' : 'ltr'}
-      className="relative overflow-hidden bg-background px-[20px] pt-[112px] pb-[96px] font-[family-name:var(--font-body)] lg:px-[64px] lg:pt-[150px] lg:pb-[128px]"
+      className="relative overflow-hidden bg-background px-[20px] pt-[72px] pb-[96px] font-[family-name:var(--font-body)] lg:px-[64px] lg:pt-[150px] lg:pb-[128px]"
     >
       <div className="relative z-10 mx-auto flex max-w-[1280px] flex-col items-center gap-[40px] lg:gap-[80px]">
         {/* Heading + description + actions */}

@@ -22,12 +22,12 @@ export default function ServiceSteps({ service, locale }: ServiceStepsProps) {
 
   const numClass = `font-[family-name:var(--font-heading-accent)] ${
     isAr ? '' : 'italic'
-  } text-[40px] lg:text-[58px] leading-none text-[#9c673f]`
+  } text-[38px] lg:text-[58px] leading-none text-[#9c673f]`
 
   return (
     <section
       dir={isAr ? 'rtl' : 'ltr'}
-      className="relative isolate overflow-hidden bg-[#FAF6F2] pt-[48px] pb-[64px] md:pt-[56px] md:pb-[96px] font-[family-name:var(--font-body)]"
+      className="relative isolate overflow-hidden bg-[#FAF6F2] pt-[48px] pb-[48px] md:pt-[56px] md:pb-[72px] font-[family-name:var(--font-body)]"
     >
       {/* Decorative tooth */}
       <img
@@ -54,7 +54,7 @@ export default function ServiceSteps({ service, locale }: ServiceStepsProps) {
 
           <Reveal
             delay={120}
-            className="mt-[40px] grid gap-[16px] md:mt-[56px] md:grid-cols-2 md:gap-x-[40px] md:gap-y-[32px] lg:gap-x-[71px] lg:gap-y-[45px]"
+            className="mt-[32px] grid auto-rows-fr gap-[14px] md:mt-[48px] md:grid-cols-2 md:gap-x-[40px] md:gap-y-[24px] lg:gap-x-[71px] lg:gap-y-[32px]"
           >
             {steps.map((step, i) => {
               const shouldCenterLastCard = steps.length === 3 && i === 2
@@ -63,7 +63,7 @@ export default function ServiceSteps({ service, locale }: ServiceStepsProps) {
                 <div
                   key={i}
                   dir={isAr ? 'rtl' : 'ltr'}
-                  className={`flex min-h-[170px] flex-col rounded-[24px] border-2 border-white bg-[#F4EAE1] px-[24px] pb-[28px] pt-[16px] lg:min-h-[190px] lg:px-[48px] lg:pb-[32px] ${
+                  className={`flex h-full flex-col rounded-[24px] border-2 border-white bg-[#F4EAE1] px-[24px] pt-[16px] pb-[20px] lg:px-[48px] lg:pb-[24px] ${
                     shouldCenterLastCard
                       ? 'md:col-span-2 md:mx-auto md:w-[calc(50%-20px)] lg:w-[calc(50%-35.5px)]'
                       : ''
@@ -76,7 +76,7 @@ export default function ServiceSteps({ service, locale }: ServiceStepsProps) {
                     {String(i + 1).padStart(2, '0')}
                   </span>
 
-                  <p className="mt-[28px] text-start text-[16px] md:text-[20px] lg:text-[22px] font-normal leading-[1.35] text-[#57534D]">
+                  <p className="mt-[16px] line-clamp-3 text-start text-[16px] md:text-[20px] lg:text-[22px] font-normal leading-[1.35] text-[#57534D]">
                     {step}
                   </p>
                 </div>

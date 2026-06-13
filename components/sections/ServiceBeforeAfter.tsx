@@ -81,7 +81,10 @@ function ComparisonSlider({
   const [position, setPosition] = useState(50)
 
   return (
-    <div className="group relative h-[430px] rounded-[28px] p-[4px] select-none lg:h-[440px]">
+    <div
+      dir="ltr"
+      className="group relative h-[430px] rounded-[28px] p-[4px] select-none lg:h-[440px]"
+    >
       <div className="relative h-full overflow-hidden rounded-[24px] bg-[#FAF6F2]">
         {/* After image */}
         <img
@@ -108,11 +111,17 @@ function ComparisonSlider({
         <div className="pointer-events-none absolute inset-0 bg-black/[0.015]" />
 
         {/* Labels */}
-        <span className="absolute left-[18px] top-[18px] z-10 rounded-full bg-[#FAF6F2] px-[13px] py-[7px] text-[12px] font-medium text-[#352514] backdrop-blur-sm">
+        <span
+          dir={isAr ? 'rtl' : 'ltr'}
+          className="absolute left-[18px] top-[18px] z-10 rounded-full bg-[#FAF6F2] px-[13px] py-[7px] text-[12px] font-medium text-[#352514] backdrop-blur-sm"
+        >
           {isAr ? 'قبل' : 'Before'}
         </span>
 
-        <span className="absolute right-[18px] top-[18px] z-10 rounded-full bg-[#FAF6F2] px-[13px] py-[7px] text-[12px] font-medium text-[#352514] backdrop-blur-sm">
+        <span
+          dir={isAr ? 'rtl' : 'ltr'}
+          className="absolute right-[18px] top-[18px] z-10 rounded-full bg-[#FAF6F2] px-[13px] py-[7px] text-[12px] font-medium text-[#352514] backdrop-blur-sm"
+        >
           {isAr ? 'بعد' : 'After'}
         </span>
 
@@ -133,8 +142,9 @@ function ComparisonSlider({
           </div>
         </div>
 
-        {/* Drag input */}
+        {/* Drag input — forced LTR so Arabic pages don't invert swipe direction */}
         <input
+          dir="ltr"
           type="range"
           min="0"
           max="100"
