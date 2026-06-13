@@ -3,6 +3,19 @@
 import { useState } from 'react'
 import type { FAQ } from '@/lib/data'
 
+const FAQ_COLORS = {
+  cardClosed: 'bg-[rgba(241,228,217,0.4)]',
+  cardOpen: 'bg-gradient-to-r from-[rgba(241,228,217,0.6)] to-[rgba(241,228,217,0.4)]',
+  cardHover: 'hover:bg-[#F4EAE1]',
+
+  questionIconBg: 'bg-white',
+  questionIconText: 'text-[#9c673f]',
+
+  toggleIcon: 'text-[#352514]',
+  questionText: 'text-[#1a0200]',
+  answerText: 'text-[#4d4d4d]',
+}
+
 function QuestionIcon({ className = '' }: { className?: string }) {
   return (
     <svg
@@ -21,11 +34,6 @@ function QuestionIcon({ className = '' }: { className?: string }) {
   )
 }
 
-/**
- * Plus that morphs into a minus when open. Drawn as two SVG strokes of equal
- * width with round caps, so horizontal/vertical thickness always match; the
- * vertical stroke collapses to 0 on open, leaving a clean centred minus.
- */
 function Toggle({ open }: { open: boolean }) {
   return (
     <svg
@@ -35,18 +43,12 @@ function Toggle({ open }: { open: boolean }) {
       strokeWidth="2.25"
       strokeLinecap="round"
       aria-hidden="true"
-      className="size-[24px] shrink-0 text-[#352514]"
+      className={`size-[24px] shrink-0 text-[#352514] transition-transform duration-300 ease-out motion-reduce:transition-none ${
+        open ? 'rotate-45' : 'rotate-0'
+      }`}
     >
       <line x1="5" y1="12" x2="19" y2="12" />
-      <line
-        x1="12"
-        y1="5"
-        x2="12"
-        y2="19"
-        className={`origin-center transition-transform duration-300 ease-out motion-reduce:transition-none ${
-          open ? 'scale-y-0' : 'scale-y-100'
-        }`}
-      />
+      <line x1="12" y1="5" x2="12" y2="19" />
     </svg>
   )
 }
@@ -56,11 +58,6 @@ interface FaqAccordionProps {
   locale: 'en' | 'ar'
 }
 
-/**
- * Single-open accordion (one item expanded at a time, matching Figma). Smooth
- * height via a 0fr→1fr grid transition; honours prefers-reduced-motion. No
- * animation libraries.
- */
 export default function FaqAccordion({ items, locale }: FaqAccordionProps) {
   const isAr = locale === 'ar'
   const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null)
@@ -75,14 +72,14 @@ export default function FaqAccordion({ items, locale }: FaqAccordionProps) {
         return (
           <div
             key={item.id}
-            className={`rounded-[16px] px-[20px] py-[20px] transition-colors duration-300 ${
-              isOpen
-                ? 'bg-gradient-to-r from-[rgba(241,228,217,0.6)] to-[rgba(241,228,217,0.4)]'
-                : 'bg-[rgba(241,228,217,0.4)]'
-            }`}
+            className={`rounded-[16px] px-[20px] py-[20px] transition-all duration-300 ease-out ${
+              isOpen ? FAQ_COLORS.cardOpen : FAQ_COLORS.cardClosed
+            } ${FAQ_COLORS.cardHover}`}
           >
             <div className="flex items-start gap-[14px] lg:gap-[16px]">
-              <span className="grid size-[36px] shrink-0 place-items-center rounded-[8px] bg-white text-[#9c673f]">
+              <span
+                className={`grid size-[36px] shrink-0 place-items-center rounded-[8px] ${FAQ_COLORS.questionIconBg} ${FAQ_COLORS.questionIconText}`}
+              >
                 <QuestionIcon className="size-[20px]" />
               </span>
 
@@ -91,12 +88,17 @@ export default function FaqAccordion({ items, locale }: FaqAccordionProps) {
                   type="button"
                   onClick={() => setOpenId(isOpen ? null : item.id)}
                   aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between gap-[12px] py-[6px] text-start outline-none focus-visible:underline"
+                  className="group flex w-full items-center justify-between gap-[12px] py-[6px] text-start outline-none focus-visible:underline"
                 >
-                  <span className="font-[family-name:var(--font-body)] text-[16px] lg:text-[18px] font-medium leading-[1.4] text-[#1a0200]">
+                  <span
+                    className={`font-[family-name:var(--font-body)] text-[16px] lg:text-[18px] font-medium leading-[1.4] transition-colors duration-300 ${FAQ_COLORS.questionText}`}
+                  >
                     {question}
                   </span>
-                  <Toggle open={isOpen} />
+
+                  <span className="transition-transform duration-300 ease-out group-hover:scale-110">
+                    <Toggle open={isOpen} />
+                  </span>
                 </button>
 
                 <div
@@ -105,7 +107,9 @@ export default function FaqAccordion({ items, locale }: FaqAccordionProps) {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="font-[family-name:var(--font-body)] text-[15px] lg:text-[16px] font-normal leading-[1.6] text-[#4d4d4d]">
+                    <p
+                      className={`font-[family-name:var(--font-body)] text-[15px] lg:text-[16px] font-normal leading-[1.6] ${FAQ_COLORS.answerText}`}
+                    >
                       {answer}
                     </p>
                   </div>

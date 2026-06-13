@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-function Chevron({ className = '' }: { className?: string }) {
+function ArrowIcon({ className = '' }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -14,7 +14,8 @@ function Chevron({ className = '' }: { className?: string }) {
       aria-hidden="true"
       className={className}
     >
-      <path d="M15 6l-6 6 6 6" />
+      <path d="M5 12h14" />
+      <path d="M13 6l6 6-6 6" />
     </svg>
   )
 }
@@ -55,13 +56,19 @@ export default function TestimonialsCarousel({
     return { el, maxScroll, pages }
   }, [])
 
-  const getLogicalScroll = (el: HTMLDivElement) => {
-    return isAr ? Math.abs(el.scrollLeft) : el.scrollLeft
-  }
+  const getLogicalScroll = useCallback(
+    (el: HTMLDivElement) => {
+      return isAr ? Math.abs(el.scrollLeft) : el.scrollLeft
+    },
+    [isAr],
+  )
 
-  const getNativeScroll = (value: number) => {
-    return isAr ? -value : value
-  }
+  const getNativeScroll = useCallback(
+    (value: number) => {
+      return isAr ? -value : value
+    },
+    [isAr],
+  )
 
   const recompute = useCallback(() => {
     const metrics = getPageMetrics()
@@ -80,7 +87,7 @@ export default function TestimonialsCarousel({
     const nextActive = Math.round(progress * (pages - 1))
 
     setActive(Math.max(0, Math.min(nextActive, pages - 1)))
-  }, [getPageMetrics, isAr])
+  }, [getPageMetrics, getLogicalScroll])
 
   useEffect(() => {
     const el = scrollerRef.current
@@ -126,7 +133,7 @@ export default function TestimonialsCarousel({
   const atEnd = active >= count - 1
 
   const arrowBase =
-    'absolute top-1/2 z-30 hidden size-[44px] -translate-y-1/2 place-items-center rounded-full bg-[#f7efe8] text-[#352514] shadow-[0px_0px_9.3px_-3px_#66451e] transition-all duration-300 ease-out hover:bg-[#352514] hover:text-[#f7efe8] active:scale-95 disabled:opacity-30 disabled:pointer-events-none md:grid lg:size-[56px]'
+    'absolute top-1/2 z-30 hidden size-[44px] -translate-y-1/2 place-items-center rounded-full bg-[#f7efe8] text-[#352514] shadow-[0_10px_28px_rgba(53,37,20,0.18)] transition-all duration-300 ease-out hover:bg-[#352514] hover:text-[#f7efe8] active:scale-95 disabled:opacity-30 disabled:pointer-events-none md:grid lg:size-[56px]'
 
   return (
     <div className="relative mx-auto w-full max-w-[1248px] px-[24px]">
@@ -159,7 +166,8 @@ export default function TestimonialsCarousel({
             disabled={isAr ? atEnd : atStart}
             className={`${arrowBase} left-4 lg:left-8`}
           >
-            <Chevron className="size-[22px]" />
+            {/* Left visual arrow */}
+            <ArrowIcon className="size-[22px] rotate-180" />
           </button>
 
           <button
@@ -169,7 +177,8 @@ export default function TestimonialsCarousel({
             disabled={isAr ? atStart : atEnd}
             className={`${arrowBase} right-4 lg:right-8`}
           >
-            <Chevron className="size-[22px] -scale-x-100" />
+            {/* Right visual arrow */}
+            <ArrowIcon className="size-[22px]" />
           </button>
         </div>
       </div>

@@ -6,9 +6,8 @@ interface BeforeAfterCardProps {
 }
 
 /**
- * Homepage before/after card — a single combined image (before stacked over
- * after). Static by design; interactive comparison sliders live on the
- * individual service pages instead.
+ * Homepage before/after card — a single combined image.
+ * Fixed height so all cards stay visually consistent.
  */
 export default function BeforeAfterCard({ item, locale }: BeforeAfterCardProps) {
   const alt =
@@ -17,12 +16,12 @@ export default function BeforeAfterCard({ item, locale }: BeforeAfterCardProps) 
       : 'Before and after dental treatment at Smile Island Clinic'
 
   return (
-    <div className="snap-center shrink-0 mr-[24px] w-[280px] lg:w-[400px] rounded-[20px] overflow-hidden bg-card select-none">
+    <div className="snap-center shrink-0 mr-[24px] w-[280px] lg:w-[400px] h-[377px] rounded-[20px] overflow-hidden bg-card select-none">
       <img
         src={item.image}
         alt={alt}
         draggable={false}
-        className="block w-full h-auto pointer-events-none"
+        className="block h-full w-full object-cover pointer-events-none"
       />
     </div>
   )

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-function Chevron({ className = '' }: { className?: string }) {
+function ArrowIcon({ className = '' }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -14,7 +14,8 @@ function Chevron({ className = '' }: { className?: string }) {
       aria-hidden="true"
       className={className}
     >
-      <path d="M15 6l-6 6 6 6" />
+      <path d="M5 12h14" />
+      <path d="M13 6l6 6-6 6" />
     </svg>
   )
 }
@@ -48,13 +49,19 @@ export default function BeforeAfterCarousel({ children, isAr }: BeforeAfterCarou
     return { el, maxScroll, pages }
   }, [])
 
-  const getLogicalScroll = (el: HTMLDivElement) => {
-    return isAr ? Math.abs(el.scrollLeft) : el.scrollLeft
-  }
+  const getLogicalScroll = useCallback(
+    (el: HTMLDivElement) => {
+      return isAr ? Math.abs(el.scrollLeft) : el.scrollLeft
+    },
+    [isAr],
+  )
 
-  const getNativeScroll = (value: number) => {
-    return isAr ? -value : value
-  }
+  const getNativeScroll = useCallback(
+    (value: number) => {
+      return isAr ? -value : value
+    },
+    [isAr],
+  )
 
   const recompute = useCallback(() => {
     const metrics = getPageMetrics()
@@ -73,7 +80,7 @@ export default function BeforeAfterCarousel({ children, isAr }: BeforeAfterCarou
     const nextActive = Math.round(progress * (pages - 1))
 
     setActive(Math.max(0, Math.min(nextActive, pages - 1)))
-  }, [getPageMetrics, isAr])
+  }, [getPageMetrics, getLogicalScroll])
 
   useEffect(() => {
     const el = scrollerRef.current
@@ -119,7 +126,7 @@ export default function BeforeAfterCarousel({ children, isAr }: BeforeAfterCarou
   const atEnd = active >= count - 1
 
   const arrowBase =
-    'absolute top-1/2 z-10 hidden size-[40px] -translate-y-1/2 place-items-center rounded-full border border-[#e9cdb4] bg-[#f3e9df] text-[#352514] shadow-sm transition-all duration-300 ease-out hover:border-[#352514] hover:bg-[#352514] hover:text-[#f7efe8] active:scale-95 disabled:opacity-30 disabled:pointer-events-none md:grid lg:size-[48px]'
+    'absolute top-1/2 z-10 hidden size-[40px] -translate-y-1/2 place-items-center rounded-full border border-[#e9cdb4] bg-[#f3e9df] text-[#352514] shadow-[0_10px_28px_rgba(53,37,20,0.18)] transition-all duration-300 ease-out hover:border-[#352514] hover:bg-[#352514] hover:text-[#f7efe8] active:scale-95 disabled:opacity-30 disabled:pointer-events-none md:grid lg:size-[48px]'
 
   return (
     <div className="relative" dir={isAr ? 'rtl' : 'ltr'}>
@@ -138,7 +145,8 @@ export default function BeforeAfterCarousel({ children, isAr }: BeforeAfterCarou
         disabled={isAr ? atEnd : atStart}
         className={`${arrowBase} left-[10px] lg:left-[24px]`}
       >
-        <Chevron className="size-[20px]" />
+        {/* Left visual arrow */}
+        <ArrowIcon className="size-[20px] rotate-180" />
       </button>
 
       <button
@@ -148,7 +156,8 @@ export default function BeforeAfterCarousel({ children, isAr }: BeforeAfterCarou
         disabled={isAr ? atStart : atEnd}
         className={`${arrowBase} right-[10px] lg:right-[24px]`}
       >
-        <Chevron className="size-[20px] -scale-x-100" />
+        {/* Right visual arrow */}
+        <ArrowIcon className="size-[20px]" />
       </button>
 
       <div

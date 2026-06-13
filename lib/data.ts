@@ -390,7 +390,7 @@ export const popularTreatments: PopularTreatment[] = [
       'Thin custom-made shells that reshape the color, form, and alignment of your smile.',
     descAr:
       'قشور رقيقة مصممة خصيصاً لتغيير لون وشكل وانتظام ابتسامتك بمظهر طبيعي.',
-    image: '/images/services/veneers.jpg',
+    image: '/images/services/veneers.png',
   },
   {
     slug: 'dental-implants',
@@ -400,7 +400,7 @@ export const popularTreatments: PopularTreatment[] = [
       'Permanent replacements for missing teeth that restore natural look and function.',
     descAr:
       'تعويض دائم للأسنان المفقودة لاستعادة الشكل الطبيعي ووظيفة المضغ.',
-    image: '/images/services/dental-implants.jpg',
+    image: '/images/services/dental-implants.png',
   },
   {
     slug: 'gum-contouring',
@@ -410,7 +410,7 @@ export const popularTreatments: PopularTreatment[] = [
       'Reshaping the gum line for a balanced, confident, and healthier-looking smile.',
     descAr:
       'إعادة تشكيل خط اللثة لابتسامة متناسقة وصحية وأكثر ثقة.',
-    image: '/images/services/gum-contouring.jpg',
+    image: '/images/services/gum-contouring.png',
   },
 ]
 
@@ -423,7 +423,13 @@ export const beforeAfterCases: BeforeAfterCase[] = [
   { id: 'ba-1', image: '/images/before-after/home-01.jpg' },
   { id: 'ba-2', image: '/images/before-after/home-02.jpg' },
   { id: 'ba-3', image: '/images/before-after/home-03.jpg' },
-  { id: 'ba-4', image: '/images/before-after/home-01.jpg' },
+  {
+  id: 'whitening-case-01',
+  image: '/images/before-after/whitening-case-01.png',
+  titleEn: 'Laser Teeth Whitening',
+  titleAr: 'تبييض الأسنان بالليزر',
+  serviceSlug: 'laser-teeth-whitening',
+},
 ]
 
 // ─── Video Testimonials ──────────────────────────────────────────────────────

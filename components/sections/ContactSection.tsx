@@ -4,8 +4,6 @@ import { siteSettings } from '@/lib/data'
 import { getWhatsAppUrl, PHONE_NUMBER } from '@/lib/whatsapp'
 import { toLocale } from '@/lib/locale'
 
-/* ── Icons ─────────────────────────────────────────────────────────────── */
-
 function WhatsAppIcon({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
@@ -32,7 +30,16 @@ function PinIcon({ className = '' }: { className?: string }) {
 
 function ClockIcon({ className = '' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className={className}
+    >
       <circle cx="12" cy="12" r="9" />
       <path d="M12 7v5l3 2" />
     </svg>
@@ -41,8 +48,18 @@ function ClockIcon({ className = '' }: { className?: string }) {
 
 function ArrowIcon({ className = '' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={className}>
-      <path d="M5 12h14M13 6l6 6-6 6" />
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M5 12h14" />
+      <path d="M13 6l6 6-6 6" />
     </svg>
   )
 }
@@ -55,6 +72,8 @@ export default function ContactSection({ locale }: ContactSectionProps) {
   const loc = toLocale(locale)
   const isAr = loc === 'ar'
 
+  const mapsUrl = 'https://www.google.com/maps/place/%D8%B3%D9%85%D8%A7%D9%8A%D9%84+%D8%A7%D9%8A%D9%84%D8%A7%D9%86%D8%AF+%D9%84%D8%AA%D8%AC%D9%85%D9%8A%D9%84+%D8%A7%D9%84%D9%84%D8%AB%D9%87+%D9%88%D8%B2%D8%B1%D8%A7%D8%B9%D8%A9+%D8%A7%D9%84%D8%A3%D8%B3%D9%86%D8%A7%D9%86+Smile+Island%E2%80%AD/@31.2302137,29.9585276,17.88z/data=!4m6!3m5!1s0x14f5c50a67e3679b:0xdeb1e9b886d35102!8m2!3d31.2304003!4d29.9585073!16s%2Fg%2F11vqwzc74l?hl=en-EG&entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D'
+
   const subtitle = isAr
     ? 'تواصل معنا، زرنا، أو احجز موعدك — نحن هنا لمساعدتك.'
     : 'Reach out, visit us, or book your appointment — we’re here to help.'
@@ -62,12 +81,6 @@ export default function ContactSection({ locale }: ContactSectionProps) {
   const accentClass = `font-[family-name:var(--font-heading-accent)] text-[#9c673f] ${
     isAr ? '' : 'italic'
   }`
-
-  const mapsUrl =
-    siteSettings.social.find((s) => s.platform === 'Google')?.url ??
-    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-      isAr ? siteSettings.addressAr : siteSettings.addressEn
-    )}`
 
   const cards = [
     {
@@ -77,7 +90,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
       href: getWhatsAppUrl(
         isAr
           ? 'مرحباً، أريد حجز موعد في عيادة سمايل ايلاند.'
-          : 'Hello, I want to book an appointment at Smile Island Dental Clinic.'
+          : 'Hello, I want to book an appointment at Smile Island Dental Clinic.',
       ),
       external: true,
       icon: <WhatsAppIcon className="size-[26px]" />,
@@ -108,7 +121,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
   return (
     <section
       id="contact"
-      className="bg-background py-[64px] md:py-[96px] font-[family-name:var(--font-body)]"
+      className="bg-[#FAF6F2] py-[64px] md:py-[96px] font-[family-name:var(--font-body)]"
     >
       <Container>
         <Reveal className="flex flex-col items-center text-center">
@@ -123,13 +136,13 @@ export default function ContactSection({ locale }: ContactSectionProps) {
               </>
             )}
           </h2>
+
           <p className="mt-[16px] max-w-[600px] text-[15px] md:text-[18px] leading-[1.5] text-[#352514]/80">
             {subtitle}
           </p>
         </Reveal>
 
         <div className="mt-[40px] grid grid-cols-1 items-stretch gap-[24px] md:mt-[56px] lg:grid-cols-[minmax(0,500px)_1fr] lg:gap-[48px]">
-          {/* Contact cards */}
           <Reveal className="flex flex-col gap-[16px]">
             {cards.map((c) => (
               <a
@@ -137,11 +150,12 @@ export default function ContactSection({ locale }: ContactSectionProps) {
                 href={c.href}
                 target={c.external ? '_blank' : undefined}
                 rel={c.external ? 'noopener noreferrer' : undefined}
-                className="group flex items-center gap-[16px] rounded-[16px] bg-[rgba(241,228,217,0.4)] p-[16px] transition-colors duration-200 hover:bg-[rgba(241,228,217,0.7)]"
+                className="group flex items-center gap-[16px] rounded-[16px] bg-[#F4EAE1] p-[16px] transition-colors duration-200 hover:bg-[#F1E5DA]"
               >
                 <span className="grid size-[48px] shrink-0 place-items-center rounded-[10px] bg-white text-[#9c673f]">
                   {c.icon}
                 </span>
+
                 <span className="min-w-0 flex-1">
                   <span className="block text-[16px] md:text-[18px] font-medium leading-[1.4] text-[#14110f]">
                     {c.title}
@@ -150,21 +164,27 @@ export default function ContactSection({ locale }: ContactSectionProps) {
                     {c.detail}
                   </span>
                 </span>
-                <span className="grid size-[40px] shrink-0 place-items-center rounded-full bg-white text-[#352514] transition-transform duration-200 group-hover:translate-x-[2px]">
-                  <ArrowIcon className={`size-[20px] ${isAr ? '-scale-x-100' : ''}`} />
+
+                <span
+                  className={`grid size-[40px] shrink-0 place-items-center rounded-full bg-white text-[#352514] transition-transform duration-200 ${
+                    isAr ? 'group-hover:-translate-x-[2px]' : 'group-hover:translate-x-[2px]'
+                  }`}
+                >
+                  <ArrowIcon className={`size-[20px] ${isAr ? 'rotate-180' : ''}`} />
                 </span>
               </a>
             ))}
 
-            {/* Working hours (no link) */}
-            <div className="flex items-start gap-[16px] rounded-[16px] bg-[rgba(241,228,217,0.4)] p-[16px]">
+            <div className="flex items-start gap-[16px] rounded-[16px] bg-[#F4EAE1] p-[16px]">
               <span className="grid size-[48px] shrink-0 place-items-center rounded-[10px] bg-white text-[#9c673f]">
                 <ClockIcon className="size-[24px]" />
               </span>
+
               <div className="min-w-0 flex-1">
                 <span className="block text-[16px] md:text-[18px] font-medium leading-[1.4] text-[#14110f]">
                   {hoursTitle}
                 </span>
+
                 <ul className="mt-[6px] flex flex-col gap-[3px]">
                   {siteSettings.workingHours.map((h, i) => (
                     <li
@@ -182,7 +202,6 @@ export default function ContactSection({ locale }: ContactSectionProps) {
             </div>
           </Reveal>
 
-          {/* Clickable map — placeholder, easy to swap for a real <img> later */}
           <Reveal delay={120} className="h-full">
             <a
               href={mapsUrl}
@@ -190,27 +209,32 @@ export default function ContactSection({ locale }: ContactSectionProps) {
               rel="noopener noreferrer"
               aria-label={mapAria}
               title={mapAria}
-              className="group relative block h-[260px] w-full overflow-hidden rounded-[24px] sm:h-[340px] lg:h-full lg:min-h-[420px]"
+              className="group relative block h-[260px] w-full overflow-hidden rounded-[24px] bg-[#F4EAE1] sm:h-[340px] lg:h-full lg:min-h-[420px]"
             >
-              {/* Faux-map placeholder (swap this block for <img src=...> later) */}
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 bg-[#eef1ec]"
-                style={{
-                  backgroundImage:
-                    'repeating-linear-gradient(0deg, transparent 0 38px, rgba(156,103,63,0.10) 38px 40px), repeating-linear-gradient(90deg, transparent 0 38px, rgba(156,103,63,0.10) 38px 40px), linear-gradient(135deg, rgba(120,170,140,0.18), transparent 60%)',
-                }}
+              <img
+                src="/images/contact/map-snapshot.png"
+                alt={isAr ? 'خريطة موقع عيادة سمايل ايلاند' : 'Map location of Smile Island Clinic'}
+                className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
               />
-              <span className="absolute left-1/2 top-1/2 grid -translate-x-1/2 -translate-y-1/2 place-items-center">
-                <span className="grid size-[52px] place-items-center rounded-full bg-[#9c673f] text-white shadow-lg transition-transform duration-300 group-hover:-translate-y-1">
-                  <PinIcon className="size-[26px]" />
+
+              <span className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/[0.04]" />
+
+              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <span className="grid size-[60px] place-items-center rounded-full bg-white/95 text-[#9c673f] shadow-[0_14px_34px_rgba(53,37,20,0.22)] ring-1 ring-[#352514]/10 transition-transform duration-300 ease-out group-hover:-translate-y-1 group-hover:scale-105">
+                  <PinIcon className="size-[30px]" />
                 </span>
               </span>
-              <span className="absolute inset-x-0 bottom-0 flex items-center justify-center bg-gradient-to-t from-black/45 to-transparent p-[16px]">
-                <span className="inline-flex items-center gap-[8px] rounded-[800px] bg-white/95 px-[16px] py-[8px] text-[14px] font-medium text-[#352514] shadow-sm">
-                  <PinIcon className="size-[16px] text-[#9c673f]" />
-                  {isAr ? 'افتح في خرائط جوجل' : 'Open in Google Maps'}
-                </span>
+
+              <span
+                translate="no"
+                className="absolute bottom-[12px] left-[12px] rounded-full bg-white/90 px-[10px] py-[5px] text-[12px] font-medium text-[#57534d] shadow-[0_6px_18px_rgba(53,37,20,0.16)]"
+              >
+                Google Maps
+              </span>
+
+              <span className="absolute bottom-[12px] right-[12px] inline-flex items-center gap-[8px] rounded-[800px] bg-white/95 px-[14px] py-[8px] text-[13px] font-medium text-[#352514] shadow-[0_6px_18px_rgba(53,37,20,0.16)] transition-transform duration-300 group-hover:-translate-y-0.5">
+                <ArrowIcon className={`size-[15px] ${isAr ? 'rotate-180' : ''}`} />
+                {isAr ? 'افتح الخريطة' : 'Open map'}
               </span>
             </a>
           </Reveal>
@@ -218,4 +242,4 @@ export default function ContactSection({ locale }: ContactSectionProps) {
       </Container>
     </section>
   )
-}
+} 

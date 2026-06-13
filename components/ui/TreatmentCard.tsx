@@ -44,9 +44,9 @@ export default function TreatmentCard({ treatment, index, locale }: TreatmentCar
   return (
     <article
       dir={isAr ? 'rtl' : 'ltr'}
-      className="group shrink-0 mr-[48px] w-[300px] lg:w-[620px] bg-[#F4EAE1] rounded-[24px] border-2 border-white p-[12px] lg:p-[16px] flex flex-col lg:flex-row lg:items-stretch gap-[16px] lg:gap-[28px] select-none transition-colors duration-500 ease-out hover:bg-[#efe2d6]"
+      className="group shrink-0 mr-[24px] w-[300px] lg:w-[620px] bg-[#F4EAE1] rounded-[24px] border-2 border-white p-[12px] lg:p-[16px] flex flex-col lg:flex-row lg:items-stretch gap-[16px] lg:gap-[28px] select-none transition-colors duration-500 ease-out hover:bg-[#F1E5DA]"
     >
-      {/* Image — left on desktop (auto-mirrors to right in RTL), bottom on mobile */}
+      {/* Image — left on desktop, auto-mirrors in RTL */}
       <div className="order-2 lg:order-none shrink-0 w-full lg:w-[240px] h-[200px] lg:h-auto rounded-[16px] overflow-hidden">
         <img
           src={treatment.image}
@@ -57,30 +57,31 @@ export default function TreatmentCard({ treatment, index, locale }: TreatmentCar
       </div>
 
       {/* Content */}
-      <div className="order-1 lg:order-none flex-1 flex flex-col lg:py-[12px]">
+      <div className="order-1 lg:order-none flex-1 flex flex-col lg:py-[12px] min-w-0">
         <span className={numClass}>{num}</span>
+
         <h3 className="font-[family-name:var(--font-body)] font-semibold text-[20px] lg:text-[22px] text-[#352514] mt-[10px]">
           {title}
         </h3>
+
         <p className="font-[family-name:var(--font-body)] font-normal text-[14px] leading-[1.6] text-[#5b4a3a] mt-[8px]">
           {desc}
         </p>
 
-        {/* Primary "Book service" first (outer/screen side); secondary
-            "See details" second (image side). dir mirrors order for RTL. */}
         <div className="flex flex-col lg:flex-row gap-[10px] mt-[16px] lg:mt-auto lg:pt-[16px]">
           <a
             href={bookUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full lg:w-auto whitespace-nowrap bg-[#352514] text-[#f7efe8] rounded-[800px] px-[20px] py-[10px] text-[14px] font-medium flex items-center justify-center gap-[8px] transition-all duration-200 hover:bg-[#2a1d10] hover:-translate-y-0.5"
+            className="w-full lg:w-auto whitespace-nowrap bg-[#352514] text-[#f7efe8] rounded-[800px] px-[20px] lg:px-[16px] py-[10px] text-[14px] font-medium flex items-center justify-center gap-[8px] transition-all duration-200 hover:bg-[#2a1d10] hover:-translate-y-0.5"
           >
             <WhatsAppIcon />
             {bookLabel}
           </a>
+
           <a
             href={detailsHref}
-            className="w-full lg:w-auto whitespace-nowrap bg-white text-[#352514] rounded-[800px] px-[20px] py-[10px] text-[14px] font-medium text-center transition-all duration-200 hover:bg-[#f3e9df] hover:-translate-y-0.5"
+            className="w-full lg:w-auto whitespace-nowrap bg-white text-[#352514] rounded-[800px] px-[20px] lg:px-[16px] py-[10px] text-[14px] font-medium text-center transition-all duration-200 hover:bg-[#f3e9df] hover:-translate-y-0.5"
           >
             {seeLabel}
           </a>
