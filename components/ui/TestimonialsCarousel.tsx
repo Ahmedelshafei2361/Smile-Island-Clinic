@@ -191,14 +191,14 @@ export default function TestimonialsCarousel({
       </div>
 
       <div
-        dir="ltr"
+        dir={isAr ? 'rtl' : 'ltr'}
         className="mt-[24px] flex items-center justify-center gap-[10px]"
       >
         {Array.from({ length: count }).map((_, i) => (
           <button
             key={i}
             type="button"
-            aria-label={`${isAr ? 'عنصر' : 'Item'} ${i + 1}`}
+            aria-label={isAr ? `عنصر ${i + 1}` : `Item ${i + 1}`}
             aria-current={i === active}
             onClick={() => goTo(i)}
             className={`transition-all duration-300 ease-out ${

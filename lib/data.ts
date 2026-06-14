@@ -524,6 +524,15 @@ export const videoTestimonials: VideoTestimonial[] = [
     youtubeUrl: 'https://www.youtube.com/shorts/XySmRoalrJ4',
     thumbnailImage: '/images/testimonials/ahmed-tarek.jpg',
   },
+    {
+    id: 'v6',
+    nameEn: 'Saleh Mounes',
+    nameAr: 'صالح مؤنس',
+    tagEn: 'Trust & Care',
+    tagAr: 'متابعة مستمرة',
+    youtubeUrl: 'https://m.youtube.com/shorts/0T7T3vRY38w',
+    thumbnailImage: '/images/testimonials/saleh-mounes.jpg',
+  },
 ]
 
 // ─── Google Reviews ──────────────────────────────────────────────────────────
@@ -534,84 +543,120 @@ export const googleReviews: GoogleReview[] = [
     nameEn: 'Mayar Hassan',
     nameAr: 'ميار حسن',
     rating: 5,
-    headlineEn: 'Exceeded my expectations',
-    headlineAr: 'فاقت توقعاتي',
+    headlineEn: 'A Smooth Experience From Booking',
+    headlineAr: 'تجربة مريحة من أول الحجز',
     quoteEn:
-      'Excellent clinic with a very professional team. The results exceeded my expectations and the prices are very fair.',
+      'Very talented doctors and an excellent clinic. From booking with Ms. Aya to reception with Nevein, everyone was very helpful until the appointment was confirmed. During the session, Dr. Rahma was friendly, professional, and very knowledgeable. It was my first time having an oral cleaning, and it definitely will not be the last. Thank you for helping me smile with confidence ♥',
     quoteAr:
-      'عيادة ممتازة وفريق محترف جداً. النتائج فاقت توقعاتي والأسعار معقولة جداً.',
+      'دكاترة شاطرين جدا والعيادة ممتازة. من أول الحجز مع مس آية والاستقبال مع نيفين، كانوا متعاونين جدا لحد ما حجزت المعاد. وأثناء الجلسة مع دكتورة رحمة كانت لطيفة جدا وفاهمة شغلها. بالنسبة لي دي كانت أول مرة أعمل تنظيف للفم، ومش هتكون آخر مرة. شكرا جدا للدكاترة، أنتم الأفضل، وشكرا إنكم خلتوني أبتسم بثقة ♥',
   },
   {
     id: 'r2',
     nameEn: 'Ahmed Elsmahy',
     nameAr: 'أحمد السماحي',
     rating: 5,
-    headlineEn: 'Amazing from start to finish',
-    headlineAr: 'تجربة رائعة من البداية للنهاية',
+    headlineEn: 'I Felt Comfortable From the Start',
+    headlineAr: 'اطمنت من أول الجلسة',
     quoteEn:
-      'Amazing experience from start to finish. The doctors are very skilled and the clinic is spotlessly clean.',
+      'Dr. Amira Hafez is very kind and, mashallah, her work is excellent. What mattered most to me is that she reassured me from the beginning, and the session was completely painless, thankfully. Thank you so much ❤🌹🌹',
     quoteAr:
-      'تجربة رائعة من البداية للنهاية. الأطباء متميزون جداً والعيادة نظيفة تماماً.',
+      'الدكتوره اميره حافظ زوق جدا وما شاء الله شغاله حلو قوي وكفايه إنها طمنتي في الاول والجلسه كانت من غير الم خالص الحمد لله شكرا جدا ❤🌹🌹',
   },
   {
     id: 'r3',
     nameEn: 'Dalia Aboshady',
     nameAr: 'داليا أبو شادي',
     rating: 5,
-    headlineEn: 'In love with my new smile',
-    headlineAr: 'أحببت ابتسامتي الجديدة',
+    headlineEn: 'Clean Place and Excellent Service',
+    headlineAr: 'مكان نضيف وخدمة ممتازة',
     quoteEn:
-      'I had my veneers done here and I am absolutely in love with my new smile. Highly recommend!',
+      'Honestly, the place is beautiful and the service is excellent. It was my first time visiting them, and I was really happy with the experience. I will not change the clinic, and I will keep coming back. The most important things in a dental clinic are sterilization and cleanliness, and honestly the place is very clean.',
     quoteAr:
-      'عملت القشرة هنا وأنا في غاية السعادة بابتسامتي الجديدة. أنصح بها بشدة!',
+      'بصراحه المكان جميل وخدمه ممتازه وكنت اول مره اتعامل معاهم بس بصراحه انا اتبسط جدآ وانشاءالله مش هاغير المكان وهتعامل معاهم علطول لان اهم حاجه في عياده الأسنان التعقيم والنضافه والصراحه المكان نضيف جدا',
   },
   {
     id: 'r4',
-    nameEn: 'Ahmed Tarek',
+    nameEn: 'ahmed tarek',
     nameAr: 'أحمد طارق',
     rating: 5,
-    headlineEn: 'Smooth and painless',
-    headlineAr: 'سلس وبدون ألم',
+    headlineEn: 'Great Care for Adults and Kids',
+    headlineAr: 'شغل ممتاز مع الكبار والأطفال',
     quoteEn:
-      'Very professional staff and excellent results. The implant procedure was smooth and painless.',
+      'A very clean and excellent place. Dr. Amira is more than excellent, and Dr. Mohamed is very skilled and knows how to deal with children very well. Wishing you continued success, and I hope you always stay at this level and even better, inshallah.',
     quoteAr:
-      'فريق محترف جداً ونتائج ممتازة. إجراء الزراعة كان سلساً وبدون ألم.',
+      'مكان نظيف جدا جدا وممتاز ودكتورة أميرة تسلم ايديها اكتر من ممتازة ودكتور محمد شاطر جدا وبيعرف يتعامل مع الاطفال كويس جدااا يا رب بالتوفيق دائما وتفضلوا في المستوي ده علي طول وأحسن إن شاء الله',
   },
   {
     id: 'r5',
-    nameEn: 'Rahma Alhosary',
-    nameAr: 'رحمة الحصري',
-    rating: 5,
-    headlineEn: 'Best clinic in Alexandria',
-    headlineAr: 'أفضل عيادة في الإسكندرية',
-    quoteEn:
-      'The best dental clinic in Alexandria. Kind doctors, clean environment, and great results.',
-    quoteAr:
-      'أفضل عيادة أسنان في الإسكندرية. أطباء لطيفون وبيئة نظيفة ونتائج رائعة.',
-  },
-  {
-    id: 'r6',
     nameEn: 'Nourhan Ragab',
     nameAr: 'نورهان رجب',
     rating: 5,
-    headlineEn: 'A true five-star experience',
-    headlineAr: 'تجربة خمس نجوم حقيقية',
+    headlineEn: 'Clean, Respectful, and Welcoming',
+    headlineAr: 'نضافة واستقبال ذوق',
     quoteEn:
-      'I was nervous about my first visit but the team made me feel so comfortable. Truly a five-star experience.',
+      'Amazing. A very respectful place, and the cleanliness is honestly outstanding. The reception team is very polite. Dr. Rana, mashallah, was wonderful, and the assistant helped me a lot today. Truly a very respectable place. May God bless you 🩷🩷🩷',
     quoteAr:
-      'كنت قلقة من زيارتي الأولى لكن الفريق جعلني مرتاحة تماماً. تجربة خمس نجوم حقيقية.',
+      'تحفه مكان محترم جدا جدا جدا ونضافه ثم نضافه ثم نضافه الاستقبال زوق اوي دكتور رنا مشاء الله عليها والمساعده كمان تعبت معايا النهارده حقيقي مكان محترم جدا ربنا يوفقكم 🩷🩷🩷',
+  },
+  {
+    id: 'r6',
+    nameEn: 'Mohamed abu mazen',
+    nameAr: 'محمد ابو مازن',
+    rating: 5,
+    headlineEn: 'Real Care for the Patient',
+    headlineAr: 'اهتمام بجد بالمريض',
+    quoteEn:
+      'Honestly, the center is excellent. This is not a compliment, it is the truth. The doctor is highly professional, honest, and respectful. Their care for the patient and their willingness to help is truly impressive. Thank you so much to the center.',
+    quoteAr:
+      'بصراحه المركز ممتاز جدا مش مجامله دي حقيقه ودكتوره علي اعلي مستوي من المصداقيه والرقي واهتمامهم بمساعدة المريض وتقديم الرعايه حاجه تشرف بجد وشكرا بجد للمركز',
   },
   {
     id: 'r7',
-    nameEn: 'Mohamed Abu Mazen',
-    nameAr: 'محمد أبو مازن',
+    nameEn: 'Aliaa Sherif',
+    nameAr: ' علياء شريف',
     rating: 5,
-    headlineEn: 'Outstanding service',
-    headlineAr: 'خدمة استثنائية',
+    headlineEn: 'Great Result and Lovely Treatment',
+    headlineAr: 'نتيجة حلوة ومعاملة جميلة',
     quoteEn:
-      'Outstanding service and beautiful results. My teeth cleaning was quick, gentle, and effective.',
+      'A very clean clinic, mashallah. The reception and treatment were lovely, and most importantly, the result was amazing. Thank you so much.',
     quoteAr:
-      'خدمة استثنائية ونتائج جميلة. تنظيف الأسنان كان سريعاً ولطيفاً وفعالاً.',
+      'عياده نضيفه جدا جدا ماشاء الله واستقبال ومعامله جميله وأهم حاجه نتيجه تحفه شكرا جدا بجد',
+  },
+  {
+    id: 'r8',
+    nameEn: 'Galal Naser',
+    nameAr: 'جلال ناصر',
+    rating: 5,
+    headlineEn: 'Sterilized, Clean, and Respectful',
+    headlineAr: 'تعقيم ونضافة وناس محترمة',
+    quoteEn:
+      'Honestly, they are very respectful people with a real sense of responsibility. Their attitude is beyond respectful. The place is truly clean, the instruments are sterilized, and the doctors and the whole team are very respectable.',
+    quoteAr:
+      'بصراحة ناس محترمين جدا وعندهم ضمير واسلبوهم فوق الاحترام ومكان مضيف فعلا وأدوات معقمة ونظافة المكان والدكاترة والطاقم اللي شغال كلو ناس محترمين جدا جدا',
+  },
+  {
+    id: 'r9',
+    nameEn: 'Mostafa Khalil',
+    nameAr: 'مصطفى خليل',
+    rating: 5,
+    headlineEn: 'Clear Explanation and Fair Prices',
+    headlineAr: 'شرح واضح وسعر معقول',
+    quoteEn:
+      'The doctor is very skilled and discusses everything with you clearly. The prices are very reasonable compared to other clinics in the area.',
+    quoteAr:
+      'الدكتور شاطره جدا وتناقش معاك كل حاجه والأسعار معقوله جدا مقارنه ببقيت العيادات في المنطقه',
+  },
+  {
+    id: 'r10',
+    nameEn: 'Rahma Alhosary',
+    nameAr: 'رحمة الحصري',
+    rating: 5,
+    headlineEn: 'Respectful Care and a Skilled Doctor',
+    headlineAr: 'معاملة محترمة ودكتورة شاطرة',
+    quoteEn:
+      'A very good place with respectful treatment. Everyone is very polite, and Dr. Habiba is very skilled.',
+    quoteAr:
+      'مكان كويس جدا معامله كويسه ومحترمين جدا و دكتوره حبيبة شطره جدا',
   },
 ]
 

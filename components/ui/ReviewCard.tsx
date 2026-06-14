@@ -22,7 +22,7 @@ export default function ReviewCard({ item, locale }: ReviewCardProps) {
   const name = isAr ? item.nameAr : item.nameEn
   const headline = isAr ? item.headlineAr : item.headlineEn
   const quote = isAr ? item.quoteAr : item.quoteEn
-  const sourceLabel = isAr ? 'مراجعة Google' : 'Google Review'
+  const sourceLabel = isAr ? 'تقييم Google' : 'Google Review'
 
   return (
     <article
