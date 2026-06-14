@@ -40,6 +40,8 @@ export default function TreatmentsCarousel({
   const velocity = useRef(0)
   const hovered = useRef(false)
   const reduce = useRef(false)
+  const activePointerId = useRef<number | null>(null)
+  const captured = useRef(false)
 
   useEffect(() => {
     reduce.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -91,10 +93,17 @@ export default function TreatmentsCarousel({
   const onPointerDown = (e: React.PointerEvent) => {
     dragging.current = true
     moved.current = false
+    captured.current = false
+    activePointerId.current = e.pointerId
     lastX.current = e.clientX
     downX.current = e.clientX
     velocity.current = 0
-    viewportRef.current?.setPointerCapture(e.pointerId)
+    // Do NOT call setPointerCapture here. Calling it on every pointerdown causes
+    // the browser to dispatch the subsequent click event to this viewport div
+    // (the capture element) instead of the actual <a> button under the cursor,
+    // so button clicks silently do nothing on desktop. Capture is set only after
+    // the drag threshold is crossed in onPointerMove, ensuring simple clicks
+    // always reach the intended anchor/button element.
   }
 
   const onPointerMove = (e: React.PointerEvent) => {
@@ -104,12 +113,21 @@ export default function TreatmentsCarousel({
     offset.current -= dx
     // px/sec, clamped so a hard flick stays smooth (not janky)
     velocity.current = Math.max(-2600, Math.min(2600, (-dx / 0.016) * 1))
-    if (Math.abs(e.clientX - downX.current) > 5) moved.current = true
+    if (Math.abs(e.clientX - downX.current) > 5) {
+      moved.current = true
+      // Capture only after drag is confirmed so out-of-viewport drags stay smooth.
+      if (!captured.current && activePointerId.current !== null) {
+        captured.current = true
+        try { viewportRef.current?.setPointerCapture(activePointerId.current) } catch {}
+      }
+    }
   }
 
   const endDrag = (e: React.PointerEvent) => {
     if (!dragging.current) return
     dragging.current = false
+    captured.current = false
+    activePointerId.current = null
     try {
       viewportRef.current?.releasePointerCapture(e.pointerId)
     } catch {}

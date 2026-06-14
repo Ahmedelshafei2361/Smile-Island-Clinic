@@ -104,6 +104,31 @@ export const about: About = {
 
 export const services: Service[] = [
   {
+    slug: 'veneers',
+    titleEn: 'Veneers',
+    titleAr: 'القشور التجميلية',
+    shortDescriptionEn:
+      'Thin custom-made porcelain or composite shells bonded to the front surface of teeth to reshape color, alignment, and form — the ideal solution for a complete smile makeover.',
+    shortDescriptionAr:
+      'قشور رقيقة مصنوعة خصيصاً من البورسلين أو الكومبوزيت تُلصق على السطح الأمامي للأسنان لتغيير اللون والشكل والانتظام بمظهر طبيعي — الحل الأمثل للتجميل الشامل للابتسامة.',
+    stepsEn: [
+      'Examining the teeth and selecting the appropriate veneer type and shade',
+      'Preparing the tooth surface by removing a thin layer of enamel and taking digital impressions',
+      'Designing and fabricating custom veneers in the lab within 24 hours',
+      'Bonding the final veneers and making any needed adjustments',
+    ],
+    stepsAr: [
+      'فحص الأسنان وتحديد النوع المناسب واللون المطلوب للقشور',
+      'تحضير سطح السن بإزالة طبقة رقيقة من المينا وأخذ القياسات الرقمية',
+      'تصميم وتصنيع القشور المخصصة في المختبر خلال 24 ساعة',
+      'تثبيت القشور النهائية وإجراء أي تعديلات مطلوبة',
+    ],
+    thumbnailImage: '/images/services/veneers.png',
+    heroImage: '/images/services/veneers.png',
+    isFeatured: true,
+    order: 0,
+  },
+  {
     slug: 'teeth-cleaning-polishing',
     titleEn: 'Teeth Cleaning & Polishing',
     titleAr: 'تنظيف وتلميع الأسنان',
