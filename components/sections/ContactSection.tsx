@@ -1,6 +1,7 @@
 import Container from '@/components/ui/Container'
 import Reveal from '@/components/ui/Reveal'
 import { siteSettings } from '@/lib/data'
+import { getOfficeHours } from '@/sanity/lib/getOfficeHours'
 import { getWhatsAppUrl, PHONE_NUMBER } from '@/lib/whatsapp'
 import { toLocale } from '@/lib/locale'
 
@@ -68,9 +69,24 @@ interface ContactSectionProps {
   locale: string
 }
 
-export default function ContactSection({ locale }: ContactSectionProps) {
+export default async function ContactSection({ locale }: ContactSectionProps) {
   const loc = toLocale(locale)
   const isAr = loc === 'ar'
+
+  // Editable hours from CMS, merged per-field over local fallback. The order
+  // matches siteSettings.workingHours: [Friday, Sat/Wed/Thu, Sun/Mon/Tue].
+  const office = await getOfficeHours()
+  const cmsHours = [
+    { en: office?.fridayHoursEn, ar: office?.fridayHoursAr },
+    { en: office?.satWedThuHoursEn, ar: office?.satWedThuHoursAr },
+    { en: office?.sunMonTueHoursEn, ar: office?.sunMonTueHoursAr },
+  ]
+  const workingHours = siteSettings.workingHours.map((h, i) => ({
+    daysEn: h.daysEn,
+    daysAr: h.daysAr,
+    hoursEn: cmsHours[i]?.en ?? h.hoursEn,
+    hoursAr: cmsHours[i]?.ar ?? h.hoursAr,
+  }))
 
   const mapsUrl =
     'https://www.google.com/maps/place/%D8%B3%D9%85%D8%A7%D9%8A%D9%84+%D8%A7%D9%8A%D9%84%D8%A7%D9%86%D8%AF+%D9%84%D8%AA%D8%AC%D9%85%D9%8A%D9%84+%D8%A7%D9%84%D9%84%D8%AB%D9%87+%D9%88%D8%B2%D8%B1%D8%A7%D8%B9%D8%A9+%D8%A7%D9%84%D8%A3%D8%B3%D9%86%D8%A7%D9%86+Smile+Island%E2%80%AD/@31.2302137,29.9585276,17.88z/data=!4m6!3m5!1s0x14f5c50a67e3679b:0xdeb1e9b886d35102!8m2!3d31.2304003!4d29.9585073!16s%2Fg%2F11vqwzc74l?hl=en-EG&entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D'
@@ -187,7 +203,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
                 </span>
 
                 <ul className="mt-[6px] flex flex-col gap-[3px]">
-                  {siteSettings.workingHours.map((h, i) => (
+                  {workingHours.map((h, i) => (
                     <li
                       key={i}
                       className="flex flex-wrap gap-x-[8px] text-[13px] md:text-[15px] leading-[1.5] text-[#57534d]"

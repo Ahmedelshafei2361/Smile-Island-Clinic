@@ -2,15 +2,19 @@ import Container from '@/components/ui/Container'
 import Reveal from '@/components/ui/Reveal'
 import FaqAccordion from '@/components/ui/FaqAccordion'
 import { faqs } from '@/lib/data'
+import { getFaq } from '@/sanity/lib/getFaq'
 import { toLocale } from '@/lib/locale'
 
 interface FaqSectionProps {
   locale: string
 }
 
-export default function FaqSection({ locale }: FaqSectionProps) {
+export default async function FaqSection({ locale }: FaqSectionProps) {
   const loc = toLocale(locale)
   const isAr = loc === 'ar'
+
+  // CMS items when available (≥3 valid), otherwise local static fallback.
+  const items = (await getFaq()) ?? faqs
 
   const subtitle = isAr
     ? 'كل ما تريد معرفته قبل زيارتك، في مكان واحد.'
@@ -44,7 +48,7 @@ export default function FaqSection({ locale }: FaqSectionProps) {
         </Reveal>
 
         <Reveal delay={120} className="mx-auto mt-[40px] w-full max-w-[820px] md:mt-[56px]">
-          <FaqAccordion items={faqs} locale={loc} />
+          <FaqAccordion items={items} locale={loc} />
         </Reveal>
       </Container>
     </section>

@@ -13,6 +13,8 @@ const SINGLETON_TYPES = new Set([
   'homePage',
   'beforeAfterSection',
   'popularTreatments',
+  'faq',
+  'officeHours',
 ])
 
 export default defineConfig({
@@ -54,6 +56,25 @@ export default defineConfig({
                   .schemaType('popularTreatments')
                   .documentId('popularTreatments')
                   .title('Popular Treatments'),
+              ),
+            S.divider(),
+            S.listItem()
+              .title('FAQ')
+              .id('faq')
+              .child(
+                S.document()
+                  .schemaType('faq')
+                  .documentId('faq')
+                  .title('FAQ'),
+              ),
+            S.listItem()
+              .title('Office Hours')
+              .id('officeHours')
+              .child(
+                S.document()
+                  .schemaType('officeHours')
+                  .documentId('officeHours')
+                  .title('Office Hours'),
               ),
           ]),
     }),
