@@ -28,6 +28,7 @@ export default function TreatmentCard({ treatment, index, locale }: TreatmentCar
   const title = isAr ? treatment.titleAr : treatment.titleEn
   const desc = isAr ? treatment.descAr : treatment.descEn
   const detailsHref = `/${locale}/services/${treatment.slug}`
+
   const bookUrl = getBookingUrl({
     serviceEn: treatment.titleEn,
     serviceAr: treatment.titleAr,
@@ -39,14 +40,43 @@ export default function TreatmentCard({ treatment, index, locale }: TreatmentCar
 
   const numClass = `font-[family-name:var(--font-heading-accent)] ${
     isAr ? '' : 'italic'
-  } text-[#9c673f] text-[40px] leading-none`
+  } text-[#9c673f] text-[38px] lg:text-[40px] leading-none`
 
   return (
     <article
       dir={isAr ? 'rtl' : 'ltr'}
-      className="group shrink-0 mr-[24px] w-[300px] lg:w-[620px] bg-[#F4EAE1] rounded-[24px] border-2 border-white p-[12px] lg:p-[16px] flex flex-col lg:flex-row lg:items-stretch gap-[16px] lg:gap-[28px] select-none transition-colors duration-500 ease-out hover:bg-[#F1E5DA]"
+      className="
+        group shrink-0 me-[20px]
+        w-[calc(100vw-32px)]
+        sm:w-[420px]
+        md:w-[520px]
+        lg:w-[650px]
+        xl:w-[700px]
+        2xl:w-[730px]
+        bg-[#F4EAE1]
+        rounded-[20px]
+        border-2 border-white
+        p-[11px]
+        flex flex-col lg:flex-row lg:items-center
+        gap-[14px] lg:gap-[22px]
+        select-none
+        transition-colors duration-500 ease-out
+        hover:bg-[#F1E5DA]
+      "
     >
-      <div className="order-2 lg:order-none shrink-0 w-full lg:w-[280px] aspect-[4/3] lg:self-center rounded-[16px] overflow-hidden">
+      <div
+        className="
+          order-2 lg:order-none
+          shrink-0
+          w-full
+          lg:w-[270px]
+          xl:w-[296px]
+          2xl:w-[312px]
+          aspect-[4/3]
+          rounded-[14px]
+          overflow-hidden
+        "
+      >
         <img
           src={treatment.image}
           alt={title}
@@ -55,23 +85,70 @@ export default function TreatmentCard({ treatment, index, locale }: TreatmentCar
         />
       </div>
 
-      <div className="order-1 lg:order-none flex-1 flex flex-col lg:py-[12px] min-w-0">
+      <div
+        className="
+          order-1 lg:order-none
+          flex-1 min-w-0
+          flex flex-col
+          lg:self-stretch
+          lg:py-[13px]
+        "
+      >
         <span className={numClass}>{num}</span>
 
-        <h3 className="font-[family-name:var(--font-body)] font-semibold text-[20px] lg:text-[22px] text-[#352514] mt-[10px]">
+        <h3
+          className="
+            font-[family-name:var(--font-body)]
+            font-semibold
+            text-[18px] lg:text-[20px]
+            leading-[1.2]
+            text-[#352514]
+            mt-[8px]
+          "
+        >
           {title}
         </h3>
 
-        <p className="font-[family-name:var(--font-body)] font-normal text-[14px] leading-[1.6] text-[#5b4a3a] mt-[8px]">
+        <p
+          className="
+            font-[family-name:var(--font-body)]
+            font-normal
+            text-[13px] lg:text-[14px]
+            leading-[1.55]
+            text-[#5b4a3a]
+            mt-[7px]
+          "
+        >
           {desc}
         </p>
 
-        <div className="flex flex-col lg:flex-row gap-[10px] mt-[16px] lg:mt-auto lg:pt-[16px]">
+        <div
+          className="
+            flex flex-col sm:flex-row
+            gap-[10px]
+            mt-[14px] lg:mt-auto lg:pt-[14px]
+          "
+        >
           <a
             href={bookUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full lg:w-auto whitespace-nowrap bg-[#352514] text-[#f7efe8] rounded-[800px] px-[20px] lg:px-[16px] py-[10px] text-[14px] font-medium flex items-center justify-center gap-[8px] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[#2a1d10]"
+            className="
+              shrink-0
+              w-full sm:w-auto
+              whitespace-nowrap
+              bg-[#352514]
+              text-[#f7efe8]
+              rounded-[800px]
+              px-[20px]
+              py-[11px]
+              text-[15px]
+              font-medium
+              leading-none
+              flex items-center justify-center gap-[8px]
+              transition-transform duration-200
+              hover:-translate-y-0.5 hover:bg-[#2a1d10]
+            "
           >
             <WhatsAppIcon />
             {bookLabel}
@@ -79,7 +156,22 @@ export default function TreatmentCard({ treatment, index, locale }: TreatmentCar
 
           <a
             href={detailsHref}
-            className="w-full lg:w-auto whitespace-nowrap bg-white text-[#352514] rounded-[800px] px-[20px] lg:px-[16px] py-[10px] text-[14px] font-medium text-center transition-transform duration-200 hover:-translate-y-0.5"
+            className="
+              shrink-0
+              w-full sm:w-auto
+              whitespace-nowrap
+              bg-white
+              text-[#352514]
+              rounded-[800px]
+              px-[22px]
+              py-[11px]
+              text-[15px]
+              font-medium
+              leading-none
+              text-center
+              transition-transform duration-200
+              hover:-translate-y-0.5
+            "
           >
             {seeLabel}
           </a>

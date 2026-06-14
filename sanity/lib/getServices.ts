@@ -40,7 +40,8 @@ const SERVICE_PROJECTION = `{
   steps[]{ stepEn, stepAr },
   image,
   sliderCases[]{ beforeImage, afterImage },
-  displayOrder
+  displayOrder,
+  active
 }`
 
 interface RawImage {
@@ -57,6 +58,7 @@ interface RawService {
   image?: RawImage
   sliderCases?: { beforeImage?: RawImage; afterImage?: RawImage }[]
   displayOrder?: number
+  active?: boolean
 }
 
 /**
@@ -155,32 +157,47 @@ export async function getServices(): Promise<ResolvedService[]> {
   }
 }
 
+/** Local static service for a slug, mapped to the resolved shape (or null). */
+function localBySlug(slug: string): ResolvedService | null {
+  const local = localServices.find((s) => s.slug === slug)
+  return local ? fromLocal(local) : null
+}
+
 /**
- * A single active service by slug, or null if not found / inactive / incomplete.
- * Falls back to local static data when Sanity is not configured.
+ * A single service by slug. Resolution order:
+ *   - Sanity not configured → local fallback (migration / no-Sanity safety).
+ *   - Sanity doc exists & active === false → null (page 404s; never resurrected
+ *     from local).
+ *   - Sanity doc exists & active & complete → render it.
+ *   - Sanity doc exists & active & incomplete → local fallback (avoid broken UI).
+ *   - No Sanity doc for this slug → local fallback (migration safety).
+ *   - Fetch error → local fallback.
+ * Unknown slugs with no local match return null → 404.
  */
 export async function getServiceBySlug(
   slug: string,
 ): Promise<ResolvedService | null> {
-  if (!isSanityConfigured) {
-    const local = localServices.find((s) => s.slug === slug)
-    return local ? fromLocal(local) : null
-  }
+  if (!isSanityConfigured) return localBySlug(slug)
 
   try {
+    // Query WITHOUT the active filter so we can tell "inactive" apart from
+    // "does not exist" — an inactive service must not fall back to local.
     const doc = await client.fetch<RawService | null>(
-      `*[_type == "service" && active == true && slug.current == $slug][0] ${SERVICE_PROJECTION}`,
+      `*[_type == "service" && slug.current == $slug][0] ${SERVICE_PROJECTION}`,
       { slug },
       { next: { revalidate: 30 } },
     )
-    const mapped = mapService(doc)
-    if (mapped) return mapped
-    // Document missing/incomplete in Sanity → try local fallback.
-    const local = localServices.find((s) => s.slug === slug)
-    return local ? fromLocal(local) : null
+
+    // No such document in Sanity → local fallback (migration safety).
+    if (!doc) return localBySlug(slug)
+
+    // Exists but deliberately hidden → 404, do not resurrect from local.
+    if (doc.active === false) return null
+
+    // Active: render if complete, else fall back to local to avoid broken UI.
+    return mapService(doc) ?? localBySlug(slug)
   } catch {
-    const local = localServices.find((s) => s.slug === slug)
-    return local ? fromLocal(local) : null
+    return localBySlug(slug)
   }
 }
 

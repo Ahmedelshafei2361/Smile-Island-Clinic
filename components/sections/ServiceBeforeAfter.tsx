@@ -13,20 +13,9 @@ interface BeforeAfterCase {
 
 interface ServiceBeforeAfterProps {
   locale: string
-  cases?: BeforeAfterCase[]
+  /** 1–3 before/after cases. The caller only renders this section when non-empty. */
+  cases: BeforeAfterCase[]
 }
-
-// Temporary dental placeholders: local teeth photos (before) paired with a
-// bright Unsplash smile (after) so the slider shows real contrast. Swap for
-// real per-service before/after pairs later.
-const AFTER_SMILE =
-  'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=900&q=70'
-
-const DUMMY_CASES: BeforeAfterCase[] = [
-  { beforeImage: '/images/before-after/home-01.jpg', afterImage: AFTER_SMILE },
-  { beforeImage: '/images/before-after/home-02.jpg', afterImage: AFTER_SMILE },
-  { beforeImage: '/images/before-after/home-03.jpg', afterImage: AFTER_SMILE },
-]
 
 function ChevronLeftIcon({ className = '' }: { className?: string }) {
   return (
@@ -157,7 +146,7 @@ export default function ServiceBeforeAfter({ locale, cases }: ServiceBeforeAfter
   const loc = toLocale(locale)
   const isAr = loc === 'ar'
 
-  const items = (cases ?? DUMMY_CASES).slice(0, 3)
+  const items = cases.slice(0, 3)
 
   const heading = isAr
     ? { title: 'قبل', accent: 'وبعد' }
