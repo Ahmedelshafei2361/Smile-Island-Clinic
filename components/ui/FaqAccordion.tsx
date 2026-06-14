@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import type { FAQ } from '@/lib/data'
+import Reveal from '@/components/ui/Reveal'
 
 const FAQ_COLORS = {
   cardClosed: 'bg-[rgba(241,228,217,0.4)]',
@@ -46,7 +47,13 @@ export default function FaqAccordion({
   const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null)
 
   return (
-    <div className="flex w-full flex-col gap-[12px]">
+    <Reveal
+      staggerChildren
+      staggerDelay={200}
+      staggerStart={160}
+      childDuration={2300}
+      className="flex w-full flex-col gap-[12px]"
+    >
       {items.map((item) => {
         const isOpen = openId === item.id
         const question = isAr ? item.questionAr : item.questionEn
@@ -96,6 +103,6 @@ export default function FaqAccordion({
           </div>
         )
       })}
-    </div>
+    </Reveal>
   )
 }

@@ -8,6 +8,7 @@ import ServiceBeforeAfter from '@/components/sections/ServiceBeforeAfter'
 import ContactSection from '@/components/sections/ContactSection'
 import { getServiceBySlug, getServiceSlugs } from '@/sanity/lib/getServices'
 import { LOCALES, toLocale } from '@/lib/locale'
+import { SITE_NAME, OG_IMAGE, ogLocale } from '@/lib/seo'
 
 // Allow service pages added in Sanity after deployment to render on demand,
 // without requiring a rebuild for every new slug.
@@ -26,14 +27,34 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
   const { locale, slug } = await params
+  const loc = toLocale(locale)
   const service = await getServiceBySlug(slug)
   if (!service) return {}
-  const isAr = toLocale(locale) === 'ar'
+  const isAr = loc === 'ar'
   const title = isAr ? service.titleAr : service.titleEn
   const description = isAr ? service.shortDescriptionAr : service.shortDescriptionEn
+  const path = `/${loc}/services/${slug}`
+
   return {
-    title: `${title} | Smile Island Dental Clinic`,
+    title: `${title} | ${SITE_NAME}`,
     description,
+    alternates: {
+      canonical: path,
+      languages: {
+        en: `/en/services/${slug}`,
+        ar: `/ar/services/${slug}`,
+        'x-default': `/en/services/${slug}`,
+      },
+    },
+    openGraph: {
+      siteName: SITE_NAME,
+      title: `${title} | ${SITE_NAME}`,
+      description,
+      type: 'website',
+      locale: ogLocale(loc),
+      url: path,
+      images: [{ url: OG_IMAGE, alt: SITE_NAME }],
+    },
   }
 }
 

@@ -59,7 +59,7 @@ export default function PopularTreatmentsSection({
           </Reveal>
         </Container>
 
-        <div className="mt-[40px] md:mt-[48px]">
+        <Reveal delay={200} className="mt-[40px] md:mt-[48px]">
           <TreatmentsCarousel reverse={isAr}>
             {ordered.map(({ treatment, index }) => (
               <TreatmentCard
@@ -70,7 +70,7 @@ export default function PopularTreatmentsSection({
               />
             ))}
           </TreatmentsCarousel>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

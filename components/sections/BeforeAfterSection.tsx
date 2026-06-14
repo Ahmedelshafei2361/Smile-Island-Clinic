@@ -62,13 +62,13 @@ export default function BeforeAfterSection({ locale, content }: BeforeAfterSecti
 
       {/* Full-bleed gallery with arrow + dot navigation (swipe also works).
           Static cards — no interactive comparison slider on the homepage. */}
-      <div className="mt-[40px] md:mt-[48px]">
+      <Reveal delay={200} className="mt-[40px] md:mt-[48px]">
         <BeforeAfterCarousel isAr={isAr}>
           {cases.map((item) => (
             <BeforeAfterCard key={item.id} item={item} locale={loc} />
           ))}
         </BeforeAfterCarousel>
-      </div>
+      </Reveal>
     </section>
   )
 }

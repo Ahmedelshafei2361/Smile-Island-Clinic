@@ -177,7 +177,10 @@ export default function ServiceBeforeAfter({ locale, cases }: ServiceBeforeAfter
         </Reveal>
 
         <Reveal
-          delay={120}
+          staggerChildren
+          staggerDelay={220}
+          staggerStart={160}
+          childDuration={2300}
           className="mt-[44px] grid gap-[20px] md:mt-[56px] sm:grid-cols-2 lg:grid-cols-3 lg:gap-[24px]"
         >
           {items.map((item, i) => (

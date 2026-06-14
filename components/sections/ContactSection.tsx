@@ -160,7 +160,13 @@ export default async function ContactSection({ locale }: ContactSectionProps) {
         </Reveal>
 
         <div className="mt-[40px] grid grid-cols-1 items-stretch gap-[24px] md:mt-[56px] lg:grid-cols-[minmax(0,500px)_1fr] lg:gap-[48px]">
-          <Reveal className="flex flex-col gap-[16px]">
+          <Reveal
+            staggerChildren
+            staggerDelay={180}
+            staggerStart={160}
+            childDuration={2300}
+            className="flex flex-col gap-[16px]"
+          >
             {cards.map((c) => (
               <a
                 key={c.key}
@@ -219,7 +225,7 @@ export default async function ContactSection({ locale }: ContactSectionProps) {
             </div>
           </Reveal>
 
-          <Reveal delay={120} className="h-full">
+          <Reveal delay={360} className="h-full">
             <a
               href={mapsUrl}
               target="_blank"

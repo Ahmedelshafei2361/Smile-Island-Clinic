@@ -1,17 +1,18 @@
 import type { Metadata } from 'next'
 import { toLocale } from '@/lib/locale'
 import type { Locale } from '@/lib/locale'
+import { SITE_NAME, OG_IMAGE, ogLocale } from '@/lib/seo'
 
 const metaByLocale: Record<Locale, { title: string; description: string }> = {
   en: {
-    title: 'Smile Island Dental Clinic',
+    title: 'Smile Island Dental Clinic | Dentist in Alexandria',
     description:
-      'Exceptional dental care at fair pricing. Book your appointment in Alexandria, Egypt.',
+      'Smile Island Dental Clinic in Alexandria, Egypt offers exceptional dental care at fair prices — implants, whitening, veneers, and more. Book your visit today.',
   },
   ar: {
-    title: 'عيادة سمايل ايلاند لطب الأسنان',
+    title: 'عيادة سمايل ايلاند لطب الأسنان | الإسكندرية',
     description:
-      'رعاية أسنان استثنائية بأسعار معقولة. احجز موعدك في الإسكندرية، مصر.',
+      'عيادة سمايل ايلاند لطب الأسنان في الإسكندرية تقدم رعاية أسنان استثنائية بأسعار معقولة — زراعة وتبييض وقشور تجميلية والمزيد. احجز موعدك الآن.',
   },
 }
 
@@ -22,7 +23,26 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const loc = toLocale(locale)
-  return metaByLocale[loc]
+  const { title, description } = metaByLocale[loc]
+  const path = `/${loc}`
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: path,
+      languages: { en: '/en', ar: '/ar', 'x-default': '/en' },
+    },
+    openGraph: {
+      siteName: SITE_NAME,
+      title,
+      description,
+      type: 'website',
+      locale: ogLocale(loc),
+      url: path,
+      images: [{ url: OG_IMAGE, alt: SITE_NAME }],
+    },
+  }
 }
 
 export function generateStaticParams() {

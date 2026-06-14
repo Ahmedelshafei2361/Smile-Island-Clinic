@@ -47,9 +47,9 @@ export default async function FaqSection({ locale }: FaqSectionProps) {
           </p>
         </Reveal>
 
-        <Reveal delay={120} className="mx-auto mt-[40px] w-full max-w-[820px] md:mt-[56px]">
+        <div className="mx-auto mt-[40px] w-full max-w-[820px] md:mt-[56px]">
           <FaqAccordion items={items} locale={loc} />
-        </Reveal>
+        </div>
       </Container>
     </section>
   )

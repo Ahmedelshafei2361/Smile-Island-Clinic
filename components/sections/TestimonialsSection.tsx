@@ -48,7 +48,7 @@ export default function TestimonialsSection({ locale }: TestimonialsSectionProps
       </Container>
 
       {/* Video testimonials (YouTube Shorts — lazy thumbnails, open on click) */}
-      <div className="mt-[40px] md:mt-[56px]">
+      <Reveal delay={200} className="mt-[40px] md:mt-[56px]">
         <TestimonialsCarousel
           isAr={isAr}
           label={isAr ? 'شهادات بالفيديو' : 'Video testimonials'}
@@ -57,10 +57,10 @@ export default function TestimonialsSection({ locale }: TestimonialsSectionProps
             <VideoTestimonialCard key={item.id} item={item} locale={loc} />
           ))}
         </TestimonialsCarousel>
-      </div>
+      </Reveal>
 
       {/* Google reviews */}
-      <div className="mt-[40px] md:mt-[56px]">
+      <Reveal delay={300} className="mt-[40px] md:mt-[56px]">
         <TestimonialsCarousel
           isAr={isAr}
           label={isAr ? 'تقييمات Google' : 'Google reviews'}
@@ -69,7 +69,7 @@ export default function TestimonialsSection({ locale }: TestimonialsSectionProps
             <ReviewCard key={item.id} item={item} locale={loc} />
           ))}
         </TestimonialsCarousel>
-      </div>
+      </Reveal>
     </section>
   )
 }

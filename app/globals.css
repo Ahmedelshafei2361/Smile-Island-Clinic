@@ -53,15 +53,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Hero entrance animations ───────────────────────────── */
+/* ── Hero / first-screen entrance animations ───────────────────────────── */
+
 @keyframes hero-rise {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translate3d(0, 30px, 0);
   }
+
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -69,32 +71,132 @@ body {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
 
 .animate-rise {
+  --rise-delay: 240ms;
+
   opacity: 0;
-  animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-name: hero-rise;
+  animation-duration: 2.45s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-delay: var(--rise-delay);
+  animation-fill-mode: both;
+  will-change: opacity, transform;
 }
 
 .animate-fade {
+  --fade-delay: 300ms;
+
   opacity: 0;
-  animation: hero-fade 1s ease-out forwards;
+  animation-name: hero-fade;
+  animation-duration: 2.65s;
+  animation-timing-function: ease-out;
+  animation-delay: var(--fade-delay);
+  animation-fill-mode: both;
+  will-change: opacity;
 }
 
 .delay-1 {
-  animation-delay: 0.1s;
+  --rise-delay: 420ms;
+  --fade-delay: 420ms;
 }
+
 .delay-2 {
-  animation-delay: 0.25s;
+  --rise-delay: 920ms;
+  --fade-delay: 920ms;
 }
+
 .delay-3 {
-  animation-delay: 0.4s;
+  --rise-delay: 1420ms;
+  --fade-delay: 1420ms;
 }
+
 .delay-4 {
-  animation-delay: 0.55s;
+  --rise-delay: 1920ms;
+  --fade-delay: 1920ms;
+}
+
+/* ── Scroll reveal stagger children ───────────────────────────── */
+/*
+ * Animation-based (not transition-based) so each child's own transition-*
+ * properties (hover colors, selected states) are never overwritten.
+ */
+
+@keyframes reveal-child {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-child-y, 22px), 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+[data-reveal-stagger='true'] > * {
+  opacity: 0;
+}
+
+[data-reveal-stagger='true'][data-reveal-visible='true'] > * {
+  animation-name: reveal-child;
+  animation-duration: var(--reveal-child-duration, 2300ms);
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+  animation-delay: var(--reveal-child-delay-1, 160ms);
+}
+
+[data-reveal-stagger='true'][data-reveal-visible='true'] > *:nth-child(1) {
+  animation-delay: var(--reveal-child-delay-1, 160ms);
+}
+
+[data-reveal-stagger='true'][data-reveal-visible='true'] > *:nth-child(2) {
+  animation-delay: var(--reveal-child-delay-2, 350ms);
+}
+
+[data-reveal-stagger='true'][data-reveal-visible='true'] > *:nth-child(3) {
+  animation-delay: var(--reveal-child-delay-3, 540ms);
+}
+
+[data-reveal-stagger='true'][data-reveal-visible='true'] > *:nth-child(4) {
+  animation-delay: var(--reveal-child-delay-4, 730ms);
+}
+
+[data-reveal-stagger='true'][data-reveal-visible='true'] > *:nth-child(5) {
+  animation-delay: var(--reveal-child-delay-5, 920ms);
+}
+
+[data-reveal-stagger='true'][data-reveal-visible='true'] > *:nth-child(6) {
+  animation-delay: var(--reveal-child-delay-6, 1110ms);
+}
+
+[data-reveal-stagger='true'][data-reveal-visible='true'] > *:nth-child(7) {
+  animation-delay: var(--reveal-child-delay-7, 1300ms);
+}
+
+[data-reveal-stagger='true'][data-reveal-visible='true'] > *:nth-child(8) {
+  animation-delay: var(--reveal-child-delay-8, 1490ms);
+}
+
+[data-reveal-stagger='true'][data-reveal-visible='true'] > *:nth-child(9) {
+  animation-delay: var(--reveal-child-delay-9, 1680ms);
+}
+
+[data-reveal-stagger='true'][data-reveal-visible='true'] > *:nth-child(10) {
+  animation-delay: var(--reveal-child-delay-10, 1870ms);
+}
+
+[data-reveal-stagger='true'][data-reveal-visible='true'] > *:nth-child(11) {
+  animation-delay: var(--reveal-child-delay-11, 2060ms);
+}
+
+[data-reveal-stagger='true'][data-reveal-visible='true'] > *:nth-child(12) {
+  animation-delay: var(--reveal-child-delay-12, 2250ms);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -103,6 +205,19 @@ body {
     opacity: 1;
     animation: none;
     transform: none;
+    will-change: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+
+  [data-reveal-stagger='true'] > * {
+    opacity: 1 !important;
+    animation: none !important;
   }
 }
 
@@ -111,6 +226,7 @@ body {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

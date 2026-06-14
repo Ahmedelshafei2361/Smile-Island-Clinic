@@ -71,7 +71,7 @@ export default function ServiceHero({ service, image, locale }: ServiceHeroProps
       <div className="relative z-10 mx-auto flex max-w-[1280px] flex-col items-center gap-[40px] lg:gap-[80px]">
         {/* Heading + description + actions */}
         <div className="flex w-full max-w-[800px] flex-col items-center gap-[24px] text-center lg:gap-[32px]">
-          <h1 className="font-[family-name:var(--font-heading)] font-medium leading-[1.2] text-[32px] md:text-[56px] text-[#352514]">
+          <h1 className="animate-rise font-[family-name:var(--font-heading)] font-medium leading-[1.2] text-[32px] md:text-[56px] text-[#352514]">
             {main ? (
               <>
                 {main}{' '}
@@ -82,11 +82,11 @@ export default function ServiceHero({ service, image, locale }: ServiceHeroProps
             )}
           </h1>
 
-          <p className="text-[15px] leading-[1.5] text-[#57534d] md:text-[18px]">
+          <p className="animate-rise delay-1 text-[15px] leading-[1.5] text-[#57534d] md:text-[18px]">
             {description}
           </p>
 
-          <div className="flex w-full flex-col items-center justify-center gap-[12px] sm:w-auto sm:flex-row sm:gap-[16px]">
+          <div className="animate-rise delay-2 flex w-full flex-col items-center justify-center gap-[12px] sm:w-auto sm:flex-row sm:gap-[16px]">
             <a
               href={bookUrl}
               target="_blank"
@@ -107,7 +107,7 @@ export default function ServiceHero({ service, image, locale }: ServiceHeroProps
         </div>
 
         {/* Large rounded service image */}
-        <div className="relative w-full max-w-[1094px] aspect-[1094/460] overflow-hidden rounded-[24px] lg:rounded-[30px]">
+        <div className="animate-fade delay-3 relative w-full max-w-[1094px] aspect-[1094/460] overflow-hidden rounded-[24px] lg:rounded-[30px]">
           <Image
             src={image}
             alt={title}

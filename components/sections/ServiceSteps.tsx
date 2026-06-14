@@ -53,7 +53,10 @@ export default function ServiceSteps({ service, locale }: ServiceStepsProps) {
           </Reveal>
 
           <Reveal
-            delay={120}
+            staggerChildren
+            staggerDelay={220}
+            staggerStart={180}
+            childDuration={2300}
             className="mt-[32px] grid auto-rows-fr gap-[14px] md:mt-[48px] md:grid-cols-2 md:gap-x-[40px] md:gap-y-[24px] lg:gap-x-[71px] lg:gap-y-[32px]"
           >
             {steps.map((step, i) => {

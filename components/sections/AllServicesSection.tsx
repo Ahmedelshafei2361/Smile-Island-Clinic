@@ -103,7 +103,11 @@ export default function AllServicesSection({
 
         <div className="mt-[40px] flex flex-col gap-[32px] md:mt-[48px] lg:grid lg:grid-cols-2 lg:items-start lg:gap-[40px]">
           {/* Services list — swipe on mobile, grid on desktop */}
-          <div
+          <Reveal
+            staggerChildren
+            staggerDelay={80}
+            staggerStart={100}
+            childDuration={2000}
             dir={isAr ? 'rtl' : 'ltr'}
             className="-mx-[20px] order-2 grid snap-x snap-mandatory grid-flow-col grid-rows-2 auto-cols-[300px] gap-[12px] overflow-x-auto px-[20px] pb-[4px] scroll-px-[20px] no-scrollbar sm:auto-cols-[320px] lg:order-none lg:mx-0 lg:grid-flow-row lg:grid-rows-none lg:grid-cols-2 lg:auto-cols-auto lg:overflow-visible lg:px-0 lg:pb-0 lg:snap-none"
           >
@@ -149,10 +153,10 @@ export default function AllServicesSection({
                 </button>
               )
             })}
-          </div>
+          </Reveal>
 
           {/* Selected service preview */}
-          <div className="order-1 flex flex-col lg:order-none">
+          <Reveal delay={120} className="order-1 flex flex-col lg:order-none">
             <img
               src={selected.image}
               alt={title(selected)}
@@ -185,7 +189,7 @@ export default function AllServicesSection({
                 {detailsLabel}
               </a>
             </div>
-          </div>
+          </Reveal>
         </div>
       </Container>
     </section>
