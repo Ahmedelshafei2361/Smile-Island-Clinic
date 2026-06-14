@@ -28,11 +28,11 @@ export default async function LocalePage({
     getPopularTreatments(),
   ])
 
-  // popular === null → use local fallback; [] → hide section; [...] → show CMS.
+  // popular.items === null → use local fallback; [] → hide section; [...] → show CMS.
   const popularItems: PopularTreatment[] =
-    popular === null
+    popular.items === null
       ? localPopular
-      : popular.map((s) => ({
+      : popular.items.map((s) => ({
           slug: s.slug,
           titleEn: s.titleEn,
           titleAr: s.titleAr,
@@ -47,7 +47,7 @@ export default async function LocalePage({
       <main className="flex-1">
         <HeroSection locale={locale} content={heroContent} />
         <AboutSection locale={locale} />
-        {popularItems.length >= 3 && (
+        {popular.showSection && popularItems.length >= 3 && (
           <PopularTreatmentsSection locale={locale} items={popularItems} />
         )}
         <BeforeAfterSection locale={locale} content={beforeAfterContent} />

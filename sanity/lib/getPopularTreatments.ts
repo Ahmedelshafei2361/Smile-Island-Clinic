@@ -6,14 +6,19 @@ import type { ResolvedService } from './getServices'
 /**
  * Resolved Popular Treatments services in the editor's chosen order.
  *
- * Return contract:
+ * `items` contract:
  *   - `null`  → Sanity not configured / unavailable / no selection document.
  *               Caller should use the local static fallback.
  *   - `[]`    → A selection exists but fewer than 3 valid active services.
  *               Caller should HIDE the section (do not show local fallback).
  *   - `[...]` → 3–6 valid services to render.
+ *
+ * `showSection` contract (visibility toggle):
+ *   - Defaults to `true` (visible) when missing, null, or on any failure.
+ *   - Only `false` when the editor explicitly turns the section off.
  */
 const POPULAR_PROJECTION = `{
+  showSection,
   "services": selectedServices[]->{
     "slug": slug.current,
     nameEn,
@@ -65,28 +70,40 @@ function mapPopular(raw: RawPopularService | null): ResolvedService | null {
   }
 }
 
-export async function getPopularTreatments(): Promise<ResolvedService[] | null> {
-  if (!isSanityConfigured) return null
+export interface PopularTreatmentsResult {
+  /** See `items` contract above. */
+  items: ResolvedService[] | null
+  /** Visibility toggle. Visible by default; only `false` hides the section. */
+  showSection: boolean
+}
+
+export async function getPopularTreatments(): Promise<PopularTreatmentsResult> {
+  if (!isSanityConfigured) return { items: null, showSection: true }
 
   try {
-    const doc = await client.fetch<{ services?: RawPopularService[] } | null>(
+    const doc = await client.fetch<
+      { showSection?: boolean; services?: RawPopularService[] } | null
+    >(
       `*[_type == "popularTreatments" && _id == "popularTreatments"][0] ${POPULAR_PROJECTION}`,
       {},
       { next: { revalidate: 30 } },
     )
 
+    // Visible unless the editor explicitly set the toggle to false.
+    const showSection = doc?.showSection !== false
+
     // No selection document at all → fall back to local content.
-    if (!doc || !Array.isArray(doc.services)) return null
+    if (!doc || !Array.isArray(doc.services)) return { items: null, showSection }
 
     const valid = doc.services
       .map(mapPopular)
       .filter((s): s is ResolvedService => s !== null)
 
     // Selection exists but is insufficient → hide the section.
-    if (valid.length < 3) return []
+    if (valid.length < 3) return { items: [], showSection }
 
-    return valid.slice(0, 6)
+    return { items: valid.slice(0, 6), showSection }
   } catch {
-    return null
+    return { items: null, showSection: true }
   }
 }

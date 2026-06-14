@@ -11,6 +11,14 @@ export const popularTreatments = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'showSection',
+      title: 'Show Popular Treatments section',
+      description:
+        'Turn this off to hide the Popular Treatments section on the homepage.',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    defineField({
       name: 'selectedServices',
       title: 'Choose Popular Treatments',
       type: 'array',
