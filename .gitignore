@@ -37,6 +37,9 @@ yarn-error.log*
 # sanity
 /.sanity
 
+# stray Claude notify-signal artifacts (written with a malformed path)
+*claude-notify-signals*
+
 # vercel
 .vercel
 
