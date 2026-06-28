@@ -1,6 +1,7 @@
 import { client } from './client'
 import { urlForImage } from './image'
 import { isSanityConfigured } from '../env'
+import { services as localServices } from '@/lib/data'
 import type { ResolvedService } from './getServices'
 
 /**
@@ -42,31 +43,49 @@ interface RawPopularService {
   displayOrder?: number
 }
 
+/**
+ * Resolve a selected service reference to a render-ready item. CMS values win
+ * per field; the local service (matched by slug) fills any gaps — most
+ * importantly the image, since seeded services often have no image uploaded
+ * yet. A reference is dropped only when it is unresolved, explicitly inactive,
+ * or an essential field is missing from BOTH CMS and local data.
+ */
 function mapPopular(raw: RawPopularService | null): ResolvedService | null {
   if (!raw) return null
-  if (raw.active === false) return null
-  if (!raw.slug || !raw.nameEn || !raw.nameAr) return null
-  if (!raw.shortDescriptionEn || !raw.shortDescriptionAr) return null
-  if (!raw.image?.asset) return null
+  if (raw.active === false) return null // explicitly hidden in CMS
+  if (!raw.slug) return null
 
-  let image: string
-  try {
-    image = urlForImage(raw.image).width(1200).fit('max').url()
-  } catch {
-    return null
+  const local = localServices.find((s) => s.slug === raw.slug)
+
+  const titleEn = raw.nameEn || local?.titleEn
+  const titleAr = raw.nameAr || local?.titleAr
+  const shortDescriptionEn = raw.shortDescriptionEn || local?.shortDescriptionEn
+  const shortDescriptionAr = raw.shortDescriptionAr || local?.shortDescriptionAr
+
+  let image: string | undefined
+  if (raw.image?.asset) {
+    try {
+      image = urlForImage(raw.image).width(1200).fit('max').url()
+    } catch {
+      image = undefined
+    }
   }
+  if (!image) image = local?.thumbnailImage
+
+  if (!titleEn || !titleAr || !shortDescriptionEn || !shortDescriptionAr) return null
+  if (!image) return null
 
   return {
     slug: raw.slug,
-    titleEn: raw.nameEn,
-    titleAr: raw.nameAr,
-    shortDescriptionEn: raw.shortDescriptionEn,
-    shortDescriptionAr: raw.shortDescriptionAr,
+    titleEn,
+    titleAr,
+    shortDescriptionEn,
+    shortDescriptionAr,
     stepsEn: [],
     stepsAr: [],
     image,
     sliderCases: [],
-    order: raw.displayOrder ?? 999,
+    order: raw.displayOrder ?? local?.order ?? 999,
   }
 }
 
