@@ -65,7 +65,15 @@ export const service = defineType({
       options: { hotspot: true },
       description:
         'Upload one landscape image for this service. This image is used in Popular Treatments, All Services, and the service page. Recommended: 1600×1200 or similar. Avoid portrait, tiny, or blurry images.',
-      validation: (rule) => rule.required().error('A service image is required.'),
+      // Warning, not error, so it never blocks publishing. Brand-new services
+      // need an image to appear on the site; seeded services fall back to their
+      // existing built-in image until one is uploaded here.
+      validation: (rule) =>
+        rule
+          .required()
+          .warning(
+            'Add a service image. A new service needs one to appear on the website; seeded services use their existing image until you upload one.',
+          ),
     }),
 
     defineField({
