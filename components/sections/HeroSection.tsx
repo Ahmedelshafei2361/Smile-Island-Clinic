@@ -33,6 +33,9 @@ export default function HeroSection({ locale, content }: HeroSectionProps) {
   const servicesHref = `/${loc}#services`
 
   const teamImage = '/images/hero/hero-team.webp'
+  // Smaller, right-sized file for the mobile hero (≤440px slot) — keeps the
+  // mobile LCP image from downloading the full desktop-resolution asset.
+  const teamImageMobile = '/images/hero/hero-team-mobile.webp'
 
   // Local static defaults — used whenever a CMS field is missing.
   const defaults = isAr
@@ -269,8 +272,10 @@ export default function HeroSection({ locale, content }: HeroSectionProps) {
           <div className="relative w-[calc(100%-24px)] max-w-[440px] aspect-[1274/575] overflow-hidden animate-fade delay-2">
             <img
               alt="Smile Island dental team"
+              fetchPriority="high"
+              decoding="async"
               className="absolute h-[148.46%] left-[-0.41%] max-w-none top-[-23.97%] w-[100.41%] object-cover"
-              src={teamImage}
+              src={teamImageMobile}
             />
           </div>
 
