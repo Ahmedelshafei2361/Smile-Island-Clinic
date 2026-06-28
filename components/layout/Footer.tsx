@@ -9,12 +9,14 @@ const footerLinks: Record<Locale, { label: string; href: string }[]> = {
     { label: 'Testimonials', href: '/en#testimonials' },
     { label: 'Services', href: '/en#services' },
     { label: 'Home', href: '/en' },
+    { label: 'Privacy Policy', href: '/en/privacy-policy' },
   ],
   ar: [
     { label: 'تواصل معنا', href: '/ar#contact' },
     { label: 'آراء العملاء', href: '/ar#testimonials' },
     { label: 'خدمات', href: '/ar#services' },
     { label: 'الرئيسية', href: '/ar' },
+    { label: 'سياسة الخصوصية', href: '/ar/privacy-policy' },
   ],
 }
 
@@ -146,7 +148,7 @@ export default function Footer({ locale }: FooterProps) {
                 <span className="block font-[family-name:var(--font-heading-accent)] font-normal">
                   ابتسامتك المثالية
                 </span>
-                <span className="block mt-[12px] font-[family-name:var(--font-body)] font-normal">
+                <span className="mt-[12px] block font-[family-name:var(--font-body)] font-normal">
                   تبدأ بمحادثة بسيطة.
                 </span>
               </>
@@ -181,16 +183,24 @@ export default function Footer({ locale }: FooterProps) {
         </div>
 
         {/* Nav row */}
-        <nav className="mt-[72px] grid grid-cols-2 gap-y-[22px] text-center md:mt-[92px] md:grid-cols-4">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-[15px] font-normal text-[#f7efe8]/85 transition-colors duration-200 hover:text-[#f7efe8] md:text-[17px]"
-            >
-              {link.label}
-            </Link>
-          ))}
+        <nav className="mx-auto mt-[72px] grid w-full max-w-[1120px] grid-cols-2 items-center gap-x-[20px] gap-y-[22px] text-center md:mt-[92px] md:flex md:max-w-[1480px] md:justify-between md:gap-x-[72px]">
+          {links.map((link, index) => {
+            const isLast = index === links.length - 1
+
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={[
+                  'text-[15px] font-normal text-[#f7efe8]/85 transition-colors duration-200 hover:text-[#f7efe8] md:text-[17px]',
+                  'whitespace-nowrap',
+                  isLast ? 'col-span-2 justify-self-center md:col-span-1' : '',
+                ].join(' ')}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
         </nav>
 
         {/* Divider */}
