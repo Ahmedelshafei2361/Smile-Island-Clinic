@@ -163,7 +163,7 @@ export default function TestimonialsCarousel({
           <div
             dir={isAr ? 'rtl' : 'ltr'}
             ref={scrollerRef}
-            className={`no-scrollbar flex touch-pan-x ${gapClassName} overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth px-6 pb-[4px] scroll-px-6 md:px-12 md:scroll-px-12 lg:px-20 lg:scroll-px-20`}
+            className={`no-scrollbar flex touch-auto ${gapClassName} overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth px-6 pb-[4px] scroll-px-6 md:px-12 md:scroll-px-12 lg:px-20 lg:scroll-px-20`}
           >
             {children}
           </div>

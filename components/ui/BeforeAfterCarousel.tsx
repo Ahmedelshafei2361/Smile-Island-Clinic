@@ -142,7 +142,7 @@ export default function BeforeAfterCarousel({ children, isAr }: BeforeAfterCarou
       <div
         ref={scrollerRef}
         dir={isAr ? 'rtl' : 'ltr'}
-        className="no-scrollbar flex touch-pan-x overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth px-[20px] lg:px-[64px]"
+        className="no-scrollbar flex touch-auto overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth px-[20px] lg:px-[64px]"
       >
         {children}
       </div>
