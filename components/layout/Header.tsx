@@ -116,11 +116,11 @@ export default function Header({ locale }: HeaderProps) {
             : 'bg-transparent border-b border-transparent'
         }`}
       >
-        <div className="flex items-center justify-between p-[20px] lg:px-[64px] lg:py-[20px]">
+        <div className="relative flex items-center justify-between p-[20px] lg:px-[64px] lg:py-[20px]">
           {/* Logo */}
           <Link
             href={`/${loc}`}
-            className="shrink-0 h-[40px] w-[111px] lg:h-[51px] lg:w-[142px] relative overflow-hidden block"
+            className="relative z-10 shrink-0 h-[40px] w-[111px] lg:h-[51px] lg:w-[142px] overflow-hidden block"
           >
             <img
               alt="Smile Island Dental Clinic"
@@ -130,8 +130,8 @@ export default function Header({ locale }: HeaderProps) {
             />
           </Link>
 
-          {/* Desktop nav links */}
-          <nav className="hidden lg:flex items-center gap-[24px]">
+          {/* Desktop nav links — truly centered on desktop */}
+          <nav className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-[24px]">
             {links.map((link) => {
               const active = isActive(link.href)
 
@@ -153,7 +153,7 @@ export default function Header({ locale }: HeaderProps) {
           </nav>
 
           {/* Desktop language switcher + Contact Us CTA */}
-          <div className="hidden lg:flex items-center gap-[12px]">
+          <div className="relative z-10 hidden lg:flex items-center gap-[12px]">
             <Link
               href={altHref}
               lang={altLocale}

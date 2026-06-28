@@ -237,6 +237,8 @@ export default async function ContactSection({ locale }: ContactSectionProps) {
               <img
                 src="/images/contact/map-snapshot.png"
                 alt={isAr ? 'خريطة موقع عيادة سمايل ايلاند' : 'Map location of Smile Island Clinic'}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
               />
 

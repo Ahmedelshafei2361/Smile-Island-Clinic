@@ -35,6 +35,11 @@ export default function MobileMenu({
 }: MobileMenuProps) {
   const [open, setOpen] = useState(false)
 
+  const languageSwitcherFontFamily =
+    altLocale === 'ar'
+      ? 'var(--font-thmanyah-sans, "Thmanyah Sans", sans-serif)'
+      : 'var(--font-dm-sans, "DM Sans", sans-serif)'
+
   return (
     <div className="lg:hidden">
       {/* Toggle */}
@@ -46,12 +51,28 @@ export default function MobileMenu({
         className="flex items-center justify-center size-[24px] text-[#352514] cursor-pointer"
       >
         {open ? (
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="size-[22px]" aria-hidden>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            className="size-[22px]"
+            aria-hidden
+          >
             <line x1="5" y1="5" x2="19" y2="19" />
             <line x1="19" y1="5" x2="5" y2="19" />
           </svg>
         ) : (
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="size-[22px]" aria-hidden>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            className="size-[22px]"
+            aria-hidden
+          >
             <line x1="3" y1="9" x2="21" y2="9" />
             <line x1="3" y1="15" x2="21" y2="15" />
           </svg>
@@ -88,6 +109,7 @@ export default function MobileMenu({
               {link.label}
             </Link>
           ))}
+
           <a
             href={ctaHref}
             target="_blank"
@@ -99,13 +121,14 @@ export default function MobileMenu({
             {ctaLabel}
           </a>
 
-          {/* Language switcher */}
+          {/* Language switcher — secondary filled button */}
           <Link
             href={altHref}
             lang={altLocale}
             dir={altLocale === 'ar' ? 'rtl' : 'ltr'}
             onClick={() => setOpen(false)}
-            className="mt-[8px] flex items-center justify-center rounded-[800px] border border-[#352514]/30 px-[20px] py-[12px] text-[15px] text-[#352514] transition-colors hover:bg-[#f1e4d9]"
+            style={{ fontFamily: languageSwitcherFontFamily }}
+            className="mt-[8px] flex w-full items-center justify-center rounded-[800px] border border-transparent bg-[#f1e4d9] px-[20px] py-[12px] text-[16px] font-medium leading-[1.5] text-[#352514] whitespace-nowrap transition-colors hover:bg-[#ead7c8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#352514]/30"
           >
             {altLabel}
           </Link>
@@ -113,4 +136,4 @@ export default function MobileMenu({
       </div>
     </div>
   )
-}
+} 

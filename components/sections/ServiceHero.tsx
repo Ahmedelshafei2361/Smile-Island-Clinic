@@ -107,7 +107,7 @@ export default function ServiceHero({ service, image, locale }: ServiceHeroProps
         </div>
 
         {/* Large rounded service image */}
-        <div className="animate-fade delay-3 relative w-full max-w-[1094px] aspect-[1094/460] overflow-hidden rounded-[24px] lg:rounded-[30px]">
+        <div className="animate-fade delay-3 relative h-[230px] w-full max-w-[1094px] overflow-hidden rounded-[24px] sm:h-[270px] md:h-auto md:aspect-[1094/460] lg:rounded-[30px]">
           <Image
             src={image}
             alt={title}

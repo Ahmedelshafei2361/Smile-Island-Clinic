@@ -55,6 +55,10 @@ export default function AboutSection({ locale }: AboutSectionProps) {
               <img
                 src={about.image}
                 alt="Smile Island Dental Clinic"
+                width={1094}
+                height={460}
+                loading="lazy"
+                decoding="async"
                 className="block h-auto w-full"
               />
             </div>

@@ -32,7 +32,7 @@ export default function HeroSection({ locale, content }: HeroSectionProps) {
   const whatsappUrl = getBookingUrl({ locale: loc })
   const servicesHref = `/${loc}#services`
 
-  const teamImage = '/images/hero/hero-team.png'
+  const teamImage = '/images/hero/hero-team.webp'
 
   // Local static defaults — used whenever a CMS field is missing.
   const defaults = isAr
@@ -89,8 +89,10 @@ export default function HeroSection({ locale, content }: HeroSectionProps) {
         <div className="absolute inset-0 overflow-hidden rounded-tl-[24px] rounded-tr-[24px]" aria-hidden>
           <img
             alt=""
+            fetchPriority="high"
+            decoding="async"
             className="absolute h-[113.07%] left-0 max-w-none top-[-3%] w-full object-cover animate-fade"
-            src="/images/hero/hero-bg.png"
+            src="/images/hero/hero-bg.webp"
           />
         </div>
 
@@ -100,6 +102,7 @@ export default function HeroSection({ locale, content }: HeroSectionProps) {
         >
           <img
             alt="Smile Island dental team"
+            decoding="async"
             className="absolute h-[148.46%] left-[-0.41%] max-w-none top-[-23.97%] w-[100.41%] object-cover"
             src={teamImage}
           />
@@ -216,8 +219,10 @@ export default function HeroSection({ locale, content }: HeroSectionProps) {
         <div className="absolute inset-0 overflow-hidden" aria-hidden>
           <img
             alt=""
+            fetchPriority="high"
+            decoding="async"
             className="h-full w-full object-cover animate-fade"
-            src="/images/hero/hero-bg.png"
+            src="/images/hero/hero-bg.webp"
           />
         </div>
 
