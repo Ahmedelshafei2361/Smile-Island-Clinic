@@ -4,6 +4,7 @@ import type { Locale } from '@/lib/locale'
 import { SITE_NAME, OG_IMAGE, ogLocale } from '@/lib/seo'
 import CookieConsent from '@/components/ui/CookieConsent'
 import GoogleTagManager from '@/components/ui/GoogleTagManager'
+import AnalyticsTracker from '@/components/analytics/AnalyticsTracker'
 
 const metaByLocale: Record<Locale, { title: string; description: string }> = {
   en: {
@@ -71,6 +72,7 @@ export default async function LocaleLayout({
       {children}
       <CookieConsent locale={loc} />
       <GoogleTagManager />
+      <AnalyticsTracker locale={loc} />
     </div>
   )
 }
